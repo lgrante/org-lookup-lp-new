@@ -1,0 +1,254 @@
+:root {
+  /* Familles de polices */
+  --font-family-heading: 'Vend Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Tailles de police */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 2rem;      /* 32px */
+  --font-size-4xl: 2.5rem;    /* 40px */
+
+  /* Poids de police */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Interlignes */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
+
+  /* Couleurs principales */
+  /*--color-primary: #098df0;   /* Salesforce Blue */
+  --color-primary: #006289;
+  --color-secondary: #22c55e;    /* Security Green */
+  --color-tertiary: #0094AE;    /* Gray 50 */
+  --color-accent-1: #ff9b26;     /* Action Orange */
+  --color-accent-2: #e768e6;     /* Danger Red */
+
+  /* Dégradés */
+  --gradient-beta: linear-gradient(90deg, #e768e6 0%, #ff9b26 50%, #e768e6 100%);
+  /*--color-salesforce: #00A1E0;   /* Salesforce Blue */
+
+  /* Neutres */
+  --color-text-primary: #374151;   /* Gray 700 */
+  --color-text-secondary: #4b5563; /* Gray 600 */
+  --color-text-tertiary: #ffffff; /* Pure White */
+  --color-bg-primary: #ffffffe3;     /* Pure White */
+  --color-bg-secondary: #d1f0ff;   /* Background Beige */
+  --color-bg-tertiary: #145C93;    /* Gray 50 */
+
+  /* Palette complète utilisée dans l'animation */
+  --color-bg: #faf9f7;
+  /*--color-primary-soft: #eef2ff;*/
+  --color-primary-soft: #a8998a;
+  --color-primary-border-soft: #c7d2fe;
+  --color-gray-50: #fefefe;
+  --color-gray-100: #f9f8f6;
+  --color-gray-200: #f0ede9;
+  --color-gray-300: #e6e2dd;
+  --color-gray-400: #d4ccc4;
+  --color-gray-600: #a8998a;
+  --color-gray-700: #8a7f73;
+  --color-gray-800: #6b6156;
+
+  /* Fonctionnelles */
+  --color-success: #22c55e;
+  --color-warning: #fb923c;
+  --color-error: #DC2626;
+  --color-info: #4f46e5;
+
+  /* États hover/focus */
+  --color-primary-hover: #4338ca;   /* Version plus sombre du Trust Blue */
+  --color-accent-1-hover: #ea580c;  /* Version plus sombre de l'Action Orange */
+
+  /* Couleurs supplémentaires pour l'animation */
+  --color-purple: #a855f7;           /* Purple pour les connexions Apex */
+  --color-blue-light: #0ea5e9;       /* Light blue pour les connexions App */
+  --color-danger-light: #f87171;     /* Light danger pour les bordures */
+  --color-orange-light: #fed7aa;     /* Light orange pour les bordures */
+  --color-success-light: #4ade80;    /* Light success pour les bordures */
+  --color-blue-bg: #edf7fc;          /* Light blue background pour les sections */
+
+  /* Couleurs red/green pour les composants */
+  --color-red-50: #fef2f2;
+  --color-red-200: #fecaca;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-green-50: #f0fdf4;
+  --color-green-200: #bbf7d0;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+
+  /* Optimisations de rendu */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animation IA - Surbrillance multicolore diagonale pour "Clear Cleanup Plan" */
+@keyframes ai-highlight-cleanup {
+  0% {
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      transparent 30%,
+      rgba(0, 136, 220, 0.1) 35%,  /* Bleu IA */
+      rgba(0, 128, 128, 0.15) 40%, /* Teal innovation */
+      rgba(154, 205, 50, 0.1) 45%, /* Vert croissance */
+      rgba(105, 53, 156, 0.12) 50%, /* Violet créativité */
+      transparent 55%,
+      transparent 100%
+    );
+    background-size: 400% 400%;
+    background-position: -100% -100%;
+  }
+  50% {
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      transparent 30%,
+      rgba(0, 136, 220, 0.2) 35%,
+      rgba(0, 128, 128, 0.25) 40%,
+      rgba(154, 205, 50, 0.2) 45%,
+      rgba(105, 53, 156, 0.22) 50%,
+      transparent 55%,
+      transparent 100%
+    );
+    background-size: 400% 400%;
+    background-position: 0% 0%;
+  }
+  100% {
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      transparent 30%,
+      rgba(0, 136, 220, 0.1) 35%,
+      rgba(0, 128, 128, 0.15) 40%,
+      rgba(154, 205, 50, 0.1) 45%,
+      rgba(105, 53, 156, 0.12) 50%,
+      transparent 55%,
+      transparent 100%
+    );
+    background-size: 400% 400%;
+    background-position: 100% 100%;
+  }
+}
+
+.ai-highlight-cleanup {
+  animation: ai-highlight-cleanup 3.5s ease-in-out infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--color-text-primary); /* Fallback pour les navigateurs qui ne supportent pas background-clip */
+}
+
+/* Styles de base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-tight);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-normal);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-normal);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-normal);
+}
+
+p {
+  /*margin: 0 0 1rem 0;*/
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+button {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Code blocks */
+code {
+  font-family: var(--font-family-mono);
+  font-size: 0.875rem;
+  background-color: var(--color-gray-100);
+  padding: 0.125rem 0.25rem;
+  border-radius: 4px;
+}
+
+pre {
+  font-family: var(--font-family-mono);
+  background-color: var(--color-gray-50);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* Respect des préférences utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

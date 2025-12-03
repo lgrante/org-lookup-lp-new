@@ -58,7 +58,7 @@ const WorkflowTimeline = () => {
       title: "Automated Safe Execution",
       subtitle: "Execute with Confidence — and Keep the Audit Trail",
       description: [
-        "<strong>Export a structured, step-by-step action plan</strong>",
+        "<strong>Automatically generate</strong> a safe, step-by-step action plan to remove technical debt",
         "<strong>Generate deployment-ready metadata packages</strong> (Salesforce CLI / CI/CD)",
         "<strong>Track every change</strong> for future admins and auditors"
       ],

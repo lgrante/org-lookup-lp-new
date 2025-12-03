@@ -1,5 +1,6 @@
 import { Box, VStack, HStack, Text, Circle, Image } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 
 interface TimelineStepProps {
   step: number
@@ -22,6 +23,24 @@ const TimelineStep = ({
   isLast = false,
   isReversed = false
 }: TimelineStepProps) => {
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down')
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      if (currentScrollY > lastScrollY.current) {
+        setScrollDirection('down')
+      } else if (currentScrollY < lastScrollY.current) {
+        setScrollDirection('up')
+      }
+      lastScrollY.current = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <Box
       position="relative"
@@ -78,7 +97,7 @@ const TimelineStep = ({
           </Box>
 
           {/* Content Section */}
-          <Box textAlign={isReversed ? "right" : "left"} width="40%">
+          <Box textAlign={isReversed ? "right" : "left"} width="35%">
             <VStack spacing={6} align={isReversed ? "flex-end" : "flex-start"} width="100%">
               {/* Title with badge */}
               <HStack spacing={3} align={isReversed ? "flex-end" : "flex-start"} width="100%">
@@ -173,17 +192,22 @@ const TimelineStep = ({
 
       {/* Timeline Line */}
       {!isLast && (
-        <Box
-          position="absolute"
-          bottom="-40px"
-          left="50%"
-          transform="translateX(-50%)"
-          w={{ base: "3px", md: "5px" }}
-          h="80px"
-          bgGradient="linear(to-b, primary.400, primary.600)"
-          borderRadius="full"
-          boxShadow="0 0 20px rgba(99, 102, 241, 0.3)"
-          display={{ base: "none", md: "block" }}
+        <motion.div
+          initial={{ opacity: 0, scaleY: 0 }}
+          whileInView={{ opacity: 1, scaleY: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          viewport={{ once: false, margin: "-100px" }}
+          style={{
+            position: "absolute",
+            bottom: "-160px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            transformOrigin: scrollDirection === 'down' ? "top" : "bottom",
+            width: "5px",
+            height: "180px",
+            background: "var(--color-primary)",
+            borderRadius: "9999px",
+          }}
         />
       )}
     </Box>

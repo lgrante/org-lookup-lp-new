@@ -26,7 +26,6 @@
   --line-height-relaxed: 1.6;
 
   /* Couleurs principales */
-  /*--color-primary: #098df0;   /* Salesforce Blue */
   --color-primary: #006289;
   --color-secondary: #22c55e;    /* Security Green */
   --color-tertiary: #0094AE;    /* Gray 50 */
@@ -86,6 +85,27 @@
   --color-green-200: #bbf7d0;
   --color-green-500: #22c55e;
   --color-green-600: #16a34a;
+
+  /* Dégradé Pain Points (1 à 4) - du rouge/chaud vers le bleu/froid */
+  --color-pain-1-bg: #fef2f2;        /* Rouge très clair */
+  --color-pain-1-icon: #dc2626;      /* Rouge */
+  --color-pain-1-border: #fecaca;    /* Rouge clair */
+  
+  --color-pain-2-bg: #fff7ed;        /* Orange très clair */
+  --color-pain-2-icon: #ea580c;      /* Orange foncé */
+  --color-pain-2-border: #fed7aa;    /* Orange clair */
+  
+  --color-pain-3-bg: #ecfdf5;        /* Vert-menthe très clair */
+  --color-pain-3-icon: #059669;      /* Vert émeraude */
+  --color-pain-3-border: #a7f3d0;    /* Vert clair */
+  
+  --color-pain-4-bg: #eff6ff;        /* Bleu très clair */
+  --color-pain-4-icon: #0284c7;      /* Bleu ciel */
+  --color-pain-4-border: #bfdbfe;    /* Bleu clair */
+  
+  --color-pain-5-bg: #f5f3ff;        /* Violet très clair */
+  --color-pain-5-icon: #7c3aed;      /* Violet vif */
+  --color-pain-5-border: #ddd6fe;    /* Violet clair */
 
   /* Optimisations de rendu */
   font-synthesis: none;

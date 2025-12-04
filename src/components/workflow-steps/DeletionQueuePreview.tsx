@@ -17,8 +17,10 @@ const DeletionQueuePreview = () => {
       overflow="hidden"
       border="1px solid"
       borderColor="gray.200"
-      maxW="500px"
-      mx="auto"
+      w="400px"
+      h="380px"
+      display="flex"
+      flexDirection="column"
     >
       {/* Header */}
       <Box bg="var(--color-primary)" px={5} py={3}>
@@ -50,7 +52,7 @@ const DeletionQueuePreview = () => {
       </HStack>
 
       {/* List */}
-      <VStack spacing={0} p={3}>
+      <VStack spacing={0} p={3} flex={1} overflow="hidden">
         {items.map((item, index) => (
           <motion.div
             key={item.name}

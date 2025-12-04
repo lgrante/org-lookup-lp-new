@@ -17,8 +17,10 @@ const ExternalCodeScanPreview = () => {
       overflow="hidden"
       border="1px solid"
       borderColor="gray.200"
-      maxW="500px"
-      mx="auto"
+      w="400px"
+      h="380px"
+      display="flex"
+      flexDirection="column"
     >
       {/* Header */}
       <Box bg="var(--color-primary)" px={5} py={3}>
@@ -28,7 +30,7 @@ const ExternalCodeScanPreview = () => {
       </Box>
 
       {/* Visual Area */}
-      <Box position="relative" h="220px" bg="gray.50" p={6}>
+      <Box position="relative" flex={1} bg="gray.50" p={6}>
         <HStack justify="space-between" align="center" h="100%">
           {/* External Sources */}
           <VStack spacing={4}>

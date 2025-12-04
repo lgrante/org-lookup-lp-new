@@ -24,8 +24,10 @@ const ImpactAnalysisPreview = () => {
       overflow="hidden"
       border="1px solid"
       borderColor="gray.200"
-      maxW="500px"
-      mx="auto"
+      w="400px"
+      h="380px"
+      display="flex"
+      flexDirection="column"
     >
       {/* Header */}
       <Box bg="var(--color-primary)" px={5} py={3}>
@@ -35,7 +37,7 @@ const ImpactAnalysisPreview = () => {
       </Box>
 
       {/* Graph Area */}
-      <Box position="relative" h="280px" bg="gray.50">
+      <Box position="relative" flex={1} bg="gray.50">
         <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0 }}>
           <defs>
             <marker id="arrow-preview" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">

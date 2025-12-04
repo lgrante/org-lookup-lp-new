@@ -90,7 +90,8 @@ const TimelineStep = ({
             >
               {component ? (
                 <Box 
-                  w="500px" 
+                  w="400px"
+                  h="380px"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"

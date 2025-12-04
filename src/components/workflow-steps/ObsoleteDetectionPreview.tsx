@@ -18,8 +18,10 @@ const ObsoleteDetectionPreview = () => {
       overflow="hidden"
       border="1px solid"
       borderColor="gray.200"
-      maxW="500px"
-      mx="auto"
+      w="400px"
+      h="380px"
+      display="flex"
+      flexDirection="column"
     >
       {/* Simplified Header */}
       <Box bg="var(--color-primary)" px={5} py={3}>
@@ -29,7 +31,7 @@ const ObsoleteDetectionPreview = () => {
       </Box>
 
       {/* Abstract List */}
-      <VStack spacing={0} p={4}>
+      <VStack spacing={0} p={4} flex={1} overflow="hidden">
         {items.map((item, index) => (
           <motion.div
             key={item.name}

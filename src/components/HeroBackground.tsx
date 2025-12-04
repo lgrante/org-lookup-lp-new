@@ -23,21 +23,6 @@ const HeroBackground = () => {
     ease: 'linear',
   }
 
-  // Variants pour les formes flottantes
-  const floatingVariants = {
-    animate: {
-      y: [0, -20, 0],
-      x: [0, 10, 0],
-      rotate: [0, 5, 0],
-    },
-  }
-
-  const floatingTransition = {
-    duration: shouldReduceMotion ? 0 : 20,
-    repeat: Infinity,
-    ease: 'easeInOut',
-  }
-
   return (
     <Box
       position="absolute"

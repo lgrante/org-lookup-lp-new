@@ -201,7 +201,7 @@ const MobileHero = () => {
       >
         {/* Step Indicators */}
         <Box display="flex" justifyContent="center" gap={2} mb={3}>
-          {STEP_LABELS.map((label, index) => (
+          {STEP_LABELS.map((_, index) => (
             <Box
               key={index}
               w={currentStep === index ? "24px" : "8px"}

@@ -1,7 +1,7 @@
 import { motion, Variants } from 'framer-motion'
 import { Box, BoxProps } from '@chakra-ui/react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
-import { slideUp, staggerContainer, staggerItem } from '../utils/animations'
+import { staggerContainer } from '../utils/animations'
 
 interface MotionSectionProps extends BoxProps {
   children: React.ReactNode

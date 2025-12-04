@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaGithub,
@@ -64,9 +64,15 @@ const TIMELINE = [
   { step: 4, highlight: "acceptButton", cursor: { x: 74, y: 78, click: true }, duration: 900 },
 ];
 
+// Types pour les positions des nœuds
+interface NodePosition {
+  x: number;
+  y: number;
+}
+
 // Calcule les coordonnées de départ / arrivée pour que la ligne parte de la
 // surface du disque source et arrive sur la surface du disque destination.
-function computeArrowPositions(from, to, radius = NODE_RADIUS) {
+function computeArrowPositions(from: NodePosition, to: NodePosition, radius = NODE_RADIUS) {
   const dx = to.x - from.x;
   const dy = to.y - from.y;
   const len = Math.sqrt(dx * dx + dy * dy) || 1;
@@ -143,55 +149,9 @@ export function HeroWorkflowAnimation() {
 
 export default HeroWorkflowAnimation;
 
-// --- Curseur animé ----------------------------------------------------------
-
-function AnimatedCursor({ cursor }) {
-  return (
-    <motion.div
-      aria-hidden
-      style={{
-        position: "absolute",
-        width: 22,
-        height: 22,
-        borderRadius: 999,
-        border: `2px solid ${COLORS.gray800}`,
-        backgroundColor: "rgba(255,255,255,0.9)",
-        boxShadow: "0 4px 12px rgba(15,23,42,0.25)",
-        top: 0,
-        left: 0,
-        transform: "translate(-50%, -50%)",
-        zIndex: 40,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      animate={{
-        x: `${cursor.x}%`,
-        y: `${cursor.y}%`,
-        scale: cursor.click ? [1, 0.88, 1] : 1,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 280,
-        damping: 26,
-        mass: 0.9,
-      }}
-    >
-      <div
-        style={{
-          width: 6,
-          height: 6,
-          borderRadius: "999px",
-          backgroundColor: COLORS.gray800,
-        }}
-      />
-    </motion.div>
-  );
-}
-
 // --- STEP 0 : Instant Obsolete Detection ------------------------------------
 
-function Step0InstantDetection({ highlight }) {
+function Step0InstantDetection({ highlight }: { highlight: string | null }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       {/* Header */}
@@ -322,7 +282,7 @@ function Step0InstantDetection({ highlight }) {
   );
 }
 
-function FlatFilterChip({ label, bg, border }) {
+function FlatFilterChip({ label, bg, border }: { label: string; bg: string; border: string }) {
   return (
     <div
       style={{
@@ -339,7 +299,7 @@ function FlatFilterChip({ label, bg, border }) {
   );
 }
 
-function MetadataRow({ active, name, type, usage, badgeLabel, badgeColor }) {
+function MetadataRow({ active, name, type, usage, badgeLabel, badgeColor }: { active: boolean; name: string; type: string; usage: string; badgeLabel: string; badgeColor: string }) {
   return (
     <div
       style={{
@@ -385,7 +345,7 @@ function MetadataRow({ active, name, type, usage, badgeLabel, badgeColor }) {
 
 // --- STEP 1 : Visual Impact Analysis ---------------------------------------
 
-function Step1ImpactMap({ highlight }) {
+function Step1ImpactMap({ highlight }: { highlight: string | null }) {
   const isLegacy = highlight === "legacyNode";
   const isLeadFlow = highlight === "leadFlowNode";
 
@@ -560,7 +520,7 @@ function Step1ImpactMap({ highlight }) {
   );
 }
 
-function CircleDot({ color }) {
+function CircleDot({ color }: { color: string }) {
   return (
     <div
       style={{
@@ -573,7 +533,7 @@ function CircleDot({ color }) {
   );
 }
 
-function ImpactNodeCircle({ label, kind, x, y, color, active }) {
+function ImpactNodeCircle({ label, kind, x, y, color, active }: { label: string; kind: string; x: string; y: string; color: string; active: boolean }) {
   const renderIcon = () => {
     if (kind === "Flow") return <FaStream style={{ fontSize: 16 }} />;
     if (kind === "Apex") return <FaCode style={{ fontSize: 16 }} />;
@@ -632,7 +592,7 @@ function ImpactNodeCircle({ label, kind, x, y, color, active }) {
 
 // --- STEP 2 : External Code Scanning ---------------------------------------
 
-function Step2ExternalScan({ highlight }) {
+function Step2ExternalScan({ highlight }: { highlight: string | null }) {
   // Centres des nœuds dans le repère SVG (viewBox 0 0 320 160)
   const webForm = { x: 70.4, y: 60.8 };
   const marketing = { x: 70.4, y: 115.2 };
@@ -800,7 +760,7 @@ function Step2ExternalScan({ highlight }) {
   );
 }
 
-function GitCircle({ label, x, y, active }) {
+function GitCircle({ label, x, y, active }: { label: string; x: string; y: string; active: boolean }) {
   return (
     <div
       style={{
@@ -850,7 +810,7 @@ function GitCircle({ label, x, y, active }) {
   );
 }
 
-function SfObjectNode({ label, x, y, active }) {
+function SfObjectNode({ label, x, y, active }: { label: string; x: string; y: string; active: boolean }) {
   return (
     <div
       style={{
@@ -898,7 +858,7 @@ function SfObjectNode({ label, x, y, active }) {
   );
 }
 
-function ApexNode({ label, x, y }) {
+function ApexNode({ label, x, y }: { label: string; x: string; y: string }) {
   return (
     <div
       style={{
@@ -946,7 +906,7 @@ function ApexNode({ label, x, y }) {
 
 // --- STEP 3 : Create Deletion Queue ----------------------------------------
 
-function Step3DeletionQueue({ highlight }) {
+function Step3DeletionQueue({ highlight }: { highlight: string | null }) {
   const legacyActive = highlight === "queueLegacyRow";
 
   return (
@@ -1048,6 +1008,7 @@ function Step3DeletionQueue({ highlight }) {
             type="Field"
             badgeLabel="Medium"
             badgeColor={COLORS.orange}
+            highlighted={false}
           />
           <QueueRow
             name="Unused workflow rule"
@@ -1055,6 +1016,7 @@ function Step3DeletionQueue({ highlight }) {
             type="Workflow"
             badgeLabel="Medium"
             badgeColor={COLORS.orange}
+            highlighted={false}
           />
           <QueueRow
             name="Archive__c object"
@@ -1062,6 +1024,7 @@ function Step3DeletionQueue({ highlight }) {
             type="Custom object"
             badgeLabel="Low"
             badgeColor={COLORS.gray400}
+            highlighted={false}
           />
         </div>
       </div>
@@ -1085,7 +1048,7 @@ function Step3DeletionQueue({ highlight }) {
   );
 }
 
-function QueueRow({ name, object, type, badgeLabel, badgeColor, highlighted }) {
+function QueueRow({ name, object, type, badgeLabel, badgeColor, highlighted }: { name: string; object: string; type: string; badgeLabel: string; badgeColor: string; highlighted: boolean }) {
   return (
     <div
       style={{
@@ -1120,7 +1083,7 @@ function QueueRow({ name, object, type, badgeLabel, badgeColor, highlighted }) {
 
 // --- STEP 4 : Automated Safe Execution -------------------------------------
 
-function Step4SmartPlan({ highlight }) {
+function Step4SmartPlan({ highlight }: { highlight: string | null }) {
   const isAccept = highlight === "acceptButton";
 
   // On simule la complétion progressive des étapes en fonction du temps global

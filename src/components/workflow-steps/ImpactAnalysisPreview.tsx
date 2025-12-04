@@ -1,13 +1,23 @@
 import { Box, Text, VStack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FiBox, FiZap, FiGitBranch, FiDatabase, FiCode } from 'react-icons/fi'
+import { IconType } from 'react-icons'
+
+interface NodeData {
+  id: number
+  label: string
+  type: string
+  x: number
+  y: number
+  color: string
+  icon: IconType
+}
 
 const ImpactAnalysisPreview = () => {
-  // Coordonnées en pixels sur un viewBox de 600x280
-  const nodes = [
-    { id: 1, label: 'AccountCleanupBatch', type: 'Apex', x: 300, y: 45, color: '#ef4444', icon: FiBox },
-    { id: 2, label: 'ContactTrigger', type: 'Trigger', x: 120, y: 130, color: '#f97316', icon: FiZap },
-    { id: 3, label: 'Old_Lead_Flow', type: 'Flow', x: 480, y: 130, color: '#22c55e', icon: FiGitBranch },
+  const nodes: NodeData[] = [
+    { id: 1, label: 'AccountCleanupBatch', type: 'Apex', x: 300, y: 50, color: '#ef4444', icon: FiBox },
+    { id: 2, label: 'ContactTrigger', type: 'Trigger', x: 120, y: 140, color: '#f97316', icon: FiZap },
+    { id: 3, label: 'Old_Lead_Flow', type: 'Flow', x: 480, y: 140, color: '#22c55e', icon: FiGitBranch },
     { id: 4, label: 'Status_Field__c', type: 'Field', x: 200, y: 230, color: '#eab308', icon: FiDatabase },
     { id: 5, label: 'Account_Helper', type: 'Apex', x: 400, y: 230, color: '#8b5cf6', icon: FiCode },
   ]
@@ -19,6 +29,8 @@ const ImpactAnalysisPreview = () => {
     { from: 3, to: 5 },
     { from: 4, to: 5 },
   ]
+
+  const nodeRadius = 22
 
   return (
     <Box
@@ -47,12 +59,14 @@ const ImpactAnalysisPreview = () => {
           height="100%" 
           viewBox="0 0 600 280"
           preserveAspectRatio="xMidYMid meet"
-          style={{ position: 'absolute', top: 0, left: 0 }}
         >
           <defs>
             <marker id="arrow-impact" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
               <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
             </marker>
+            <filter id="shadow-impact" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.15"/>
+            </filter>
           </defs>
           
           {/* Edges */}
@@ -60,14 +74,13 @@ const ImpactAnalysisPreview = () => {
             const from = nodes.find(n => n.id === edge.from)!
             const to = nodes.find(n => n.id === edge.to)!
             
-            // Points de contrôle pour courbe de Bézier
             const midX = (from.x + to.x) / 2
             const midY = (from.y + to.y) / 2 - 20
             
             return (
               <motion.path
                 key={index}
-                d={`M ${from.x} ${from.y + 25} Q ${midX} ${midY + 25} ${to.x} ${to.y - 25}`}
+                d={`M ${from.x} ${from.y + nodeRadius} Q ${midX} ${midY + nodeRadius} ${to.x} ${to.y - nodeRadius}`}
                 fill="none"
                 stroke="#94a3b8"
                 strokeWidth={2}
@@ -79,71 +92,68 @@ const ImpactAnalysisPreview = () => {
             )
           })}
 
-          {/* Node circles (SVG) */}
-          {nodes.map((node, index) => (
-            <motion.circle
-              key={node.id}
-              cx={node.x}
-              cy={node.y}
-              r={22}
-              fill="white"
-              stroke={node.color}
-              strokeWidth={3}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }}
-            />
-          ))}
+          {/* Nodes */}
+          {nodes.map((node, index) => {
+            const IconComponent = node.icon
+            return (
+              <motion.g
+                key={node.id}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                style={{ transformOrigin: `${node.x}px ${node.y}px` }}
+              >
+                {/* Circle background */}
+                <circle
+                  cx={node.x}
+                  cy={node.y}
+                  r={nodeRadius}
+                  fill="white"
+                  stroke={node.color}
+                  strokeWidth={3}
+                  filter="url(#shadow-impact)"
+                />
+                
+                {/* Icon (using foreignObject) */}
+                <foreignObject
+                  x={node.x - 12}
+                  y={node.y - 12}
+                  width={24}
+                  height={24}
+                >
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    w="24px"
+                    h="24px"
+                    color={node.color}
+                  >
+                    <IconComponent size={18} />
+                  </Box>
+                </foreignObject>
+                
+                {/* Label */}
+                <foreignObject
+                  x={node.x - 45}
+                  y={node.y + nodeRadius + 4}
+                  width={90}
+                  height={24}
+                >
+                  <Text 
+                    fontSize="8px" 
+                    fontWeight="bold" 
+                    color="gray.700"
+                    textAlign="center"
+                    lineHeight={1.2}
+                  >
+                    {node.label}
+                  </Text>
+                </foreignObject>
+              </motion.g>
+            )
+          })}
         </svg>
-
-        {/* Node icons and labels (HTML overlay) */}
-        {nodes.map((node, index) => {
-          const IconComponent = node.icon
-          // Convertir les coordonnées viewBox en pourcentages
-          const leftPercent = (node.x / 600) * 100
-          const topPercent = (node.y / 280) * 100
-          
-          return (
-            <motion.div
-              key={node.id}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              style={{
-                position: 'absolute',
-                left: `${leftPercent}%`,
-                top: `${topPercent}%`,
-                transform: 'translate(-50%, -50%)',
-                pointerEvents: 'none',
-              }}
-            >
-              <VStack spacing={0}>
-                <Box
-                  w="44px"
-                  h="44px"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  color={node.color}
-                >
-                  <IconComponent size={20} />
-                </Box>
-                <Text 
-                  fontSize="8px" 
-                  fontWeight="bold" 
-                  color="gray.700"
-                  textAlign="center"
-                  maxW="75px"
-                  lineHeight={1.1}
-                  mt={1}
-                >
-                  {node.label}
-                </Text>
-              </VStack>
-            </motion.div>
-          )
-        })}
       </Box>
 
       {/* Footer */}

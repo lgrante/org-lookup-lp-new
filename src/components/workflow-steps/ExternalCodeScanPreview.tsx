@@ -1,6 +1,7 @@
-import { Box, Text, VStack } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FiGithub, FiBox, FiZap, FiDatabase } from 'react-icons/fi'
+import { IconType } from 'react-icons'
 
 const GitLabIcon = ({ size = 18 }: { size?: number }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
@@ -8,9 +9,19 @@ const GitLabIcon = ({ size = 18 }: { size?: number }) => (
   </svg>
 )
 
+interface NodeData {
+  id: number
+  label: string
+  type: string
+  x: number
+  y: number
+  color: string
+  icon: 'github' | 'gitlab' | IconType
+  isExternal?: boolean
+}
+
 const ExternalCodeScanPreview = () => {
-  // Coordonnées en pixels sur un viewBox de 600x280
-  const nodes = [
+  const nodes: NodeData[] = [
     { id: 1, label: 'Lead Web Form', type: 'GitHub', x: 100, y: 90, color: '#24292e', icon: 'github', isExternal: true },
     { id: 2, label: 'Mass Import Script', type: 'GitLab', x: 100, y: 190, color: '#fc6d26', icon: 'gitlab', isExternal: true },
     { id: 3, label: 'LeadAPI', type: 'Apex', x: 320, y: 140, color: '#6366f1', icon: FiBox },
@@ -24,6 +35,9 @@ const ExternalCodeScanPreview = () => {
     { from: 3, to: 4, color: '#94a3b8', dashed: false },
     { from: 3, to: 5, color: '#94a3b8', dashed: false },
   ]
+
+  const nodeRadius = 24
+  const extSize = 50
 
   return (
     <Box
@@ -52,7 +66,6 @@ const ExternalCodeScanPreview = () => {
           height="100%" 
           viewBox="0 0 600 280"
           preserveAspectRatio="xMidYMid meet"
-          style={{ position: 'absolute', top: 0, left: 0 }}
         >
           <defs>
             <marker id="arrow-ext-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -64,12 +77,18 @@ const ExternalCodeScanPreview = () => {
             <marker id="arrow-ext-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
               <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
             </marker>
+            <filter id="shadow-ext" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="4" floodOpacity="0.2"/>
+            </filter>
           </defs>
           
           {/* Edges */}
           {edges.map((edge, index) => {
             const from = nodes.find(n => n.id === edge.from)!
             const to = nodes.find(n => n.id === edge.to)!
+            
+            const fromOffset = from.isExternal ? extSize / 2 + 5 : nodeRadius + 5
+            const toOffset = to.isExternal ? extSize / 2 + 5 : nodeRadius + 5
             
             const midX = (from.x + to.x) / 2
             const midY = (from.y + to.y) / 2 - 15
@@ -80,7 +99,7 @@ const ExternalCodeScanPreview = () => {
             return (
               <motion.path
                 key={index}
-                d={`M ${from.x + 30} ${from.y} Q ${midX} ${midY} ${to.x - 25} ${to.y}`}
+                d={`M ${from.x + fromOffset} ${from.y} Q ${midX} ${midY} ${to.x - toOffset} ${to.y}`}
                 fill="none"
                 stroke={edge.color}
                 strokeWidth={2.5}
@@ -93,90 +112,126 @@ const ExternalCodeScanPreview = () => {
             )
           })}
 
-          {/* External node backgrounds (rectangles) */}
+          {/* External Nodes (rectangles) */}
           {nodes.filter(n => n.isExternal).map((node, index) => (
-            <motion.rect
-              key={node.id}
-              x={node.x - 28}
-              y={node.y - 28}
-              width={56}
-              height={56}
-              rx={12}
-              fill={node.color}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }}
-            />
-          ))}
-
-          {/* Internal node circles */}
-          {nodes.filter(n => !n.isExternal).map((node, index) => (
-            <motion.circle
-              key={node.id}
-              cx={node.x}
-              cy={node.y}
-              r={24}
-              fill="white"
-              stroke={node.color}
-              strokeWidth={3}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.2 + index * 0.08 }}
-              style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }}
-            />
-          ))}
-        </svg>
-
-        {/* Node icons and labels (HTML overlay) */}
-        {nodes.map((node, index) => {
-          const isExternal = node.isExternal
-          const IconComponent = typeof node.icon === 'function' ? node.icon : null
-          const leftPercent = (node.x / 600) * 100
-          const topPercent = (node.y / 280) * 100
-          
-          return (
-            <motion.div
+            <motion.g
               key={node.id}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              style={{
-                position: 'absolute',
-                left: `${leftPercent}%`,
-                top: `${topPercent}%`,
-                transform: 'translate(-50%, -50%)',
-                pointerEvents: 'none',
-              }}
+              style={{ transformOrigin: `${node.x}px ${node.y}px` }}
             >
-              <VStack spacing={0}>
+              <rect
+                x={node.x - extSize / 2}
+                y={node.y - extSize / 2}
+                width={extSize}
+                height={extSize}
+                rx={12}
+                fill={node.color}
+                filter="url(#shadow-ext)"
+              />
+              
+              {/* Icon */}
+              <foreignObject
+                x={node.x - 14}
+                y={node.y - 14}
+                width={28}
+                height={28}
+              >
                 <Box
-                  w={isExternal ? "56px" : "48px"}
-                  h={isExternal ? "56px" : "48px"}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  color={isExternal ? "white" : node.color}
+                  w="28px"
+                  h="28px"
+                  color="white"
                 >
-                  {node.icon === 'github' && <FiGithub size={24} />}
-                  {node.icon === 'gitlab' && <GitLabIcon size={24} />}
-                  {IconComponent && <IconComponent size={20} />}
+                  {node.icon === 'github' && <FiGithub size={22} />}
+                  {node.icon === 'gitlab' && <GitLabIcon size={22} />}
                 </Box>
+              </foreignObject>
+              
+              {/* Label */}
+              <foreignObject
+                x={node.x - 50}
+                y={node.y + extSize / 2 + 4}
+                width={100}
+                height={24}
+              >
                 <Text 
                   fontSize="8px" 
                   fontWeight="bold" 
                   color="gray.700"
                   textAlign="center"
-                  maxW="75px"
-                  lineHeight={1.1}
-                  mt={isExternal ? 0 : 1}
+                  lineHeight={1.2}
                 >
                   {node.label}
                 </Text>
-              </VStack>
-            </motion.div>
-          )
-        })}
+              </foreignObject>
+            </motion.g>
+          ))}
+
+          {/* Internal Nodes (circles) */}
+          {nodes.filter(n => !n.isExternal).map((node, index) => {
+            const IconComponent = node.icon as IconType
+            return (
+              <motion.g
+                key={node.id}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.2 + index * 0.08 }}
+                style={{ transformOrigin: `${node.x}px ${node.y}px` }}
+              >
+                <circle
+                  cx={node.x}
+                  cy={node.y}
+                  r={nodeRadius}
+                  fill="white"
+                  stroke={node.color}
+                  strokeWidth={3}
+                  filter="url(#shadow-ext)"
+                />
+                
+                {/* Icon */}
+                <foreignObject
+                  x={node.x - 12}
+                  y={node.y - 12}
+                  width={24}
+                  height={24}
+                >
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    w="24px"
+                    h="24px"
+                    color={node.color}
+                  >
+                    <IconComponent size={18} />
+                  </Box>
+                </foreignObject>
+                
+                {/* Label */}
+                <foreignObject
+                  x={node.x - 45}
+                  y={node.y + nodeRadius + 4}
+                  width={90}
+                  height={24}
+                >
+                  <Text 
+                    fontSize="8px" 
+                    fontWeight="bold" 
+                    color="gray.700"
+                    textAlign="center"
+                    lineHeight={1.2}
+                  >
+                    {node.label}
+                  </Text>
+                </foreignObject>
+              </motion.g>
+            )
+          })}
+        </svg>
       </Box>
 
       {/* Footer */}

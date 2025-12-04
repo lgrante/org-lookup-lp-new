@@ -1,11 +1,57 @@
+import { useState, useEffect } from 'react'
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { WiStars } from 'react-icons/wi'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import HeroBackground from '../HeroBackground'
 import { staggerContainer, staggerItem } from '../../utils/animations'
 
+// Import workflow step previews
+import { 
+  ObsoleteDetectionPreview, 
+  ImpactAnalysisPreview, 
+  ExternalCodeScanPreview, 
+  DeletionQueuePreview, 
+  SafeExecutionPreview 
+} from '../workflow-steps'
+
+const STEP_LABELS = [
+  'Obsolete Detection',
+  'Impact Analysis',
+  'External Scan',
+  'Deletion Queue',
+  'Safe Execution'
+]
+
 const MobileHero = () => {
+  const [currentStep, setCurrentStep] = useState(0)
+
+  // Auto-cycle through steps
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentStep((prev) => (prev + 1) % 5)
+    }, 4000) // 4 seconds per step
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const renderCurrentPreview = () => {
+    switch (currentStep) {
+      case 0:
+        return <ObsoleteDetectionPreview />
+      case 1:
+        return <ImpactAnalysisPreview />
+      case 2:
+        return <ExternalCodeScanPreview />
+      case 3:
+        return <DeletionQueuePreview />
+      case 4:
+        return <SafeExecutionPreview />
+      default:
+        return <ObsoleteDetectionPreview />
+    }
+  }
+
   return (
     <Box
       as="section"
@@ -14,7 +60,7 @@ const MobileHero = () => {
       flexDirection="column"
       justifyContent="center"
       position="relative"
-      pt="80px" // Account for fixed header
+      pt="80px"
       pb={8}
       px={4}
       overflow="hidden"
@@ -146,122 +192,66 @@ const MobileHero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Simplified Static Preview - replaces heavy animation */}
+      {/* Animated Preview Carousel */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        style={{ marginTop: '32px' }}
+        style={{ marginTop: '24px' }}
       >
-        <Box
-          borderRadius="16px"
-          overflow="hidden"
-          boxShadow="0px 8px 24px rgba(0, 0, 0, 0.15)"
-          bg="white"
-          border="1px solid var(--color-gray-200)"
-        >
-          {/* Static preview card */}
-          <Box p={4}>
-            <VStack spacing={3} align="stretch">
-              {/* Header */}
-              <Box display="flex" alignItems="center" gap={2}>
-                <Box
-                  w="28px"
-                  h="28px"
-                  borderRadius="full"
-                  bg="var(--color-primary)"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  color="white"
-                  fontSize="xs"
-                  fontWeight="bold"
-                >
-                  ✓
-                </Box>
-                <Text fontSize="sm" fontWeight="semibold" color="var(--color-text-primary)">
-                  Org Metadata Scanner
-                </Text>
-                <Box
-                  ml="auto"
-                  px={2}
-                  py={0.5}
-                  borderRadius="full"
-                  bg="var(--color-success)"
-                  color="white"
-                  fontSize="xs"
-                  fontWeight="bold"
-                >
-                  128 items
-                </Box>
-              </Box>
+        {/* Step Indicators */}
+        <Box display="flex" justifyContent="center" gap={2} mb={3}>
+          {STEP_LABELS.map((label, index) => (
+            <Box
+              key={index}
+              w={currentStep === index ? "24px" : "8px"}
+              h="8px"
+              borderRadius="full"
+              bg={currentStep === index ? "var(--color-primary)" : "var(--color-gray-300)"}
+              transition="all 0.3s ease"
+              cursor="pointer"
+              onClick={() => setCurrentStep(index)}
+            />
+          ))}
+        </Box>
 
-              {/* Sample rows */}
-              <Box
-                borderRadius="8px"
-                border="1px solid var(--color-gray-200)"
-                overflow="hidden"
-                fontSize="xs"
-              >
-                <Box
-                  display="grid"
-                  gridTemplateColumns="2fr 1fr 1fr"
-                  bg="var(--color-gray-50)"
-                  p={2}
-                  borderBottom="1px solid var(--color-gray-200)"
-                  fontWeight="medium"
-                  color="var(--color-text-secondary)"
-                >
-                  <Text>Field</Text>
-                  <Text>Usage</Text>
-                  <Text>Risk</Text>
-                </Box>
-                <Box
-                  display="grid"
-                  gridTemplateColumns="2fr 1fr 1fr"
-                  p={2}
-                  borderBottom="1px solid var(--color-gray-100)"
-                  bg="var(--color-primary-soft)"
-                  opacity={0.3}
-                >
-                  <Text fontWeight="medium">Legacy score</Text>
-                  <Text color="var(--color-text-secondary)">0.4%</Text>
-                  <Box
-                    px={2}
-                    py={0.5}
-                    borderRadius="full"
-                    bg="var(--color-error)"
-                    color="white"
-                    fontSize="10px"
-                    fontWeight="bold"
-                    w="fit-content"
-                  >
-                    High
-                  </Box>
-                </Box>
-                <Box
-                  display="grid"
-                  gridTemplateColumns="2fr 1fr 1fr"
-                  p={2}
-                >
-                  <Text fontWeight="medium">Onboarding flag</Text>
-                  <Text color="var(--color-text-secondary)">1.2%</Text>
-                  <Box
-                    px={2}
-                    py={0.5}
-                    borderRadius="full"
-                    bg="var(--color-warning)"
-                    color="white"
-                    fontSize="10px"
-                    fontWeight="bold"
-                    w="fit-content"
-                  >
-                    Medium
-                  </Box>
-                </Box>
-              </Box>
-            </VStack>
-          </Box>
+        {/* Current Step Label */}
+        <Text 
+          fontSize="xs" 
+          color="var(--color-text-secondary)" 
+          textAlign="center" 
+          mb={2}
+          fontWeight="medium"
+        >
+          Step {currentStep + 1}: {STEP_LABELS[currentStep]}
+        </Text>
+
+        {/* Preview Container with scale */}
+        <Box
+          position="relative"
+          overflow="hidden"
+          borderRadius="12px"
+          boxShadow="0px 8px 24px rgba(0, 0, 0, 0.15)"
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              style={{
+                transformOrigin: 'top left',
+                transform: 'scale(0.58)',
+                width: '600px',
+                height: '380px',
+                marginBottom: '-160px', // Compensate for scale
+                marginRight: '-252px', // Compensate for scale
+              }}
+            >
+              {renderCurrentPreview()}
+            </motion.div>
+          </AnimatePresence>
         </Box>
       </motion.div>
     </Box>
@@ -269,4 +259,3 @@ const MobileHero = () => {
 }
 
 export default MobileHero
-

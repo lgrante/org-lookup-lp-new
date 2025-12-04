@@ -1,12 +1,23 @@
 import { Box, Heading, Text, VStack, HStack, Circle } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { ReactNode } from 'react'
 import { fadeIn } from '../../utils/animations'
+
+// Import workflow step previews
+import { 
+  ObsoleteDetectionPreview, 
+  ImpactAnalysisPreview, 
+  ExternalCodeScanPreview, 
+  DeletionQueuePreview, 
+  SafeExecutionPreview 
+} from '../workflow-steps'
 
 interface Step {
   step: number
   title: string
   subtitle: string
   description: string[]
+  preview: ReactNode
 }
 
 const MobileWorkflowTimeline = () => {
@@ -19,7 +30,8 @@ const MobileWorkflowTimeline = () => {
         "Surface risky or low-value metadata",
         "Score items by usage, recency, dependency depth",
         "Build a realistic cleanup backlog"
-      ]
+      ],
+      preview: <ObsoleteDetectionPreview />
     },
     {
       step: 2,
@@ -29,7 +41,8 @@ const MobileWorkflowTimeline = () => {
         "Interactive dependency map: Flows ⇄ Apex ⇄ Validation Rules",
         "Detect overlapping automation",
         "Generate shareable visuals"
-      ]
+      ],
+      preview: <ImpactAnalysisPreview />
     },
     {
       step: 3,
@@ -39,7 +52,8 @@ const MobileWorkflowTimeline = () => {
         "Connect GitHub/GitLab/Bitbucket",
         "Detect references in Apex, JS, integrations",
         "Avoid breaking APIs or data pipelines"
-      ]
+      ],
+      preview: <ExternalCodeScanPreview />
     },
     {
       step: 4,
@@ -49,7 +63,8 @@ const MobileWorkflowTimeline = () => {
         "View all metadata items in the deletion queue",
         "Review the consolidated list",
         "Organize before execution"
-      ]
+      ],
+      preview: <DeletionQueuePreview />
     },
     {
       step: 5,
@@ -59,7 +74,8 @@ const MobileWorkflowTimeline = () => {
         "Generate a safe, step-by-step action plan",
         "Generate deployment-ready metadata packages",
         "Track every change for future auditors"
-      ]
+      ],
+      preview: <SafeExecutionPreview />
     }
   ]
 
@@ -152,59 +168,82 @@ const MobileWorkflowTimeline = () => {
                         {step.step}
                       </Circle>
 
-                      {/* Step Content */}
+                      {/* Step Content Card */}
                       <Box
                         bg="white"
                         borderRadius="12px"
                         border="1px solid var(--color-gray-200)"
-                        p={4}
+                        overflow="hidden"
                         boxShadow="sm"
                       >
-                        <VStack spacing={3} align="flex-start">
-                          {/* Title & Subtitle */}
-                          <VStack spacing={1} align="flex-start">
-                            <Heading
-                              as="h3"
-                              fontSize="md"
-                              fontWeight="bold"
-                              color="var(--color-text-primary)"
-                              fontFamily="'Vend Sans', sans-serif"
-                            >
-                              {step.title}
-                            </Heading>
-                            <Text
-                              fontSize="xs"
-                              fontWeight="medium"
-                              color="var(--color-primary)"
-                              fontStyle="italic"
-                            >
-                              {step.subtitle}
-                            </Text>
-                          </VStack>
+                        {/* Text Content */}
+                        <Box p={4}>
+                          <VStack spacing={3} align="flex-start">
+                            {/* Title & Subtitle */}
+                            <VStack spacing={1} align="flex-start">
+                              <Heading
+                                as="h3"
+                                fontSize="md"
+                                fontWeight="bold"
+                                color="var(--color-text-primary)"
+                                fontFamily="'Vend Sans', sans-serif"
+                              >
+                                {step.title}
+                              </Heading>
+                              <Text
+                                fontSize="xs"
+                                fontWeight="medium"
+                                color="var(--color-primary)"
+                                fontStyle="italic"
+                              >
+                                {step.subtitle}
+                              </Text>
+                            </VStack>
 
-                          {/* Description Points */}
-                          <VStack spacing={2} align="flex-start" w="full">
-                            {step.description.map((item, idx) => (
-                              <HStack key={idx} spacing={2} align="flex-start">
-                                <Box
-                                  w="6px"
-                                  h="6px"
-                                  borderRadius="full"
-                                  bg="var(--color-tertiary)"
-                                  mt="6px"
-                                  flexShrink={0}
-                                />
-                                <Text
-                                  fontSize="sm"
-                                  color="var(--color-text-secondary)"
-                                  lineHeight={1.5}
-                                >
-                                  {item}
-                                </Text>
-                              </HStack>
-                            ))}
+                            {/* Description Points */}
+                            <VStack spacing={2} align="flex-start" w="full">
+                              {step.description.map((item, idx) => (
+                                <HStack key={idx} spacing={2} align="flex-start">
+                                  <Box
+                                    w="6px"
+                                    h="6px"
+                                    borderRadius="full"
+                                    bg="var(--color-tertiary)"
+                                    mt="6px"
+                                    flexShrink={0}
+                                  />
+                                  <Text
+                                    fontSize="sm"
+                                    color="var(--color-text-secondary)"
+                                    lineHeight={1.5}
+                                  >
+                                    {item}
+                                  </Text>
+                                </HStack>
+                              ))}
+                            </VStack>
                           </VStack>
-                        </VStack>
+                        </Box>
+
+                        {/* Preview Visual - Scaled to fit */}
+                        <Box
+                          borderTop="1px solid var(--color-gray-200)"
+                          bg="var(--color-gray-50)"
+                          overflow="hidden"
+                          position="relative"
+                        >
+                          <Box
+                            transform="scale(0.52)"
+                            transformOrigin="top left"
+                            width="600px"
+                            height="380px"
+                            // Compensate for the scaled size
+                            marginBottom="-182px"
+                            marginRight="-288px"
+                          >
+                            {step.preview}
+                          </Box>
+                        </Box>
                       </Box>
 
                       {/* Connecting Line to next step */}
@@ -232,4 +271,3 @@ const MobileWorkflowTimeline = () => {
 }
 
 export default MobileWorkflowTimeline
-

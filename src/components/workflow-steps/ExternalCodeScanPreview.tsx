@@ -9,19 +9,20 @@ const GitLabIcon = ({ size = 18 }: { size?: number }) => (
 )
 
 const ExternalCodeScanPreview = () => {
+  // Coordonnées en pixels sur un viewBox de 600x280
   const nodes = [
-    { id: 1, label: 'Lead Web Form', type: 'GitHub', x: 20, y: 30, color: '#24292e', icon: 'github', isExternal: true },
-    { id: 2, label: 'Mass Import Script', type: 'GitLab', x: 20, y: 70, color: '#fc6d26', icon: 'gitlab', isExternal: true },
-    { id: 3, label: 'LeadAPI', type: 'Apex', x: 55, y: 50, color: '#6366f1', icon: FiBox },
-    { id: 4, label: 'LeadTrigger', type: 'Trigger', x: 80, y: 30, color: '#f97316', icon: FiZap },
-    { id: 5, label: 'Lead__c', type: 'Object', x: 80, y: 70, color: '#22c55e', icon: FiDatabase },
+    { id: 1, label: 'Lead Web Form', type: 'GitHub', x: 100, y: 90, color: '#24292e', icon: 'github', isExternal: true },
+    { id: 2, label: 'Mass Import Script', type: 'GitLab', x: 100, y: 190, color: '#fc6d26', icon: 'gitlab', isExternal: true },
+    { id: 3, label: 'LeadAPI', type: 'Apex', x: 320, y: 140, color: '#6366f1', icon: FiBox },
+    { id: 4, label: 'LeadTrigger', type: 'Trigger', x: 500, y: 90, color: '#f97316', icon: FiZap },
+    { id: 5, label: 'Lead__c', type: 'Object', x: 500, y: 190, color: '#22c55e', icon: FiDatabase },
   ]
 
   const edges = [
     { from: 1, to: 3, color: '#3b82f6', dashed: false },
     { from: 2, to: 3, color: '#22c55e', dashed: true },
-    { from: 3, to: 4, color: '#cbd5e1', dashed: false },
-    { from: 3, to: 5, color: '#cbd5e1', dashed: false },
+    { from: 3, to: 4, color: '#94a3b8', dashed: false },
+    { from: 3, to: 5, color: '#94a3b8', dashed: false },
   ]
 
   return (
@@ -45,17 +46,23 @@ const ExternalCodeScanPreview = () => {
       </Box>
 
       {/* Graph Area */}
-      <Box position="relative" flex={1} bg="gray.50">
-        <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0 }}>
+      <Box position="relative" flex={1} bg="gray.50" overflow="hidden">
+        <svg 
+          width="100%" 
+          height="100%" 
+          viewBox="0 0 600 280"
+          preserveAspectRatio="xMidYMid meet"
+          style={{ position: 'absolute', top: 0, left: 0 }}
+        >
           <defs>
-            <marker id="arrow-ext-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-              <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
+            <marker id="arrow-ext-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
             </marker>
-            <marker id="arrow-ext-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-              <polygon points="0 0, 8 3, 0 6" fill="#22c55e" />
+            <marker id="arrow-ext-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e" />
             </marker>
-            <marker id="arrow-ext-gray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-              <polygon points="0 0, 8 3, 0 6" fill="#94a3b8" />
+            <marker id="arrow-ext-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
             </marker>
           </defs>
           
@@ -63,71 +70,106 @@ const ExternalCodeScanPreview = () => {
           {edges.map((edge, index) => {
             const from = nodes.find(n => n.id === edge.from)!
             const to = nodes.find(n => n.id === edge.to)!
+            
             const midX = (from.x + to.x) / 2
-            const midY = (from.y + to.y) / 2 - 5
+            const midY = (from.y + to.y) / 2 - 15
+            
             const markerId = edge.color === '#3b82f6' ? 'arrow-ext-blue' : 
                             edge.color === '#22c55e' ? 'arrow-ext-green' : 'arrow-ext-gray'
             
             return (
               <motion.path
                 key={index}
-                d={`M ${from.x + 8}% ${from.y}% Q ${midX}% ${midY}% ${to.x - 5}% ${to.y}%`}
+                d={`M ${from.x + 30} ${from.y} Q ${midX} ${midY} ${to.x - 25} ${to.y}`}
                 fill="none"
                 stroke={edge.color}
-                strokeWidth={2}
-                strokeDasharray={edge.dashed ? "6,3" : "none"}
+                strokeWidth={2.5}
+                strokeDasharray={edge.dashed ? "8,4" : "none"}
                 markerEnd={`url(#${markerId})`}
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 + index * 0.15 }}
+                transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
               />
             )
           })}
+
+          {/* External node backgrounds (rectangles) */}
+          {nodes.filter(n => n.isExternal).map((node, index) => (
+            <motion.rect
+              key={node.id}
+              x={node.x - 28}
+              y={node.y - 28}
+              width={56}
+              height={56}
+              rx={12}
+              fill={node.color}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }}
+            />
+          ))}
+
+          {/* Internal node circles */}
+          {nodes.filter(n => !n.isExternal).map((node, index) => (
+            <motion.circle
+              key={node.id}
+              cx={node.x}
+              cy={node.y}
+              r={24}
+              fill="white"
+              stroke={node.color}
+              strokeWidth={3}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 + index * 0.08 }}
+              style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }}
+            />
+          ))}
         </svg>
 
-        {/* Nodes */}
+        {/* Node icons and labels (HTML overlay) */}
         {nodes.map((node, index) => {
           const isExternal = node.isExternal
           const IconComponent = typeof node.icon === 'function' ? node.icon : null
+          const leftPercent = (node.x / 600) * 100
+          const topPercent = (node.y / 280) * 100
           
           return (
             <motion.div
               key={node.id}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
               style={{
                 position: 'absolute',
-                left: `${node.x}%`,
-                top: `${node.y}%`,
+                left: `${leftPercent}%`,
+                top: `${topPercent}%`,
                 transform: 'translate(-50%, -50%)',
+                pointerEvents: 'none',
               }}
             >
-              <VStack spacing={1}>
+              <VStack spacing={0}>
                 <Box
-                  w={isExternal ? "48px" : "44px"}
-                  h={isExternal ? "48px" : "44px"}
-                  borderRadius={isExternal ? "12px" : "full"}
-                  bg={isExternal ? node.color : "white"}
-                  border={isExternal ? "none" : "3px solid"}
-                  borderColor={node.color}
-                  boxShadow="0 4px 12px rgba(0,0,0,0.15)"
+                  w={isExternal ? "56px" : "48px"}
+                  h={isExternal ? "56px" : "48px"}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
                   color={isExternal ? "white" : node.color}
                 >
-                  {node.icon === 'github' && <FiGithub size={20} />}
-                  {node.icon === 'gitlab' && <GitLabIcon size={20} />}
-                  {IconComponent && <IconComponent size={18} />}
+                  {node.icon === 'github' && <FiGithub size={24} />}
+                  {node.icon === 'gitlab' && <GitLabIcon size={24} />}
+                  {IconComponent && <IconComponent size={20} />}
                 </Box>
                 <Text 
-                  fontSize="9px" 
+                  fontSize="8px" 
                   fontWeight="bold" 
                   color="gray.700"
                   textAlign="center"
-                  maxW="80px"
+                  maxW="75px"
                   lineHeight={1.1}
+                  mt={isExternal ? 0 : 1}
                 >
                   {node.label}
                 </Text>

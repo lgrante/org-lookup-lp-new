@@ -202,7 +202,7 @@ const DeletionPlan = () => {
                           />
                         </Box>
                         <Text fontSize="sm" mt={2} color="var(--color-red-500)" fontWeight="semibold" textAlign="center">
-                          ~40+ hours of work
+                          3-12 months of work
                         </Text>
                       </Box>
                     </VStack>
@@ -310,7 +310,7 @@ const DeletionPlan = () => {
                     textAlign="center"
                     boxShadow="0 4px 12px rgba(34, 197, 94, 0.3)"
                   >
-                    Save 39+ hours
+                    Save months
                   </Box>
                 </VStack>
               </motion.div>
@@ -365,7 +365,7 @@ const DeletionPlan = () => {
                           />
                         </Box>
                         <Text fontSize="sm" mt={2} color="var(--color-green-500)" fontWeight="semibold" textAlign="center">
-                          ~30 minutes
+                          ~1 week
                         </Text>
                       </Box>
                     </VStack>

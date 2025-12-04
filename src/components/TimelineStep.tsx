@@ -80,7 +80,7 @@ const TimelineStep = ({
           </Circle>
 
           {/* Visual Section */}
-          <Box textAlign="center" minW="200px" bg="transparent" width={component ? "55%" : "40%"}>
+          <Box textAlign="center" minW="200px" bg="transparent" width="45%">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -89,15 +89,7 @@ const TimelineStep = ({
               style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}
             >
               {component ? (
-                <Box 
-                  w="600px"
-                  h="380px"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  {component}
-                </Box>
+                component
               ) : (
                 <Image
                   src={imageSrc}
@@ -110,7 +102,7 @@ const TimelineStep = ({
           </Box>
 
           {/* Content Section */}
-          <Box textAlign={isReversed ? "right" : "left"} width="35%">
+          <Box textAlign={isReversed ? "right" : "left"} width="45%">
             <VStack spacing={6} align={isReversed ? "flex-end" : "flex-start"} width="100%">
               {/* Title with badge */}
               <HStack spacing={3} align={isReversed ? "flex-end" : "flex-start"} width="100%">

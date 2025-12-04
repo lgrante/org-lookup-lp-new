@@ -1,14 +1,15 @@
 import { Box, VStack, HStack, Text, Circle, Image } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, ReactNode } from 'react'
 
 interface TimelineStepProps {
   step: number
   title: string
   subtitle?: string
   description: string[]
-  imageSrc: string
-  imageAlt: string
+  imageSrc?: string
+  imageAlt?: string
+  component?: ReactNode
   isLast?: boolean
   isReversed?: boolean
 }
@@ -20,6 +21,7 @@ const TimelineStep = ({
   description,
   imageSrc,
   imageAlt,
+  component,
   isLast = false,
   isReversed = false
 }: TimelineStepProps) => {
@@ -77,9 +79,8 @@ const TimelineStep = ({
             {step}
           </Circle>
 
-          {/* Image Section */}
-          <Box textAlign="center" minW="200px" bg="transparent" width="40%">
-            {/* Image ULTRA */}
+          {/* Visual Section */}
+          <Box textAlign="center" minW="200px" bg="transparent" width={component ? "55%" : "40%"}>
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -87,12 +88,18 @@ const TimelineStep = ({
               viewport={{ once: false, margin: "-100px" }}
               style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}
             >
-              <Image
-                src={imageSrc}
-                alt={imageAlt}
-                w="70%"
-                objectFit="contain"
-              />
+              {component ? (
+                <Box w="100%" maxW="900px" transform="scale(0.85)" transformOrigin="center">
+                  {component}
+                </Box>
+              ) : (
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt || "Step illustration"}
+                  w="70%"
+                  objectFit="contain"
+                />
+              )}
             </motion.div>
           </Box>
 

@@ -2,6 +2,13 @@ import { Box, Heading, Text, VStack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import TimelineStep from './TimelineStep'
 import { fadeIn, staggerContainer } from '../utils/animations'
+import { 
+  ObsoleteDetection, 
+  ImpactAnalysis, 
+  ExternalCodeScan, 
+  DeletionQueue, 
+  SafeExecution 
+} from './workflow-steps'
 
 const WorkflowTimeline = () => {
   const steps = [
@@ -14,8 +21,7 @@ const WorkflowTimeline = () => {
         "<strong>Score items</strong> by usage, recency, dependency depth",
         "<strong>Build a realistic cleanup backlog</strong> filtered by object, business area, or risk"
       ],
-      imageSrc: "/obsolescence-list.svg",
-      imageAlt: "Step 1"
+      component: <ObsoleteDetection />
     },
     {
       step: 2,
@@ -26,8 +32,7 @@ const WorkflowTimeline = () => {
         "<strong>Detect overlapping or redundant automation</strong>",
         "<strong>Generate shareable visuals</strong> to align admins, devs, and business stakeholders"
       ],
-      imageSrc: "/dependencies-map.svg",
-      imageAlt: "Step 2"
+      component: <ImpactAnalysis />
     },
     {
       step: 3,
@@ -38,8 +43,7 @@ const WorkflowTimeline = () => {
         "<strong>Detect references</strong> in Apex, JS, integrations, scheduled scripts",
         "<strong>Avoid breaking APIs or data pipelines</strong> tied to legacy fields"
       ],
-      imageSrc: "/sync_v2.png",
-      imageAlt: "Step 3"
+      component: <ExternalCodeScan />
     },
     {
       step: 4,
@@ -50,8 +54,7 @@ const WorkflowTimeline = () => {
         "<strong>Review the consolidated list</strong> of selected items",
         "<strong>Organize and manage</strong> your deletion queue before execution"
       ],
-      imageSrc: "/obsolescence-list.svg",
-      imageAlt: "Step 4"
+      component: <DeletionQueue />
     },
     {
       step: 5,
@@ -62,8 +65,7 @@ const WorkflowTimeline = () => {
         "<strong>Generate deployment-ready metadata packages</strong> (Salesforce CLI / CI/CD)",
         "<strong>Track every change</strong> for future admins and auditors"
       ],
-      imageSrc: "/obsolescence-list.svg",
-      imageAlt: "Step 5"
+      component: <SafeExecution />
     }
   ]
 
@@ -111,8 +113,7 @@ const WorkflowTimeline = () => {
                 title={step.title}
                 subtitle={step.subtitle}
                 description={step.description}
-                imageSrc={step.imageSrc}
-                imageAlt={step.imageAlt}
+                component={step.component}
                 isLast={index === steps.length - 1}
                 isReversed={index % 2 === 1}
               />

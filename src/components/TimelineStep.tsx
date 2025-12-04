@@ -89,7 +89,22 @@ const TimelineStep = ({
               style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}
             >
               {component ? (
-                <Box w="100%" maxW="900px" transform="scale(0.85)" transformOrigin="center">
+                <Box 
+                  w="800px" 
+                  h="500px" 
+                  overflow="hidden"
+                  display="flex"
+                  alignItems="flex-start"
+                  justifyContent="center"
+                  sx={{
+                    '& > *': {
+                      transform: 'scale(0.75)',
+                      transformOrigin: 'top center',
+                      width: '100%',
+                      minWidth: '800px',
+                    }
+                  }}
+                >
                   {component}
                 </Box>
               ) : (

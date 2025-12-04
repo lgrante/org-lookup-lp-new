@@ -62,7 +62,7 @@ const ImpactAnalysisPreview = () => {
         >
           <defs>
             <marker id="arrow-impact" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-              <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+              <polygon points="0 0, 10 3.5, 0 7" fill="var(--color-primary)" />
             </marker>
             <filter id="shadow-impact" x="-20%" y="-20%" width="140%" height="140%">
               <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.15"/>
@@ -82,7 +82,7 @@ const ImpactAnalysisPreview = () => {
                 key={index}
                 d={`M ${from.x} ${from.y + nodeRadius} Q ${midX} ${midY + nodeRadius} ${to.x} ${to.y - nodeRadius}`}
                 fill="none"
-                stroke="#94a3b8"
+                stroke="var(--color-primary)"
                 strokeWidth={2}
                 markerEnd="url(#arrow-impact)"
                 initial={{ pathLength: 0, opacity: 0 }}

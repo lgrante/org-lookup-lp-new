@@ -30,10 +30,10 @@ const ExternalCodeScanPreview = () => {
   ]
 
   const edges = [
-    { from: 1, to: 3, color: '#3b82f6', dashed: false },
-    { from: 2, to: 3, color: '#22c55e', dashed: true },
-    { from: 3, to: 4, color: '#94a3b8', dashed: false },
-    { from: 3, to: 5, color: '#94a3b8', dashed: false },
+    { from: 1, to: 3 },
+    { from: 2, to: 3 },
+    { from: 3, to: 4 },
+    { from: 3, to: 5 },
   ]
 
   const nodeRadius = 24
@@ -68,14 +68,8 @@ const ExternalCodeScanPreview = () => {
           preserveAspectRatio="xMidYMid meet"
         >
           <defs>
-            <marker id="arrow-ext-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-              <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
-            </marker>
-            <marker id="arrow-ext-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-              <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e" />
-            </marker>
-            <marker id="arrow-ext-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-              <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+            <marker id="arrow-ext-primary" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="var(--color-primary)" />
             </marker>
             <filter id="shadow-ext" x="-20%" y="-20%" width="140%" height="140%">
               <feDropShadow dx="0" dy="2" stdDeviation="4" floodOpacity="0.2"/>
@@ -93,18 +87,14 @@ const ExternalCodeScanPreview = () => {
             const midX = (from.x + to.x) / 2
             const midY = (from.y + to.y) / 2 - 15
             
-            const markerId = edge.color === '#3b82f6' ? 'arrow-ext-blue' : 
-                            edge.color === '#22c55e' ? 'arrow-ext-green' : 'arrow-ext-gray'
-            
             return (
               <motion.path
                 key={index}
                 d={`M ${from.x + fromOffset} ${from.y} Q ${midX} ${midY} ${to.x - toOffset} ${to.y}`}
                 fill="none"
-                stroke={edge.color}
+                stroke="var(--color-primary)"
                 strokeWidth={2.5}
-                strokeDasharray={edge.dashed ? "8,4" : "none"}
-                markerEnd={`url(#${markerId})`}
+                markerEnd="url(#arrow-ext-primary)"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}

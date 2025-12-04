@@ -14,6 +14,7 @@ import {
 import { motion } from 'framer-motion'
 import LayoutContainer from '../LayoutContainer'
 import { fadeIn } from '../../utils/animations'
+import { supabase } from '../../lib/supabase'
 
 const MobileContactForm = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +37,21 @@ const MobileContactForm = () => {
     setIsSubmitting(true)
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const { error } = await supabase
+        .from('lead')
+        .insert([
+          {
+            email: formData.email,
+            company_name: formData.companyName,
+            challenges: formData.challenge && formData.challenge.trim() !== '' ? formData.challenge : null,
+          },
+        ])
+        .select()
+
+      if (error) {
+        console.error('Erreur Supabase:', error)
+        throw error
+      }
 
       toast({
         title: "Success!",

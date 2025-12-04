@@ -3,11 +3,11 @@ import { motion } from 'framer-motion'
 import TimelineStep from './TimelineStep'
 import { fadeIn, staggerContainer } from '../utils/animations'
 import { 
-  ObsoleteDetection, 
-  ImpactAnalysis, 
-  ExternalCodeScan, 
-  DeletionQueue, 
-  SafeExecution 
+  ObsoleteDetectionPreview, 
+  ImpactAnalysisPreview, 
+  ExternalCodeScanPreview, 
+  DeletionQueuePreview, 
+  SafeExecutionPreview 
 } from './workflow-steps'
 
 const WorkflowTimeline = () => {
@@ -21,7 +21,7 @@ const WorkflowTimeline = () => {
         "<strong>Score items</strong> by usage, recency, dependency depth",
         "<strong>Build a realistic cleanup backlog</strong> filtered by object, business area, or risk"
       ],
-      component: <ObsoleteDetection />
+      component: <ObsoleteDetectionPreview />
     },
     {
       step: 2,
@@ -32,7 +32,7 @@ const WorkflowTimeline = () => {
         "<strong>Detect overlapping or redundant automation</strong>",
         "<strong>Generate shareable visuals</strong> to align admins, devs, and business stakeholders"
       ],
-      component: <ImpactAnalysis />
+      component: <ImpactAnalysisPreview />
     },
     {
       step: 3,
@@ -43,7 +43,7 @@ const WorkflowTimeline = () => {
         "<strong>Detect references</strong> in Apex, JS, integrations, scheduled scripts",
         "<strong>Avoid breaking APIs or data pipelines</strong> tied to legacy fields"
       ],
-      component: <ExternalCodeScan />
+      component: <ExternalCodeScanPreview />
     },
     {
       step: 4,
@@ -54,7 +54,7 @@ const WorkflowTimeline = () => {
         "<strong>Review the consolidated list</strong> of selected items",
         "<strong>Organize and manage</strong> your deletion queue before execution"
       ],
-      component: <DeletionQueue />
+      component: <DeletionQueuePreview />
     },
     {
       step: 5,
@@ -65,7 +65,7 @@ const WorkflowTimeline = () => {
         "<strong>Generate deployment-ready metadata packages</strong> (Salesforce CLI / CI/CD)",
         "<strong>Track every change</strong> for future admins and auditors"
       ],
-      component: <SafeExecution />
+      component: <SafeExecutionPreview />
     }
   ]
 

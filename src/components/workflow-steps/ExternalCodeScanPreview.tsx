@@ -55,7 +55,7 @@ const ExternalCodeScanPreview = () => {
       {/* Header */}
       <Box bg="var(--color-primary)" px={5} py={3}>
         <Text color="white" fontSize="md" fontWeight="bold">
-          External Dependencies
+          Dependency Graph
         </Text>
       </Box>
 

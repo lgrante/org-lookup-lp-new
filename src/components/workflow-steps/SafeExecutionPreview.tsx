@@ -26,7 +26,7 @@ const SafeExecutionPreview = () => {
       overflow="hidden"
       border="1px solid"
       borderColor="gray.200"
-      w="400px"
+      w="600px"
       h="380px"
       display="flex"
       flexDirection="column"

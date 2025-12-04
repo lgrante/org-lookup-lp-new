@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Text, VStack, Image } from '@chakra-ui/react'
+import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { WiStars } from 'react-icons/wi'
 import { ArrowForwardIcon } from '@chakra-ui/icons'

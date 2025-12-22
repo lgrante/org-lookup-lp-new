@@ -112,13 +112,15 @@ const MobileWhatYouGet = () => {
                         <Box
                           bg="var(--color-primary)"
                           borderRadius="full"
-                          p={2}
+                          boxSize="40px"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
                           flexShrink={0}
                         >
                           <Icon
                             as={benefit.icon}
-                            w={5}
-                            h={5}
+                            boxSize={5}
                             color="white"
                           />
                         </Box>

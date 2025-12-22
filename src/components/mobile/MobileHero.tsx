@@ -16,11 +16,11 @@ import {
 } from '../workflow-steps'
 
 const STEP_LABELS = [
-  'Obsolete Detection',
-  'Impact Analysis',
-  'External Scan',
-  'Deletion Queue',
-  'Safe Execution'
+  'Detect obsolete components of your org',
+  'Analyze the impact of deleting these components',
+  'Scan beyond Salesforce org for external code dependencies',
+  'Add components to deletion queue',
+  'AI guide you through safe step-by-step deletion plan'
 ]
 
 interface MobileHeroProps {
@@ -202,10 +202,33 @@ const MobileHero = ({ onContactClick }: MobileHeroProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        style={{ marginTop: '24px' }}
+        style={{ marginTop: '64px' }}
       >
+        {/* Current Step Label */}
+        <Box h="48px" display="flex" alignItems="center" justifyContent="center" mb={3}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+            >
+              <Text 
+                fontSize="md" 
+                color="var(--color-text-primary)" 
+                textAlign="center" 
+                fontWeight="bold"
+                px={8}
+              >
+                Step {currentStep + 1}: {STEP_LABELS[currentStep]}
+              </Text>
+            </motion.div>
+          </AnimatePresence>
+        </Box>
+
         {/* Step Indicators */}
-        <Box display="flex" justifyContent="center" gap={2} mb={3}>
+        <Box display="flex" justifyContent="center" gap={2} mb={4}>
           {STEP_LABELS.map((_, index) => (
             <Box
               key={index}
@@ -219,17 +242,6 @@ const MobileHero = ({ onContactClick }: MobileHeroProps) => {
             />
           ))}
         </Box>
-
-        {/* Current Step Label */}
-        <Text 
-          fontSize="xs" 
-          color="var(--color-text-secondary)" 
-          textAlign="center" 
-          mb={2}
-          fontWeight="medium"
-        >
-          Step {currentStep + 1}: {STEP_LABELS[currentStep]}
-        </Text>
 
         {/* Preview Container with scale */}
         <Box

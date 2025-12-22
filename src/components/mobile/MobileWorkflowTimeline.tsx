@@ -136,7 +136,7 @@ const MobileWorkflowTimeline = () => {
             viewport={{ once: false, margin: "-30px" }}
             style={{ width: '100%' }}
           >
-            <Box position="relative" pl={8}>
+            <Box position="relative" pl={10}>
               {/* Vertical Timeline Line */}
               <Box
                 position="absolute"
@@ -161,7 +161,7 @@ const MobileWorkflowTimeline = () => {
                         fontSize="sm"
                         fontWeight="bold"
                         position="absolute"
-                        left="-32px"
+                        left="-40px"
                         top="0"
                         boxShadow="0 2px 8px rgba(0, 98, 137, 0.3)"
                       >
@@ -175,6 +175,8 @@ const MobileWorkflowTimeline = () => {
                         border="1px solid var(--color-gray-200)"
                         overflow="hidden"
                         boxShadow="sm"
+                        maxW="312px"
+                        w="full"
                       >
                         {/* Text Content */}
                         <Box p={4}>
@@ -250,7 +252,7 @@ const MobileWorkflowTimeline = () => {
                       {index < steps.length - 1 && (
                         <Box
                           position="absolute"
-                          left="-17px"
+                          left="-25px"
                           top="32px"
                           bottom="-24px"
                           width="3px"

@@ -1,5 +1,6 @@
-import { Box, VStack, HStack, Text } from '@chakra-ui/react'
+import { Box, VStack, HStack, Text, Icon } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { FiBarChart2, FiLink, FiGlobe } from 'react-icons/fi'
 
 const DeletionQueuePreview = () => {
   const items = [
@@ -27,9 +28,9 @@ const DeletionQueuePreview = () => {
       {/* Summary */}
       <HStack spacing={3} p={4} bg="gray.50" borderBottom="1px solid" borderColor="gray.100">
         {[
-          { label: 'Step 1', count: 12, icon: '📊' },
-          { label: 'Step 2', count: 5, icon: '🔗' },
-          { label: 'Step 3', count: 2, icon: '🌐' },
+          { label: 'Step 1', count: 12, icon: FiBarChart2 },
+          { label: 'Step 2', count: 5, icon: FiLink },
+          { label: 'Step 3', count: 2, icon: FiGlobe },
         ].map((item, index) => (
           <motion.div
             key={item.label}
@@ -38,8 +39,8 @@ const DeletionQueuePreview = () => {
             transition={{ delay: index * 0.1 }}
             style={{ flex: 1 }}
           >
-            <Box bg="white" p={2} borderRadius="md" textAlign="center" boxShadow="sm">
-              <Text fontSize="sm">{item.icon}</Text>
+            <Box bg="white" p={2} borderRadius="md" textAlign="center" boxShadow="sm" display="flex" flexDirection="column" alignItems="center">
+              <Icon as={item.icon} color="var(--color-primary)" mb={1} />
               <Text fontSize="lg" fontWeight="bold" color="var(--color-primary)">{item.count}</Text>
             </Box>
           </motion.div>

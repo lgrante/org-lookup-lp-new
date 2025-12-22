@@ -95,17 +95,28 @@ const HeroAnimationCarousel = ({ scale: _ignoredScale }: HeroAnimationCarouselPr
       minH={{ base: "auto", md: "550px" }}
       spacing={{ base: 6, md: 8 }}
     >
-      <Heading
-        as="h2"
-        fontSize={{ base: "2xl", md: "3xl" }}
-        color="white"
-        textAlign="center"
-        mb={{ base: 6, md: 10 }}
-        fontWeight="bold"
-        px={4}
-      >
-        Step {currentStep + 1}: {STEP_LABELS[currentStep]}
-      </Heading>
+      <Box h={{ base: "80px", md: "100px" }} display="flex" alignItems="center" justifyContent="center" mb={{ base: 4, md: 6 }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStep}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+          >
+            <Heading
+              as="h2"
+              fontSize={{ base: "2xl", md: "3xl" }}
+              color="white"
+              textAlign="center"
+              fontWeight="bold"
+              px={4}
+            >
+              Step {currentStep + 1}: {STEP_LABELS[currentStep]}
+            </Heading>
+          </motion.div>
+        </AnimatePresence>
+      </Box>
 
       {/* ... (indicators and label remain same) */}
       <Box display="flex" justifyContent="center" gap={2} mb={4}>

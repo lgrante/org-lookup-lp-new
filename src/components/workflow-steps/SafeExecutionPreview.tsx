@@ -1,20 +1,21 @@
-import { Box, VStack, HStack, Text } from '@chakra-ui/react'
+import { Box, VStack, HStack, Text, Icon } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { FiTrash2, FiSettings, FiDatabase, FiMail, FiCheckCircle, FiCheck, FiClock } from 'react-icons/fi'
 
 const SafeExecutionPreview = () => {
   const tasks = [
-    { icon: '🗑️', label: 'Delete AccountCleanupBatch', status: 'approved', color: 'green' },
-    { icon: '🔧', label: 'Refactor LeadService refs', status: 'pending', color: 'gray' },
-    { icon: '💾', label: 'Backup Opportunity_Flow', status: 'completed', color: 'green' },
-    { icon: '📧', label: 'Notify stakeholders', status: 'pending', color: 'gray' },
+    { icon: FiTrash2, label: 'Delete AccountCleanupBatch', status: 'approved', color: 'green' },
+    { icon: FiSettings, label: 'Refactor LeadService refs', status: 'pending', color: 'gray' },
+    { icon: FiDatabase, label: 'Backup Opportunity_Flow', status: 'completed', color: 'green' },
+    { icon: FiMail, label: 'Notify stakeholders', status: 'pending', color: 'gray' },
   ]
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'approved': return '✅'
-      case 'completed': return '✔️'
-      case 'pending': return '⏳'
-      default: return '○'
+      case 'approved': return FiCheckCircle
+      case 'completed': return FiCheck
+      case 'pending': return FiClock
+      default: return null
     }
   }
 
@@ -72,9 +73,8 @@ const SafeExecutionPreview = () => {
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                fontSize="md"
               >
-                {task.icon}
+                <Icon as={task.icon} color={task.status === 'completed' ? 'green.500' : task.status === 'approved' ? 'blue.500' : 'gray.500'} />
               </Box>
 
               {/* Task Info */}
@@ -82,9 +82,14 @@ const SafeExecutionPreview = () => {
                 <Text fontSize="sm" fontWeight="medium" color="gray.800">
                   {task.label}
                 </Text>
-                <Text fontSize="xs" color="gray.500">
-                  {getStatusIcon(task.status)} {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
-                </Text>
+                <HStack spacing={1} align="center">
+                  {getStatusIcon(task.status) && (
+                    <Icon as={getStatusIcon(task.status)!} color={task.status === 'completed' ? 'green.500' : task.status === 'approved' ? 'blue.400' : 'gray.400'} fontSize="xs" />
+                  )}
+                  <Text fontSize="xs" color="gray.500">
+                    {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
+                  </Text>
+                </HStack>
               </VStack>
 
               {/* Action Buttons (only for pending) */}

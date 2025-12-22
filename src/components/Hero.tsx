@@ -6,7 +6,11 @@ import HeroAnimationCarousel from './HeroAnimationCarousel'
 import { staggerContainer, staggerItem } from '../utils/animations'
 
 
-const Hero = () => {
+interface HeroProps {
+  onContactClick?: () => void
+}
+
+const Hero = ({ onContactClick }: HeroProps) => {
   const scale = useBreakpointValue({ base: 0.6, md: 0.8, lg: 0.9, xl: 1.05 }) ?? 1.0
 
   return (
@@ -141,6 +145,7 @@ const Hero = () => {
                       backgroundSize: '200% 100%',
                     }}
                     rightIcon={<ArrowForwardIcon />}
+                    onClick={onContactClick}
                   >
                     Join Beta
                   </Button>

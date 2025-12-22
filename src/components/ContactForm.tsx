@@ -16,10 +16,16 @@ import LayoutContainer from './LayoutContainer'
 import { fadeIn } from '../utils/animations'
 import { supabase } from '../lib/supabase'
 
-const ContactForm = () => {
+interface ContactFormProps {
+  isModal?: boolean
+  onSuccess?: () => void
+}
+
+const ContactForm = ({ isModal = false, onSuccess }: ContactFormProps) => {
   const [formData, setFormData] = useState({
     email: '',
     companyName: '',
+    phone: '',
     challenge: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -43,10 +49,10 @@ const ContactForm = () => {
           {
             email: formData.email,
             company_name: formData.companyName,
+            phone_number: formData.phone && formData.phone.trim() !== '' ? formData.phone : null,
             challenges: formData.challenge && formData.challenge.trim() !== '' ? formData.challenge : null,
           },
         ])
-        .select()
 
       if (error) {
         console.error('Erreur Supabase:', error)
@@ -61,10 +67,15 @@ const ContactForm = () => {
         isClosable: true,
       })
 
+      if (onSuccess) {
+        onSuccess()
+      }
+
       // Reset form
       setFormData({
         email: '',
         companyName: '',
+        phone: '',
         challenge: ''
       })
     } catch (error) {
@@ -78,6 +89,146 @@ const ContactForm = () => {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const FormContent = (
+    <Box
+      as="form"
+      onSubmit={handleSubmit}
+      w="full"
+      bg="var(--color-gray-100)"
+      p={{ base: 6, md: 8 }}
+      borderRadius="12px"
+      border="1px solid"
+      borderColor="var(--color-gray-200)"
+    >
+      <VStack spacing={6}>
+        <FormControl isRequired>
+          <FormLabel
+            htmlFor="email"
+            color="var(--color-text-primary)"
+            fontWeight="medium"
+          >
+            Email
+          </FormLabel>
+          <Input
+            id="email"
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange('email')}
+            placeholder="your.email@company.com"
+            bg="white"
+            border="1px solid"
+            borderColor="var(--color-gray-300)"
+            _focus={{
+              borderColor: 'primary.500',
+              boxShadow: '0 0 0 1px #2563EB'
+            }}
+            size={{ base: "md", md: "lg" }}
+          />
+        </FormControl>
+
+        <FormControl isRequired>
+          <FormLabel
+            htmlFor="companyName"
+            color="var(--color-text-primary)"
+            fontWeight="medium"
+          >
+            Company Name
+          </FormLabel>
+          <Input
+            id="companyName"
+            type="text"
+            value={formData.companyName}
+            onChange={handleInputChange('companyName')}
+            placeholder="Your Company"
+            bg="white"
+            border="1px solid"
+            borderColor="var(--color-gray-300)"
+            _focus={{
+              borderColor: 'primary.500',
+              boxShadow: '0 0 0 1px #2563EB'
+            }}
+            size={{ base: "md", md: "lg" }}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel
+            htmlFor="phone"
+            color="var(--color-text-primary)"
+            fontWeight="medium"
+          >
+            Phone Number (Optional)
+          </FormLabel>
+          <Input
+            id="phone"
+            type="tel"
+            value={formData.phone}
+            onChange={handleInputChange('phone')}
+            placeholder="+1 (555) 000-0000"
+            bg="white"
+            border="1px solid"
+            borderColor="var(--color-gray-300)"
+            _focus={{
+              borderColor: 'primary.500',
+              boxShadow: '0 0 0 1px #2563EB'
+            }}
+            size={{ base: "md", md: "lg" }}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel
+            htmlFor="challenge"
+            color="var(--color-text-primary)"
+            fontWeight="medium"
+          >
+            What is your biggest challenge with technical debt in Salesforce?
+          </FormLabel>
+          <Textarea
+            id="challenge"
+            value={formData.challenge}
+            onChange={handleInputChange('challenge')}
+            placeholder="Tell us about your biggest technical debt challenge..."
+            bg="white"
+            border="1px solid"
+            borderColor="var(--color-gray-300)"
+            _focus={{
+              borderColor: 'primary.500',
+              boxShadow: '0 0 0 1px #2563EB'
+            }}
+            size={{ base: "md", md: "lg" }}
+            rows={4}
+            resize="vertical"
+          />
+        </FormControl>
+
+        <Button
+          type="submit"
+          size="lg"
+          variant="solid"
+          bg="accent.primary"
+          _hover={{ bg: '#DC2626' }}
+          color="white"
+          w="full"
+          fontSize="lg"
+          fontWeight="medium"
+          isLoading={isSubmitting}
+          loadingText="Submitting..."
+        >
+          Join Beta
+        </Button>
+
+        <Text fontSize="sm" color="var(--color-text-secondary)" textAlign="center">
+          We respect your privacy and will never share your information.
+        </Text>
+      </VStack>
+    </Box>
+  )
+
+  if (isModal) {
+    return FormContent
   }
 
   return (
@@ -103,115 +254,9 @@ const ContactForm = () => {
             whileInView="visible"
             viewport={{ once: false, margin: "-50px" }}
             transition={{ delay: 0.2 }}
+            style={{ width: '100%' }}
           >
-            <Box
-            as="form"
-            onSubmit={handleSubmit}
-            w="full"
-            bg="var(--color-gray-100)"
-            p={{ base: 6, md: 8 }}
-            borderRadius="12px"
-            border="1px solid"
-            borderColor="var(--color-gray-200)"
-          >
-            <VStack spacing={6}>
-              <FormControl isRequired>
-                <FormLabel
-                  htmlFor="email"
-                  color="var(--color-text-primary)"
-                  fontWeight="medium"
-                >
-                  Email
-                </FormLabel>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleInputChange('email')}
-                  placeholder="your.email@company.com"
-                  bg="white"
-                  border="1px solid"
-                  borderColor="var(--color-gray-300)"
-                  _focus={{
-                    borderColor: 'primary.500',
-                    boxShadow: '0 0 0 1px #2563EB'
-                  }}
-                  size={{ base: "md", md: "lg" }}
-                />
-              </FormControl>
-
-              <FormControl isRequired>
-                <FormLabel
-                  htmlFor="companyName"
-                  color="var(--color-text-primary)"
-                  fontWeight="medium"
-                >
-                  Company Name
-                </FormLabel>
-                <Input
-                  id="companyName"
-                  type="text"
-                  value={formData.companyName}
-                  onChange={handleInputChange('companyName')}
-                  placeholder="Your Company"
-                  bg="white"
-                  border="1px solid"
-                  borderColor="var(--color-gray-300)"
-                  _focus={{
-                    borderColor: 'primary.500',
-                    boxShadow: '0 0 0 1px #2563EB'
-                  }}
-                  size={{ base: "md", md: "lg" }}
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel
-                  htmlFor="challenge"
-                  color="var(--color-text-primary)"
-                  fontWeight="medium"
-                >
-                  What is your biggest challenge with technical debt in Salesforce?
-                </FormLabel>
-                <Textarea
-                  id="challenge"
-                  value={formData.challenge}
-                  onChange={handleInputChange('challenge')}
-                  placeholder="Tell us about your biggest technical debt challenge..."
-                  bg="white"
-                  border="1px solid"
-                  borderColor="var(--color-gray-300)"
-                  _focus={{
-                    borderColor: 'primary.500',
-                    boxShadow: '0 0 0 1px #2563EB'
-                  }}
-                  size={{ base: "md", md: "lg" }}
-                  rows={4}
-                  resize="vertical"
-                />
-              </FormControl>
-
-              <Button
-                type="submit"
-                size="lg"
-                variant="solid"
-                bg="accent.primary"
-                _hover={{ bg: '#DC2626' }}
-                color="white"
-                w="full"
-                fontSize="lg"
-                fontWeight="medium"
-                isLoading={isSubmitting}
-                loadingText="Submitting..."
-              >
-                Join Beta
-              </Button>
-
-              <Text fontSize="sm" color="var(--color-text-secondary)" textAlign="center">
-                We respect your privacy and will never share your information.
-              </Text>
-            </VStack>
-          </Box>
+            {FormContent}
           </motion.div>
         </VStack>
       </LayoutContainer>

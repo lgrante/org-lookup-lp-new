@@ -23,7 +23,11 @@ const STEP_LABELS = [
   'Safe Execution'
 ]
 
-const MobileHero = () => {
+interface MobileHeroProps {
+  onContactClick?: () => void
+}
+
+const MobileHero = ({ onContactClick }: MobileHeroProps) => {
   const [currentStep, setCurrentStep] = useState(0)
 
   // Auto-cycle through steps
@@ -184,6 +188,7 @@ const MobileHero = () => {
                   backgroundSize: '200% 100%',
                 }}
                 rightIcon={<ArrowForwardIcon />}
+                onClick={onContactClick}
               >
                 Join Beta
               </Button>

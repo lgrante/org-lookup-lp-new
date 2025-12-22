@@ -16,10 +16,16 @@ import LayoutContainer from '../LayoutContainer'
 import { fadeIn } from '../../utils/animations'
 import { supabase } from '../../lib/supabase'
 
-const MobileContactForm = () => {
+interface MobileContactFormProps {
+  isModal?: boolean
+  onSuccess?: () => void
+}
+
+const MobileContactForm = ({ isModal = false, onSuccess }: MobileContactFormProps) => {
   const [formData, setFormData] = useState({
     email: '',
     companyName: '',
+    phone: '',
     challenge: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -43,6 +49,7 @@ const MobileContactForm = () => {
           {
             email: formData.email,
             company_name: formData.companyName,
+            phone_number: formData.phone && formData.phone.trim() !== '' ? formData.phone : null,
             challenges: formData.challenge && formData.challenge.trim() !== '' ? formData.challenge : null,
           },
         ])
@@ -61,9 +68,14 @@ const MobileContactForm = () => {
         isClosable: true,
       })
 
+      if (onSuccess) {
+        onSuccess()
+      }
+
       setFormData({
         email: '',
         companyName: '',
+        phone: '',
         challenge: ''
       })
     } catch (error) {
@@ -77,6 +89,159 @@ const MobileContactForm = () => {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const FormContent = (
+    <Box
+      as="form"
+      onSubmit={handleSubmit}
+      w="full"
+      bg="var(--color-gray-100)"
+      p={5}
+      borderRadius="12px"
+      border="1px solid"
+      borderColor="var(--color-gray-200)"
+    >
+      <VStack spacing={4}>
+        <FormControl isRequired>
+          <FormLabel
+            htmlFor="email"
+            color="var(--color-text-primary)"
+            fontWeight="medium"
+            fontSize="sm"
+          >
+            Email
+          </FormLabel>
+          <Input
+            id="email"
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange('email')}
+            placeholder="your.email@company.com"
+            bg="white"
+            border="1px solid"
+            borderColor="var(--color-gray-300)"
+            _focus={{
+              borderColor: 'var(--color-primary)',
+              boxShadow: '0 0 0 1px var(--color-primary)'
+            }}
+            size="lg"
+            fontSize="md"
+            h="48px"
+          />
+        </FormControl>
+
+        <FormControl isRequired>
+          <FormLabel
+            htmlFor="companyName"
+            color="var(--color-text-primary)"
+            fontWeight="medium"
+            fontSize="sm"
+          >
+            Company Name
+          </FormLabel>
+          <Input
+            id="companyName"
+            type="text"
+            value={formData.companyName}
+            onChange={handleInputChange('companyName')}
+            placeholder="Your Company"
+            bg="white"
+            border="1px solid"
+            borderColor="var(--color-gray-300)"
+            _focus={{
+              borderColor: 'var(--color-primary)',
+              boxShadow: '0 0 0 1px var(--color-primary)'
+            }}
+            size="lg"
+            fontSize="md"
+            h="48px"
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel
+            htmlFor="phone"
+            color="var(--color-text-primary)"
+            fontWeight="medium"
+            fontSize="sm"
+          >
+            Phone Number (Optional)
+          </FormLabel>
+          <Input
+            id="phone"
+            type="tel"
+            value={formData.phone}
+            onChange={handleInputChange('phone')}
+            placeholder="+1 (555) 000-0000"
+            bg="white"
+            border="1px solid"
+            borderColor="var(--color-gray-300)"
+            _focus={{
+              borderColor: 'var(--color-primary)',
+              boxShadow: '0 0 0 1px var(--color-primary)'
+            }}
+            size="lg"
+            fontSize="md"
+            h="48px"
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel
+            htmlFor="challenge"
+            color="var(--color-text-primary)"
+            fontWeight="medium"
+            fontSize="sm"
+          >
+            What is your biggest challenge with technical debt in Salesforce?
+          </FormLabel>
+          <Textarea
+            id="challenge"
+            value={formData.challenge}
+            onChange={handleInputChange('challenge')}
+            placeholder="Tell us about your biggest technical debt challenge..."
+            bg="white"
+            border="1px solid"
+            borderColor="var(--color-gray-300)"
+            _focus={{
+              borderColor: 'var(--color-primary)',
+              boxShadow: '0 0 0 1px var(--color-primary)'
+            }}
+            fontSize="md"
+            rows={3}
+            resize="vertical"
+          />
+        </FormControl>
+
+        <Button
+          type="submit"
+          size="lg"
+          variant="solid"
+          bg="var(--color-primary)"
+          _hover={{ bg: 'var(--color-primary-hover)' }}
+          _active={{ transform: 'scale(0.98)' }}
+          color="white"
+          w="full"
+          fontSize="md"
+          fontWeight="bold"
+          h="52px"
+          borderRadius="full"
+          isLoading={isSubmitting}
+          loadingText="Submitting..."
+        >
+          Join Beta
+        </Button>
+
+        <Text fontSize="xs" color="var(--color-text-secondary)" textAlign="center">
+          We respect your privacy and will never share your information.
+        </Text>
+      </VStack>
+    </Box>
+  )
+
+  if (isModal) {
+    return FormContent
   }
 
   return (
@@ -105,124 +270,7 @@ const MobileContactForm = () => {
             viewport={{ once: false, margin: "-30px" }}
             style={{ width: '100%' }}
           >
-            <Box
-              as="form"
-              onSubmit={handleSubmit}
-              w="full"
-              bg="var(--color-gray-100)"
-              p={5}
-              borderRadius="12px"
-              border="1px solid"
-              borderColor="var(--color-gray-200)"
-            >
-              <VStack spacing={4}>
-                <FormControl isRequired>
-                  <FormLabel
-                    htmlFor="email"
-                    color="var(--color-text-primary)"
-                    fontWeight="medium"
-                    fontSize="sm"
-                  >
-                    Email
-                  </FormLabel>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange('email')}
-                    placeholder="your.email@company.com"
-                    bg="white"
-                    border="1px solid"
-                    borderColor="var(--color-gray-300)"
-                    _focus={{
-                      borderColor: 'var(--color-primary)',
-                      boxShadow: '0 0 0 1px var(--color-primary)'
-                    }}
-                    size="lg"
-                    fontSize="md"
-                    h="48px"
-                  />
-                </FormControl>
-
-                <FormControl isRequired>
-                  <FormLabel
-                    htmlFor="companyName"
-                    color="var(--color-text-primary)"
-                    fontWeight="medium"
-                    fontSize="sm"
-                  >
-                    Company Name
-                  </FormLabel>
-                  <Input
-                    id="companyName"
-                    type="text"
-                    value={formData.companyName}
-                    onChange={handleInputChange('companyName')}
-                    placeholder="Your Company"
-                    bg="white"
-                    border="1px solid"
-                    borderColor="var(--color-gray-300)"
-                    _focus={{
-                      borderColor: 'var(--color-primary)',
-                      boxShadow: '0 0 0 1px var(--color-primary)'
-                    }}
-                    size="lg"
-                    fontSize="md"
-                    h="48px"
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel
-                    htmlFor="challenge"
-                    color="var(--color-text-primary)"
-                    fontWeight="medium"
-                    fontSize="sm"
-                  >
-                    What is your biggest challenge with technical debt in Salesforce?
-                  </FormLabel>
-                  <Textarea
-                    id="challenge"
-                    value={formData.challenge}
-                    onChange={handleInputChange('challenge')}
-                    placeholder="Tell us about your biggest technical debt challenge..."
-                    bg="white"
-                    border="1px solid"
-                    borderColor="var(--color-gray-300)"
-                    _focus={{
-                      borderColor: 'var(--color-primary)',
-                      boxShadow: '0 0 0 1px var(--color-primary)'
-                    }}
-                    fontSize="md"
-                    rows={3}
-                    resize="vertical"
-                  />
-                </FormControl>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  variant="solid"
-                  bg="var(--color-primary)"
-                  _hover={{ bg: 'var(--color-primary-hover)' }}
-                  _active={{ transform: 'scale(0.98)' }}
-                  color="white"
-                  w="full"
-                  fontSize="md"
-                  fontWeight="bold"
-                  h="52px"
-                  borderRadius="full"
-                  isLoading={isSubmitting}
-                  loadingText="Submitting..."
-                >
-                  Join Beta
-                </Button>
-
-                <Text fontSize="xs" color="var(--color-text-secondary)" textAlign="center">
-                  We respect your privacy and will never share your information.
-                </Text>
-              </VStack>
-            </Box>
+            {FormContent}
           </motion.div>
         </VStack>
       </LayoutContainer>

@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, useDisclosure } from '@chakra-ui/react'
 import { useIsMobile } from './hooks/useIsMobile'
 
 // Desktop components
@@ -10,6 +10,7 @@ import WorkflowTimeline from './components/WorkflowTimeline'
 import WhatYouGet from './components/WhatYouGet'
 import ContactForm from './components/ContactForm'
 import Footer from './components/Footer'
+import ContactModal from './components/ContactModal'
 
 // Mobile components
 import {
@@ -25,13 +26,14 @@ import {
 
 function App() {
   const isMobile = useIsMobile()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Box minH="100vh" bg="#faf9f7" display="flex" flexDirection="column" overflowX="hidden">
       {isMobile ? (
         <>
-          <MobileHeader />
-          <MobileHero />
+          <MobileHeader onContactClick={onOpen} />
+          <MobileHero onContactClick={onOpen} />
           <MobilePainPoints />
           <MobileWorkflowTimeline />
           <MobileDeletionPlan />
@@ -41,8 +43,8 @@ function App() {
         </>
       ) : (
         <>
-          <Header />
-          <Hero />
+          <Header onContactClick={onOpen} />
+          <Hero onContactClick={onOpen} />
           <PainPoints />
           <WorkflowTimeline />
           <DeletionPlan />
@@ -51,6 +53,7 @@ function App() {
           <Footer />
         </>
       )}
+      <ContactModal isOpen={isOpen} onClose={onClose} />
     </Box>
   )
 }

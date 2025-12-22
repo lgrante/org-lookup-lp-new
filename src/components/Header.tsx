@@ -1,7 +1,11 @@
 import { Box, Image, Text, HStack, Button } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 
-const Header = () => {
+interface HeaderProps {
+  onContactClick?: () => void
+}
+
+const Header = ({ onContactClick }: HeaderProps) => {
   return (
     <Box
       as="header"
@@ -73,6 +77,7 @@ const Header = () => {
               transform: "scale(1.08)",
             }}
             transition="all 0.2s ease-in-out"
+            onClick={onContactClick}
           >
             Talk to us
           </Button>

@@ -17,15 +17,17 @@ import {
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 
-const MobileHeader = () => {
+interface MobileHeaderProps {
+  onContactClick?: () => void
+}
+
+const MobileHeader = ({ onContactClick }: MobileHeaderProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const scrollToContact = () => {
+  const handleContactClick = () => {
     onClose()
-    // Scroll to contact form
-    const contactSection = document.querySelector('#contact-form')
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' })
+    if (onContactClick) {
+      onContactClick()
     }
   }
 
@@ -160,7 +162,7 @@ const MobileHeader = () => {
                 _hover={{
                   bg: 'var(--color-primary)',
                 }}
-                onClick={scrollToContact}
+                onClick={handleContactClick}
               >
                 Talk to us
               </Button>

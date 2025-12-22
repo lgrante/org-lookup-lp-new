@@ -34,7 +34,7 @@ const HeroAnimationCarousel = ({ scale: _ignoredScale }: HeroAnimationCarouselPr
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStep((prev) => (prev + 1) % 5);
-    }, 4000); // 4 seconds per step
+    }, 2500); // 2.5 seconds per step
 
     return () => clearInterval(interval);
   }, []);
@@ -102,7 +102,7 @@ const HeroAnimationCarousel = ({ scale: _ignoredScale }: HeroAnimationCarouselPr
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             <Heading
               as="h2"
@@ -163,7 +163,7 @@ const HeroAnimationCarousel = ({ scale: _ignoredScale }: HeroAnimationCarouselPr
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               style={{ width: "100%", height: "100%" }}
             >
               {renderCurrentPreview()}

@@ -14,7 +14,7 @@ const WorkflowTimeline = () => {
   const steps = [
     {
       step: 1,
-      title: "Instant Obsolete Detection",
+      title: "Detect obsolete components of your org",
       subtitle: "Get a Prioritized List of Technical Debt",
       description: [
         "Surface <strong>risky or low-value metadata</strong> (fields, objects, Flows, classes, etc.)",
@@ -25,7 +25,7 @@ const WorkflowTimeline = () => {
     },
     {
       step: 2,
-      title: "Visual Impact Analysis",
+      title: "Analyze the impact of deleting these components",
       subtitle: "See What Might Break Before You Change Anything",
       description: [
         "<strong>Interactive dependency map</strong>: Flows ⇄ Apex ⇄ Validation Rules ⇄ Layouts ⇄ Reports",
@@ -36,7 +36,7 @@ const WorkflowTimeline = () => {
     },
     {
       step: 3,
-      title: "External Code Scanning",
+      title: "Scan beyond Salesforce org for external code dependencies",
       subtitle: "Find External Dependencies Automatically",
       description: [
         "<strong>Connect GitHub/GitLab/Bitbucket</strong>",
@@ -47,7 +47,7 @@ const WorkflowTimeline = () => {
     },
     {
       step: 4,
-      title: "Create Deletion Queue",
+      title: "Add components to deletion queue",
       subtitle: "Review and Organize Your Selected Metadata",
       description: [
         "<strong>View all metadata items</strong> you've added to the deletion queue from steps 1 and 2",
@@ -58,12 +58,12 @@ const WorkflowTimeline = () => {
     },
     {
       step: 5,
-      title: "Automated Safe Execution",
-      subtitle: "Execute with Confidence — and Keep the Audit Trail",
+      title: "AI guide you through safe step-by-step deletion plan",
+      subtitle: "Interactive Action Plan with AI Agent",
       description: [
-        "<strong>Automatically generate</strong> a safe, step-by-step action plan to remove technical debt",
-        "<strong>Generate deployment-ready metadata packages</strong> (Salesforce CLI / CI/CD)",
-        "<strong>Track every change</strong> for future admins and auditors"
+        "<strong>AI Agent-Driven Plan</strong>: The agent generates a step-by-step action plan for cleanup",
+        "<strong>Interactive Review</strong>: Review actions with a side-by-side diff view",
+        "<strong>Full Control</strong>: Accept, refuse, or <strong>manually edit</strong> any action yourself"
       ],
       component: <SafeExecutionPreview />
     }

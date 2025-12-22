@@ -232,24 +232,29 @@ const MobileHero = () => {
           overflow="hidden"
           borderRadius="12px"
           boxShadow="0px 8px 24px rgba(0, 0, 0, 0.15)"
+          bg="var(--color-gray-50)"
+          border="1px solid var(--color-gray-200)"
+          w="max-content"
+          mx="auto"
         >
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
+              exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              style={{
-                transformOrigin: 'top left',
-                transform: 'scale(0.58)',
-                width: '600px',
-                height: '380px',
-                marginBottom: '-160px', // Compensate for scale
-                marginRight: '-252px', // Compensate for scale
-              }}
             >
-              {renderCurrentPreview()}
+              <Box
+                transform="scale(0.52)"
+                transformOrigin="top left"
+                width="600px"
+                height="380px"
+                marginBottom="-182px"
+                marginRight="-288px"
+              >
+                {renderCurrentPreview()}
+              </Box>
             </motion.div>
           </AnimatePresence>
         </Box>

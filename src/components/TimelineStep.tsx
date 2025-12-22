@@ -89,7 +89,20 @@ const TimelineStep = ({
               style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}
             >
               {component ? (
-                component
+                <Box
+                  bg="white"
+                  borderRadius="16px"
+                  boxShadow="0 8px 32px rgba(0,0,0,0.12)"
+                  overflow="hidden"
+                  border="1px solid"
+                  borderColor="gray.200"
+                  w="100%"
+                  maxW="600px" // Restrict max width to prevent stretching too much
+                  h="380px"
+                  mx="auto" // Center it
+                >
+                  {component}
+                </Box>
               ) : (
                 <Image
                   src={imageSrc}

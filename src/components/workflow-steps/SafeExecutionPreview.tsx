@@ -21,12 +21,7 @@ const SafeExecutionPreview = () => {
   return (
     <Box
       bg="white"
-      borderRadius="16px"
-      boxShadow="0 8px 32px rgba(0,0,0,0.12)"
-      overflow="hidden"
-      border="1px solid"
-      borderColor="gray.200"
-      w="600px"
+      w="100%"
       h="380px"
       display="flex"
       flexDirection="column"

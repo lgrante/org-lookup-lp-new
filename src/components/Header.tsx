@@ -11,13 +11,13 @@ const Header = () => {
       right={0}
       transform="translateX(-50%)"
       borderRadius={100}
-      width="93%"
       border="1px solid var(--color-gray-400)"
       backgroundColor="var(--color-bg-primary)"
       boxShadow="lg"
       zIndex={1000}
       py={{ base: 3, md: 3 }}
       height="90px"
+      width="95%"
       display="flex"
       alignItems="center"
       justifyContent="center"
@@ -61,7 +61,7 @@ const Header = () => {
           <Button
             zIndex={2000}
             height="90%"
-            width="12%"
+            width="8%"
             rightIcon={<ArrowForwardIcon />}
             variant="ghost"
             backgroundColor="transparent"

@@ -15,11 +15,11 @@ interface NodeData {
 
 const ImpactAnalysisPreview = () => {
   const nodes: NodeData[] = [
-    { id: 1, label: 'AccountCleanupBatch', type: 'Apex', x: 300, y: 50, color: '#ef4444', icon: FiBox },
-    { id: 2, label: 'ContactTrigger', type: 'Trigger', x: 120, y: 140, color: '#f97316', icon: FiZap },
-    { id: 3, label: 'Old_Lead_Flow', type: 'Flow', x: 480, y: 140, color: '#22c55e', icon: FiGitBranch },
-    { id: 4, label: 'Status_Field__c', type: 'Field', x: 200, y: 230, color: '#eab308', icon: FiDatabase },
-    { id: 5, label: 'Account_Helper', type: 'Apex', x: 400, y: 230, color: '#8b5cf6', icon: FiCode },
+    { id: 1, label: 'AccountCleanupBatch', type: 'Apex', x: 290, y: 130, color: '#ef4444', icon: FiBox },
+    { id: 2, label: 'ContactTrigger', type: 'Trigger', x: 60, y: 70, color: '#f97316', icon: FiZap },
+    { id: 3, label: 'Old_Lead_Flow', type: 'Flow', x: 540, y: 220, color: '#22c55e', icon: FiGitBranch },
+    { id: 4, label: 'Status_Field__c', type: 'Field', x: 140, y: 240, color: '#eab308', icon: FiDatabase },
+    { id: 5, label: 'Account_Helper', type: 'Apex', x: 500, y: 60, color: '#8b5cf6', icon: FiCode },
   ]
 
   const edges = [
@@ -35,12 +35,7 @@ const ImpactAnalysisPreview = () => {
   return (
     <Box
       bg="white"
-      borderRadius="16px"
-      boxShadow="0 8px 32px rgba(0,0,0,0.12)"
-      overflow="hidden"
-      border="1px solid"
-      borderColor="gray.200"
-      w="600px"
+      w="100%"
       h="380px"
       display="flex"
       flexDirection="column"
@@ -74,13 +69,21 @@ const ImpactAnalysisPreview = () => {
             const from = nodes.find(n => n.id === edge.from)!
             const to = nodes.find(n => n.id === edge.to)!
             
-            const midX = (from.x + to.x) / 2
-            const midY = (from.y + to.y) / 2 - 20
+            const dx = to.x - from.x
+            const dy = to.y - from.y
+            
+            const midX = (from.x + to.x) / 2 - dy * 0.2 // Add perpendicular offset
+            const midY = (from.y + to.y) / 2 + dx * 0.2
+
+            // Calculate intersection with target node to show arrow (tangent at end is vector mid->to)
+            const angleToEnd = Math.atan2(to.y - midY, to.x - midX)
+            const targetX = to.x - Math.cos(angleToEnd) * (nodeRadius + 6)
+            const targetY = to.y - Math.sin(angleToEnd) * (nodeRadius + 6)
             
             return (
               <motion.path
                 key={index}
-                d={`M ${from.x} ${from.y + nodeRadius} Q ${midX} ${midY + nodeRadius} ${to.x} ${to.y - nodeRadius}`}
+                d={`M ${from.x} ${from.y} Q ${midX} ${midY} ${targetX} ${targetY}`}
                 fill="none"
                 stroke="var(--color-primary)"
                 strokeWidth={2}

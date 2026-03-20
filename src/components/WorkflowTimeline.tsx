@@ -14,56 +14,56 @@ const WorkflowTimeline = () => {
   const steps = [
     {
       step: 1,
-      title: "Detect obsolete components of your org",
-      subtitle: "Get a Prioritized List of Technical Debt",
+      title: "Get your Agentic Readiness Score",
+      subtitle: "Instant AI-Oriented Health Diagnostic",
       description: [
-        "Surface <strong>risky or low-value metadata</strong> (fields, objects, Flows, classes, etc.)",
-        "<strong>Score items</strong> by usage, recency, dependency depth",
-        "<strong>Build a realistic cleanup backlog</strong> filtered by object, business area, or risk"
+        "<strong>Agentic Readiness Score</strong>: know exactly where your org stands before deploying AI agents",
+        "Surface <strong>metadata, automation, security & integration debt</strong> — ranked by AI risk, not just usage",
+        "<strong>Prioritized action backlog</strong> filtered by object, business area, and blast radius"
       ],
       component: <ObsoleteDetectionPreview />
     },
     {
       step: 2,
-      title: "Analyze the impact of deleting these components",
-      subtitle: "See What Might Break Before You Change Anything",
+      title: "Investigate with your AI-powered org assistant",
+      subtitle: "Ask Anything. See the Full Dependency Graph.",
       description: [
-        "<strong>Interactive dependency map</strong>: Flows ⇄ Apex ⇄ Validation Rules ⇄ Layouts ⇄ Reports",
-        "<strong>Detect overlapping or redundant automation</strong>",
-        "<strong>Generate shareable visuals</strong> to align admins, devs, and business stakeholders"
+        "<strong>Natural language search</strong> across your entire org — \"Which Permission Set can trigger this Apex class?\"",
+        "<strong>Interactive dependency map</strong>: Fields ⇄ Apex ⇄ Flows ⇄ Profiles ⇄ Layouts ⇄ External systems",
+        "<strong>Cross-system visibility</strong>: GitHub/GitLab repos, ERPs, middlewares — all connected"
       ],
       component: <ImpactAnalysisPreview />
     },
     {
       step: 3,
-      title: "Scan beyond Salesforce org for external code dependencies",
-      subtitle: "Find External Dependencies Automatically",
+      title: "Scan external codebases for hidden dependencies",
+      subtitle: "Go Beyond Salesforce — Find Every Reference",
       description: [
-        "<strong>Connect GitHub/GitLab/Bitbucket</strong>",
-        "<strong>Detect references</strong> in Apex, JS, integrations, scheduled scripts",
-        "<strong>Avoid breaking APIs or data pipelines</strong> tied to legacy fields"
+        "<strong>Connect GitHub/GitLab/Bitbucket</strong> and detect references in Apex, JS, and integrations",
+        "<strong>Uncover undocumented systems</strong> querying your API 50x/day on fields you thought were unused",
+        "<strong>Avoid breaking APIs or data pipelines</strong> before your agent cleanup begins"
       ],
       component: <ExternalCodeScanPreview />
     },
     {
       step: 4,
-      title: "Add components to deletion queue",
-      subtitle: "Review and Organize Your Selected Metadata",
+      title: "Organize your cleanup into AI-suggested packs",
+      subtitle: "Smart Clustering — No More One-by-One Selection",
       description: [
-        "<strong>View all metadata items</strong> you've added to the deletion queue from steps 1 and 2",
-        "<strong>Review the consolidated list</strong> of selected items",
-        "<strong>Organize and manage</strong> your deletion queue before execution"
+        "<strong>AI groups related components</strong> into logical Cleanup Packs by project, team, or domain",
+        "Example: \"12 components tied to your legacy Partner Portal 2019 — archive the whole pack?\"",
+        "<strong>Drag packs into named queues</strong>: Sprint Cleanup Q1, AI Readiness Wave 1…"
       ],
       component: <DeletionQueuePreview />
     },
     {
       step: 5,
-      title: "AI guide you through safe step-by-step deletion plan",
-      subtitle: "Interactive Action Plan with AI Agent",
+      title: "Execute with AI — stay in control at every step",
+      subtitle: "Accept, Refuse, Review — with Instant Rollback",
       description: [
-        "<strong>AI Agent-Driven Plan</strong>: The agent generates a step-by-step action plan for cleanup",
-        "<strong>Interactive Review</strong>: Review actions with a side-by-side diff view",
-        "<strong>Full Control</strong>: Accept, refuse, or <strong>manually edit</strong> any action yourself"
+        "<strong>AI generates a step-by-step plan</strong> like a senior dev would: PR on GitLab → deactivate Flows → remove permissions → delete fields",
+        "<strong>Full control</strong>: Accept, Refuse, Review or Assign each action to a teammate",
+        "<strong>Built-in rollback</strong>: snapshot before every step — restore anything, instantly, without restoring the full org"
       ],
       component: <SafeExecutionPreview />
     }
@@ -90,10 +90,10 @@ const WorkflowTimeline = () => {
           >
             <VStack spacing={4} textAlign="center">
               <Heading as="h2" size="3xl" color="var(--color-text-primary)">
-                How OrgLookup Works
+                From Diagnosis to Safe Execution
               </Heading>
               <Text fontSize={{ base: "lg", md: "xl" }} color="var(--color-text-secondary)" maxW="600px">
-                Transform months of listing, cleaning and refacto into minutes
+                Your org's AI readiness journey — from the first scan to a clean, agent-ready Salesforce
               </Text>
             </VStack>
           </motion.div>

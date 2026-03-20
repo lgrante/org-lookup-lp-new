@@ -19,59 +19,59 @@ interface PainPoint {
 const PainPoints = () => {
   const painPoints: PainPoint[] = [
     {
-      title: "Hundreds of fields",
-      description: "Nobody knows what's safe to remove",
+      title: "Metadata debt",
+      description: "347+ custom fields on a single object, 23 with ambiguous names — your AI Agent can't classify intent correctly and selects wrong action parameters",
       icon: FiDatabase,
       bgColor: "var(--color-pain-1-bg)",
       iconColor: "var(--color-pain-1-icon)",
       borderColor: "var(--color-pain-1-border)",
       stat: "35%+",
-      statLabel: "of custom fields are unused"
+      statLabel: "of custom fields are unused and confuse AI agents"
     },
     {
-      title: "Overlapping automation",
-      description: "Workflow Rules, Flows, Apex all conflict",
+      title: "Automation debt",
+      description: "A single record save triggers 6 concurrent automation paths. Agentforce handling 50 conversations hits the 10s CPU Governor Limit — and crashes brutally",
       icon: FiGitBranch,
       bgColor: "var(--color-pain-2-bg)",
       iconColor: "var(--color-pain-2-icon)",
       borderColor: "var(--color-pain-2-border)",
       stat: "62%",
-      statLabel: "of orgs use Workflow Rules & Flow simultaneously"
+      statLabel: "of orgs run Workflow Rules & Flows simultaneously"
     },
     {
-      title: "Invisible dependencies",
-      description: "Missing dependencies or metadata conflicts",
+      title: "Security debt",
+      description: "~60 permission sets with 80% overlap on Account & Contact. Deploy Agentforce on this and a simple query could expose financial data your agent should never see",
       icon: FiEyeOff,
       bgColor: "var(--color-pain-3-bg)",
       iconColor: "var(--color-pain-3-icon)",
       borderColor: "var(--color-pain-3-border)",
-      stat: "78%",
-      statLabel: "of teams experience deployment bugs"
+      stat: "80%",
+      statLabel: "permission set overlap on standard objects on average"
     },
     {
-      title: "Metadata in connected apps",
-      description: "Undocumented integrations using your fields",
+      title: "Integration debt",
+      description: "Legacy SOAP integrations add 15–30s latency per call. Agentforce has a strict 60s timeout — your AI agent goes silent mid-conversation with a live customer",
       icon: FiExternalLink,
       bgColor: "var(--color-pain-4-bg)",
       iconColor: "var(--color-pain-4-icon)",
       borderColor: "var(--color-pain-4-border)",
-      stat: "28%",
-      statLabel: "of enterprise apps are integrated/documented"
+      stat: "4x",
+      statLabel: "more payload weight with legacy SOAP vs REST APIs"
     }
   ]
 
-  // Card de conclusion avec conséquences concrètes
+  // Card de conclusion
   const conclusionCard = {
     title: "The result?",
     icon: FiAlertTriangle,
-    stat: "100+",
-    statLabel: "hours to manually audit an org",
+    stat: "45%",
+    statLabel: "average Agentic Readiness Score — most orgs aren't ready",
     consequences: [
-      { icon: FiZap, text: "Unpredictable side effects on every change" },
-      { icon: FiXCircle, text: "Deployment failures & rollbacks" },
-      { icon: FiTool, text: "Harder maintenance over time" },
-      { icon: FiClock, text: "Slower feature delivery" },
-      { icon: FiTrendingUp, text: "Growing technical debt" }
+      { icon: FiZap, text: "AI agents hallucinate on ambiguous field names" },
+      { icon: FiXCircle, text: "Apex CPU timeout — agents crash mid-conversation" },
+      { icon: FiTool, text: "Over-permissioned agents expose sensitive data" },
+      { icon: FiClock, text: "Legacy integrations time out, breaking agent sessions" },
+      { icon: FiTrendingUp, text: "Agentforce ROI destroyed before it even starts" }
     ] as { icon: IconType; text: string }[]
   }
 
@@ -126,8 +126,8 @@ const PainPoints = () => {
         <VStack spacing={16} maxW="1600px" mx="auto" w="full" px={{ base: 4, md: 8 }}>
           <VStack spacing={4} textAlign="center">
             <Heading as="h2" size="3xl" color="var(--color-text-primary)">
-              The Reality Salesforce Admins Talk About Every Day
-            </Heading>
+                Why AI Agents Fail in Enterprise
+              </Heading>
           </VStack>
 
           {/* Grid des 4 premiers pain points */}

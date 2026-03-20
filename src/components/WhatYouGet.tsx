@@ -21,23 +21,23 @@ const WhatYouGet = () => {
   const benefits = [
     {
       icon: FiEye,
-      title: "A clear view of your org's technical debt",
-      description: "no more surprises"
+      title: "Your Agentic Readiness Score",
+      description: "know exactly where your org stands — before deploying a single agent"
     },
     {
       icon: FiZap,
-      title: "Faster, safer changes",
-      description: "less time on impact analysis and troubleshooting"
+      title: "AI agents that actually work",
+      description: "no more hallucinations, CPU timeouts, or data leaks from a messy org"
     },
     {
       icon: FiEye,
-      title: "Shared understanding across teams",
-      description: "a single source of truth"
+      title: "Full cross-system visibility",
+      description: "a single source of truth across Salesforce, Git repos, and external integrations"
     },
     {
       icon: FiPackage,
-      title: "Easy redeployment across environments",
-      description: "deploy cleanup changes to all your orgs effortlessly"
+      title: "Safe, reversible execution",
+      description: "deploy Agentforce-readiness changes with built-in rollback at every step"
     }
   ]
 
@@ -55,6 +55,9 @@ const WhatYouGet = () => {
               <Heading as="h2" size="2xl" color="var(--color-text-primary)">
                 What You Get With OrgLookup
               </Heading>
+              <Text color="var(--color-text-secondary)" fontSize="lg" maxW="500px" textAlign="center">
+                The first Agentic Governance Platform for Salesforce
+              </Text>
             </VStack>
           </motion.div>
 

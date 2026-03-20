@@ -56,16 +56,18 @@ const Hero = ({ onContactClick }: HeroProps) => {
                     lineHeight={1.2}
                     maxW="85%"
                   >
-                    Turn your <span style={{fontWeight: "bold", color: "var(--color-tertiary)", position: "relative"}}>
-                      Salesforce
-                    </span> Technical Debt into a                       <motion.span
+                    Is Your{' '}
+                    <span style={{fontWeight: "bold", color: "var(--color-tertiary)", position: "relative"}}>
+                      Salesforce Org
+                    </span>{' '}
+                    Ready for the{' '}
+                    <motion.span
                       animate={{
                         backgroundPosition: ["-200% center", "200% center"],
                       }}
                       transition={{
                         duration: 4,
                         repeat: Infinity,
-                        //ease: "linear",
                         ease: "easeInOut",
                       }}
                       style={{
@@ -78,7 +80,7 @@ const Hero = ({ onContactClick }: HeroProps) => {
                         display: 'inline-block',
                       }}
                     >
-                      Clear Cleanup Plan
+                      AI Era?
                       <motion.span
                         animate={{
                           backgroundPosition: ["-200% center", "200% center"],
@@ -118,7 +120,7 @@ const Hero = ({ onContactClick }: HeroProps) => {
                     lineHeight={1.6}
                     maxW="500px"
                   >
-                    Most admins inherit orgs burdened with years of technical debt. OrgLookup transforms complex cleanup into guided, actionable workflows.
+                    AI agents fail in enterprise — not because of the models, but because of what's underneath. OrgLookup prepares your Salesforce org to deploy Agentforce safely, with AI-guided metadata governance.
                   </Text>
                 </motion.div>
 

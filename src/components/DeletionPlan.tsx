@@ -33,19 +33,19 @@ interface ProcessStep {
 
 const DeletionPlan = () => {
   const manualProcess: ProcessStep[] = [
-    { icon: FiSearch, text: "Manually <strong>hunt for unused fields</strong>, objects, and layouts across Setup, reports, and page layouts" },
-    { icon: FiLink, text: "<strong>Check references for each field</strong> across Flows, Apex, and layouts" },
-    { icon: FiGitBranch, text: "<strong>Search Git repos and external apps</strong> for legacy references" },
-    { icon: FiShield, text: "<strong>Design safe deletion order</strong> to avoid breaking production" },
-    { icon: FiFileText, text: "<strong>Document everything manually</strong> in spreadsheets" }
+    { icon: FiSearch, text: "Manually <strong>hunt for unused or ambiguous metadata</strong> that could cause AI agent hallucinations" },
+    { icon: FiLink, text: "<strong>Audit automation paths one by one</strong> to spot CPU bottlenecks before they crash Agentforce" },
+    { icon: FiShield, text: "<strong>Review permission sets manually</strong> to prevent over-privileged AI agents from leaking data" },
+    { icon: FiGitBranch, text: "<strong>Search Git repos and external apps</strong> for legacy references and undocumented integrations" },
+    { icon: FiFileText, text: "<strong>Document everything in spreadsheets</strong> — no rollback if something breaks" }
   ]
 
   const orgLookupProcess: ProcessStep[] = [
-    { icon: FiList, text: "<strong>Get prioritized list</strong> of suspicious or low-value metadata" },
-    { icon: FiEye, text: "<strong>Visualize dependencies</strong> between Flows, Apex, and layouts" },
-    { icon: FiGitBranch, text: "<strong>Auto-detect references</strong> in GitHub/GitLab/Bitbucket" },
-    { icon: FiShield, text: "<strong>Build safe deletion queues</strong> (deactivate → archive → clean → delete)" },
-    { icon: FiCheckCircle, text: "<strong>Automatically generate</strong> a safe, step-by-step action plan to remove technical debt" }
+    { icon: FiList, text: "<strong>Get your Agentic Readiness Score instantly</strong> — know what's blocking Agentforce deployment" },
+    { icon: FiEye, text: "<strong>Visualize the full dependency graph</strong>: metadata, automation, security & integration debt in one view" },
+    { icon: FiGitBranch, text: "<strong>Auto-detect external references</strong> in GitHub/GitLab/Bitbucket and connected systems" },
+    { icon: FiShield, text: "<strong>AI suggests logical cleanup packs</strong> — no one-by-one selection, grouped by project or risk" },
+    { icon: FiCheckCircle, text: "<strong>Execute with built-in rollback</strong>: snapshot before every step, restore anything instantly" }
   ]
 
   // Animation pour la colonne Manual (apparaît en premier)
@@ -141,7 +141,7 @@ const DeletionPlan = () => {
           >
             <VStack spacing={6} textAlign="center">
               <Heading as="h2" size="3xl" color="var(--color-text-primary)">
-                Manual vs Automated Cleanup
+                Manual Governance vs AI-Guided Agentforce Readiness
               </Heading>
             </VStack>
           </motion.div>

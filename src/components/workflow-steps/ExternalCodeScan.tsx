@@ -147,8 +147,6 @@ const ExternalCodeScan = () => {
               const toNode = salesforceNodes.find(n => n.id === conn.to)
               if (!fromNode || !toNode) return null
               
-              const isRest = conn.type === 'REST API'
-              
               return (
                 <g key={index}>
                   <motion.path

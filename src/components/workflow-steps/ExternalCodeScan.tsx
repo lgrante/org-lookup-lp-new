@@ -5,8 +5,8 @@ import { FiGithub, FiRefreshCw } from 'react-icons/fi'
 interface ExternalNode {
   id: string
   name: string
-  source: 'github' | 'gitlab'
-  repoName: string
+  source: 'github' | 'gitlab' | 'sap' | 'hubspot' | 'powerbi'
+  subtitle?: string
   x: number
   y: number
 }
@@ -20,8 +20,9 @@ interface SalesforceNode {
 }
 
 const externalNodes: ExternalNode[] = [
-  { id: 'ext1', name: 'Web Lead Form', source: 'github', repoName: 'frontend-leads', x: 15, y: 35 },
-  { id: 'ext2', name: 'Mass Import Script', source: 'gitlab', repoName: 'data-sync', x: 15, y: 65 },
+  { id: 'ext1', name: 'SAP ERP', source: 'sap', subtitle: 'Global Inventory', x: 15, y: 20 },
+  { id: 'ext2', name: 'HubSpot', source: 'hubspot', subtitle: 'Marketing Sync', x: 15, y: 45 },
+  { id: 'ext3', name: 'PowerBI', source: 'powerbi', subtitle: 'Financial Dashboard', x: 15, y: 70 },
 ]
 
 const salesforceNodes: SalesforceNode[] = [
@@ -31,15 +32,32 @@ const salesforceNodes: SalesforceNode[] = [
 ]
 
 const connections = [
-  { from: 'ext1', to: 'sf1', type: 'REST API', label: 'API Call' },
-  { from: 'ext1', to: 'sf2', type: 'REST API', label: 'API Call' },
-  { from: 'ext2', to: 'sf2', type: 'Bulk API', label: 'Bulk Insert' },
-  { from: 'ext2', to: 'sf3', type: 'Bulk API', label: 'Triggers' },
+  { from: 'ext1', to: 'sf1', type: 'Sentinel', label: 'Write Sentinel' },
+  { from: 'ext2', to: 'sf2', type: 'Predictive', label: 'Predictive Scan' },
+  { from: 'ext3', to: 'sf3', type: 'Forensic', label: 'Forensic Audit' },
 ]
 
 const GitLabIcon = () => (
   <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
     <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z"/>
+  </svg>
+)
+
+const SAPIcon = () => (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+    <path d="M0 0h24v24H0V0zm16.5 11l-1.5-3h-6l-1.5 3h9zm.5 1h-10l-1 2h12l-1-2zm-12 3h14l-1 2h-12l-1-2z" />
+  </svg>
+)
+
+const HubSpotIcon = () => (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+    <path d="M18.8 10.3c-.5 0-1-.3-1.3-.7-.4-.5-.6-1-.5-1.6.1-.5.3-1 .7-1.3.5-.4 1-.6 1.6-.5 1.1.2 1.8 1.1 1.8 2.2 0 1.1-.9 1.9-2.3 1.9zm-4.1 6.3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm6.8 9.3c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z" />
+  </svg>
+)
+
+const PowerBIIcon = () => (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+    <path d="M11 11h2v11h-2V11zm4-4h2v15h-2V7zM7 16h2v6H7v-6z" />
   </svg>
 )
 
@@ -63,10 +81,10 @@ const ExternalCodeScan = () => {
           <HStack justify="space-between" align="center">
             <VStack align="start" spacing={1}>
               <Text color="white" fontSize="xl" fontWeight="bold" fontFamily="'Vend Sans', sans-serif">
-                External Code Dependencies
+                Integration Dependency Map
               </Text>
               <Text color="whiteAlpha.800" fontSize="sm">
-                Scan your Git repositories for Salesforce integrations
+                Uncover all external systems touching your Salesforce data
               </Text>
             </VStack>
             <HStack spacing={3}>
@@ -113,10 +131,13 @@ const ExternalCodeScan = () => {
           <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0 }}>
             <defs>
               <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
+                <polygon points="0 0, 10 3.5, 0 7" fill="#3182ce" />
               </marker>
-              <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e" />
+              <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#e53e3e" />
+              </marker>
+              <marker id="arrow-yellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#d69e2e" />
               </marker>
             </defs>
             
@@ -133,10 +154,10 @@ const ExternalCodeScan = () => {
                   <motion.path
                     d={`M ${fromNode.x + 12}% ${fromNode.y}% C ${40}% ${fromNode.y}% ${50}% ${toNode.y}% ${toNode.x - 8}% ${toNode.y}%`}
                     fill="none"
-                    stroke={isRest ? '#3b82f6' : '#22c55e'}
+                    stroke={conn.type === 'Sentinel' ? '#e53e3e' : conn.type === 'Predictive' ? '#d69e2e' : '#3182ce'}
                     strokeWidth={2}
-                    strokeDasharray={isRest ? 'none' : '8,4'}
-                    markerEnd={isRest ? 'url(#arrow-blue)' : 'url(#arrow-green)'}
+                    strokeDasharray={conn.type === 'Forensic' ? 'none' : '5,3'}
+                    markerEnd={conn.type === 'Sentinel' ? 'url(#arrow-red)' : conn.type === 'Predictive' ? 'url(#arrow-yellow)' : 'url(#arrow-blue)'}
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}
                     transition={{ duration: 1, delay: index * 0.3 }}
@@ -173,19 +194,19 @@ const ExternalCodeScan = () => {
               }}
             >
               <Box
-                bg={node.source === 'github' ? '#24292e' : '#fc6d26'}
-                color="white"
+                bg={node.source === 'sap' ? '#0070bc' : node.source === 'hubspot' ? '#ff7a59' : '#f2c811'}
+                color={node.source === 'powerbi' ? 'black' : 'white'}
                 p={4}
                 borderRadius="12px"
                 boxShadow="0 4px 12px rgba(0,0,0,0.2)"
                 textAlign="center"
                 minW="120px"
               >
-                <Box mb={2}>
-                  {node.source === 'github' ? <FiGithub size={28} /> : <GitLabIcon />}
+                <Box mb={2} display="flex" justifyContent="center">
+                  {node.source === 'sap' ? <SAPIcon /> : node.source === 'hubspot' ? <HubSpotIcon /> : <PowerBIIcon />}
                 </Box>
                 <Text fontSize="sm" fontWeight="bold">{node.name}</Text>
-                <Text fontSize="xs" opacity={0.8}>{node.repoName}</Text>
+                <Text fontSize="xs" opacity={0.8}>{node.subtitle}</Text>
               </Box>
             </motion.div>
           ))}
@@ -246,10 +267,11 @@ const ExternalCodeScan = () => {
             boxShadow="sm"
             fontSize="xs"
           >
-            <Text fontWeight="bold" mb={2}>API Types</Text>
+            <Text fontWeight="bold" mb={2}>Monitoring Modes</Text>
             <VStack align="start" spacing={1}>
-              <HStack><Box w={4} h={0.5} bg="blue.500" /> <Text>REST API</Text></HStack>
-              <HStack><Box w={4} h={0.5} bg="green.500" borderStyle="dashed" borderWidth="1px" borderColor="green.500" /> <Text>Bulk API</Text></HStack>
+              <HStack><Box w={4} h={0.5} bg="#e53e3e" borderStyle="dashed" borderWidth="1.5px" /> <Text>Sentinel (Write Tracking)</Text></HStack>
+              <HStack><Box w={4} h={0.5} bg="#d69e2e" borderStyle="dashed" borderWidth="1.5px" /> <Text>Predictive Scan (Reads)</Text></HStack>
+              <HStack><Box w={4} h={0.5} bg="#3182ce" /> <Text>Forensic Audit (Discovery)</Text></HStack>
             </VStack>
           </Box>
         </Box>
@@ -258,8 +280,8 @@ const ExternalCodeScan = () => {
         <Alert status="warning" variant="left-accent">
           <AlertIcon />
           <Box>
-            <Text fontWeight="medium">Warning: LeadAPI class is referenced by 2 external repositories</Text>
-            <Text fontSize="sm" color="gray.600">Deletion may break external integrations.</Text>
+            <Text fontWeight="medium">Warning: Global Integration Debt Detected</Text>
+            <Text fontSize="sm" color="gray.600">3 undocumented integration streams (SAP, PowerBI) touching sensitive financial fields.</Text>
           </Box>
           <Button size="sm" ml="auto" variant="ghost">View Details</Button>
         </Alert>

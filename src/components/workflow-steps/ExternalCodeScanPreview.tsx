@@ -9,6 +9,18 @@ const GitLabIcon = ({ size = 18 }: { size?: number }) => (
   </svg>
 )
 
+const SAPIcon = ({ size = 18 }: { size?: number }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M0 0h24v24H0V0zm16.5 11l-1.5-3h-6l-1.5 3h9zm.5 1h-10l-1 2h12l-1-2zm-12 3h14l-1 2h-12l-1-2z" />
+  </svg>
+)
+
+const PowerBIIcon = ({ size = 18 }: { size?: number }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M11 11h2v11h-2V11zm4-4h2v15h-2V7zM7 16h2v6H7v-6z" />
+  </svg>
+)
+
 interface NodeData {
   id: number
   label: string
@@ -16,14 +28,14 @@ interface NodeData {
   x: number
   y: number
   color: string
-  icon: 'github' | 'gitlab' | IconType
+  icon: 'sap' | 'powerbi' | IconType
   isExternal?: boolean
 }
 
 const ExternalCodeScanPreview = () => {
   const nodes: NodeData[] = [
-    { id: 1, label: 'Lead Web Form', type: 'GitHub', x: 100, y: 90, color: '#24292e', icon: 'github', isExternal: true },
-    { id: 2, label: 'Mass Import Script', type: 'GitLab', x: 100, y: 190, color: '#fc6d26', icon: 'gitlab', isExternal: true },
+    { id: 1, label: 'SAP ERP', type: 'Sentinel', x: 100, y: 90, color: '#0070bc', icon: 'sap', isExternal: true },
+    { id: 2, label: 'PowerBI', type: 'Predictive', x: 100, y: 190, color: '#f2c811', icon: 'powerbi', isExternal: true },
     { id: 3, label: 'LeadAPI', type: 'Apex', x: 320, y: 140, color: '#6366f1', icon: FiBox },
     { id: 4, label: 'LeadTrigger', type: 'Trigger', x: 500, y: 90, color: '#f97316', icon: FiZap },
     { id: 5, label: 'Lead__c', type: 'Object', x: 500, y: 190, color: '#22c55e', icon: FiDatabase },
@@ -129,10 +141,10 @@ const ExternalCodeScanPreview = () => {
                   justifyContent="center"
                   w="28px"
                   h="28px"
-                  color="white"
+                  color={node.icon === 'powerbi' ? 'black' : 'white'}
                 >
-                  {node.icon === 'github' && <FiGithub size={22} />}
-                  {node.icon === 'gitlab' && <GitLabIcon size={22} />}
+                  {node.icon === 'sap' && <SAPIcon size={22} />}
+                  {node.icon === 'powerbi' && <PowerBIIcon size={22} />}
                 </Box>
               </foreignObject>
               
@@ -222,7 +234,7 @@ const ExternalCodeScanPreview = () => {
       {/* Footer */}
       <Box px={5} py={3} bg="orange.50" borderTop="1px solid" borderColor="orange.200">
         <Text fontSize="xs" color="orange.700" textAlign="center">
-          ⚠️ 2 external systems • 4 connections detected
+          ⚠️ Undocumented SAP & PowerBI dependencies detected
         </Text>
       </Box>
     </Box>

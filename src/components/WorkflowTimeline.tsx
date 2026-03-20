@@ -29,19 +29,19 @@ const WorkflowTimeline = () => {
       subtitle: "Ask Anything. See the Full Dependency Graph.",
       description: [
         "<strong>Natural language search</strong> across your entire org — \"Which Permission Set can trigger this Apex class?\"",
-        "<strong>Interactive dependency map</strong>: Fields ⇄ Apex ⇄ Flows ⇄ Profiles ⇄ Layouts ⇄ External systems",
+        "<strong>Interactive dependency map</strong>",
         "<strong>Cross-system visibility</strong>: GitHub/GitLab repos, ERPs, middlewares — all connected"
       ],
       component: <ImpactAnalysisPreview />
     },
     {
       step: 3,
-      title: "Scan external codebases for hidden dependencies",
-      subtitle: "Go Beyond Salesforce — Find Every Reference",
+      title: "Map every external dependency & integration",
+      subtitle: "Zero Blind Spot — No Shield License Required",
       description: [
-        "<strong>Connect GitHub/GitLab/Bitbucket</strong> and detect references in Apex, JS, and integrations",
-        "<strong>Uncover undocumented systems</strong> querying your API 50x/day on fields you thought were unused",
-        "<strong>Avoid breaking APIs or data pipelines</strong> before your agent cleanup begins"
+        "<strong>Identify all connected apps</strong>: ERPs (SAP, Oracle), Marketing (HubSpot), and BI (PowerBI, Tableau)",
+        "<strong>Predictive Deep Scan</strong>: AI-guided polling of debug logs to capture 100% of read queries",
+        "<strong>Sentinel Monitoring</strong>: Auto-injected triggers to map hidden REST/Bulk API write payloads"
       ],
       component: <ExternalCodeScanPreview />
     },

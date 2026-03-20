@@ -16,11 +16,11 @@ import {
 } from '../workflow-steps'
 
 const STEP_LABELS = [
-  'Detect obsolete components of your org',
-  'Analyze the impact of deleting these components',
-  'Scan beyond Salesforce org for external code dependencies',
-  'Add components to deletion queue',
-  'AI guide you through safe step-by-step deletion plan'
+  'Measure your Agentic Readiness Score',
+  'Visualize hidden metadata dependencies',
+  'Map every external system & integration',
+  'Cluster cleanup items into Smart Packs',
+  'Safe execution with surgical rollback'
 ]
 
 interface MobileHeroProps {
@@ -94,15 +94,15 @@ const MobileHero = ({ onContactClick }: MobileHeroProps) => {
                 fontSize="2xl"
                 lineHeight={1.3}
               >
-                Turn your{' '}
+                Is Your{' '}
                 <Text
                   as="span"
                   fontWeight="bold"
                   color="var(--color-tertiary)"
                 >
-                  Salesforce
+                  Salesforce Org
                 </Text>{' '}
-                Technical Debt into a{' '}
+                Ready for the{' '}
                 <motion.span
                   animate={{
                     backgroundPosition: ["-200% center", "200% center"],
@@ -121,7 +121,7 @@ const MobileHero = ({ onContactClick }: MobileHeroProps) => {
                     display: 'inline',
                   }}
                 >
-                  Clear Cleanup Plan
+                  AI Era?
                   <motion.span
                     animate={{
                       backgroundPosition: ["-200% center", "200% center"],
@@ -160,7 +160,7 @@ const MobileHero = ({ onContactClick }: MobileHeroProps) => {
                 color="var(--color-text-primary)"
                 lineHeight={1.6}
               >
-                Most admins inherit orgs burdened with years of technical debt. OrgLookup transforms complex cleanup into guided, actionable workflows.
+                AI agents fail in enterprise — not because of the models, but because of what's underneath. OrgLookup prepares your Salesforce org for Agentforce.
               </Text>
             </motion.div>
 

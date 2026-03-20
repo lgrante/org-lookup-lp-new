@@ -24,56 +24,56 @@ const MobileWorkflowTimeline = () => {
   const steps: Step[] = [
     {
       step: 1,
-      title: "Instant Obsolete Detection",
-      subtitle: "Get a Prioritized List of Technical Debt",
+      title: "Get your Agentic Readiness Score",
+      subtitle: "Instant AI-Oriented Health Diagnostic",
       description: [
-        "Surface risky or low-value metadata",
-        "Score items by usage, recency, dependency depth",
-        "Build a realistic cleanup backlog"
+        "Know exactly where your org stands before deploying AI",
+        "Surface metadata, automation, security & integration debt",
+        "Prioritize actions by risk, not just usage"
       ],
       preview: <ObsoleteDetectionPreview />
     },
     {
       step: 2,
-      title: "Visual Impact Analysis",
-      subtitle: "See What Might Break Before You Change Anything",
+      title: "AI-Powered Investigative Assistant",
+      subtitle: "Natural Language Search across Metadata",
       description: [
-        "Interactive dependency map: Flows ⇄ Apex ⇄ Validation Rules",
-        "Detect overlapping automation",
-        "Generate shareable visuals"
+        "Ask anything: \"Which Flow can trigger this field?\"",
+        "Interactive dependency map for flows, apex, and rules",
+        "Cross-system visibility into GitHub, ERPs, and more"
       ],
       preview: <ImpactAnalysisPreview />
     },
     {
       step: 3,
-      title: "External Code Scanning",
-      subtitle: "Find External Dependencies Automatically",
+      title: "Map every external dependency",
+      subtitle: "Zero Blind Spot — No Shield License required",
       description: [
-        "Connect GitHub/GitLab/Bitbucket",
-        "Detect references in Apex, JS, integrations",
-        "Avoid breaking APIs or data pipelines"
+        "Identify connected apps (SAP, HubSpot, PowerBI)",
+        "Predictive Deep Scan captures 100% of read queries",
+        "Sentinel Monitoring maps hidden REST/Bulk write payloads"
       ],
       preview: <ExternalCodeScanPreview />
     },
     {
       step: 4,
-      title: "Create Deletion Queue",
-      subtitle: "Review and Organize Your Selected Metadata",
+      title: "Organize into AI Cleanup Packs",
+      subtitle: "Smart Clustering — No One-by-One Selection",
       description: [
-        "View all metadata items in the deletion queue",
-        "Review the consolidated list",
-        "Organize before execution"
+        "AI groups related items by project, team, or domain",
+        "Example: \"12 components tied to legacy Partner Portal\"",
+        "Organize cleanup into named Waves (Q1, Wave 2…)"
       ],
       preview: <DeletionQueuePreview />
     },
     {
       step: 5,
-      title: "Automated Safe Execution",
-      subtitle: "Execute with Confidence",
+      title: "Safe Execution & Rollback",
+      subtitle: "AI Plan with Surgical Restores",
       description: [
-        "Generate a safe, step-by-step action plan",
-        "Generate deployment-ready metadata packages",
-        "Track every change for future auditors"
+        "AI generates a senior-dev plan: PR → Deactivate → Delete",
+        "Total Control: Accept, Refuse, or Assign each action",
+        "Snapshot before every step — restore anything, instantly"
       ],
       preview: <SafeExecutionPreview />
     }
@@ -120,10 +120,10 @@ const MobileWorkflowTimeline = () => {
           >
             <VStack spacing={2} textAlign="center">
               <Heading as="h2" fontSize="xl" color="var(--color-text-primary)">
-                How OrgLookup Works
+                From Diagnosis to Safe Execution
               </Heading>
               <Text fontSize="sm" color="var(--color-text-secondary)">
-                Transform months of cleanup into minutes
+                Your org's AI readiness journey — from the first scan to a clean, agent-ready Salesforce
               </Text>
             </VStack>
           </motion.div>

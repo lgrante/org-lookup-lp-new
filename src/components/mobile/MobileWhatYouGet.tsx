@@ -21,23 +21,23 @@ const MobileWhatYouGet = () => {
   const benefits = [
     {
       icon: FiEye,
-      title: "A clear view of your org's technical debt",
-      description: "no more surprises"
+      title: "Your Agentic Readiness Score",
+      description: "Know exactly where your org stands — before deploying AI"
     },
     {
       icon: FiZap,
-      title: "Faster, safer changes",
-      description: "less time on impact analysis and troubleshooting"
+      title: "Safe Agentforce Deployment",
+      description: "Zero Hallucination risks from ambiguous or redundant metadata"
     },
     {
       icon: FiEye,
-      title: "Shared understanding across teams",
-      description: "a single source of truth"
+      title: "Zero Blind Spot Visibility",
+      description: "Map every external dependency (SAP, PowerBI, HubSpot)"
     },
     {
       icon: FiPackage,
-      title: "Easy redeployment across environments",
-      description: "deploy cleanup changes effortlessly"
+      title: "Surgical Deletion & Rollback",
+      description: "Cleanup with confidence — restore any item instantly"
     }
   ]
 
@@ -77,7 +77,7 @@ const MobileWhatYouGet = () => {
           >
             <VStack spacing={2} textAlign="center">
               <Heading as="h2" fontSize="xl" color="var(--color-text-primary)">
-                What You Get With OrgLookup
+                The Agentic Governance Platform
               </Heading>
             </VStack>
           </motion.div>

@@ -19,44 +19,44 @@ interface PainPoint {
 const MobilePainPoints = () => {
   const painPoints: PainPoint[] = [
     {
-      title: "Hundreds of fields",
-      description: "Nobody knows what's safe to remove",
+      title: "Metadata debt",
+      description: "Ambiguous field names cause AI agent hallucinations",
       icon: FiDatabase,
       bgColor: "var(--color-pain-1-bg)",
       iconColor: "var(--color-pain-1-icon)",
       borderColor: "var(--color-pain-1-border)",
-      stat: "35%+",
-      statLabel: "of custom fields are unused"
+      stat: "347+",
+      statLabel: "fields on a single object"
     },
     {
-      title: "Overlapping automation",
-      description: "Workflow Rules, Flows, Apex all conflict",
+      title: "Automation debt",
+      description: "Agents trigger legacy flows with unpredictable results",
       icon: FiGitBranch,
       bgColor: "var(--color-pain-2-bg)",
       iconColor: "var(--color-pain-2-icon)",
       borderColor: "var(--color-pain-2-border)",
-      stat: "62%",
-      statLabel: "of orgs use Workflow Rules & Flow simultaneously"
+      stat: "80%",
+      statLabel: "of automations are redundant"
     },
     {
-      title: "Invisible dependencies",
-      description: "Missing dependencies or metadata conflicts",
+      title: "Security debt",
+      description: "Over-permissive profiles lead to AI data leaks",
       icon: FiEyeOff,
       bgColor: "var(--color-pain-3-bg)",
       iconColor: "var(--color-pain-3-icon)",
       borderColor: "var(--color-pain-3-border)",
-      stat: "78%",
-      statLabel: "of teams experience deployment bugs"
+      stat: "62%",
+      statLabel: "of fields shouldn't be visible to AI"
     },
     {
-      title: "Metadata in connected apps",
-      description: "Undocumented integrations using your fields",
+      title: "Integration debt",
+      description: "Hidden code dependencies break during cleanup",
       icon: FiExternalLink,
       bgColor: "var(--color-pain-4-bg)",
       iconColor: "var(--color-pain-4-icon)",
       borderColor: "var(--color-pain-4-border)",
-      stat: "28%",
-      statLabel: "of enterprise apps are integrated/documented"
+      stat: "5x",
+      statLabel: "more integrations than documented"
     }
   ]
 
@@ -108,7 +108,7 @@ const MobilePainPoints = () => {
           {/* Header */}
           <VStack spacing={3} textAlign="center">
             <Heading as="h2" fontSize="xl" color="var(--color-text-primary)" lineHeight={1.3}>
-              The Reality Salesforce Admins Talk About Every Day
+              Why AI Agents Fail in Enterprise
             </Heading>
           </VStack>
 

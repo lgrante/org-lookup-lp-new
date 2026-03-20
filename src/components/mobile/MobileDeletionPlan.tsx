@@ -31,19 +31,19 @@ interface ProcessStep {
 
 const MobileDeletionPlan = () => {
   const manualProcess: ProcessStep[] = [
-    { icon: FiSearch, text: "Manually hunt for unused fields" },
-    { icon: FiLink, text: "Check references for each field" },
-    { icon: FiGitBranch, text: "Search Git repos manually" },
-    { icon: FiShield, text: "Design safe deletion order" },
-    { icon: FiFileText, text: "Document in spreadsheets" }
+    { icon: FiSearch, text: "Manually hunt for AI-hallucination risks" },
+    { icon: FiLink, text: "Check field references one by one" },
+    { icon: FiGitBranch, text: "Search Git repos for dependencies" },
+    { icon: FiShield, text: "Cross-check permissions for AI leak" },
+    { icon: FiFileText, text: "Document findings in spreadsheets" }
   ]
 
   const orgLookupProcess: ProcessStep[] = [
-    { icon: FiList, text: "Get prioritized list of metadata" },
-    { icon: FiEye, text: "Visualize dependencies" },
-    { icon: FiGitBranch, text: "Auto-detect external references" },
-    { icon: FiShield, text: "Build safe deletion queues" },
-    { icon: FiCheckCircle, text: "Generate step-by-step plan" }
+    { icon: FiList, text: "Get your Agentic Readiness Score" },
+    { icon: FiEye, text: "Visualize the full dependency graph" },
+    { icon: FiGitBranch, text: "Sentinel active monitoring (no Shield)" },
+    { icon: FiShield, text: "Cluster items into Smart Cleanup Packs" },
+    { icon: FiCheckCircle, text: "Generate surgical deletion plans" }
   ]
 
   const columnVariant = {
@@ -71,7 +71,7 @@ const MobileDeletionPlan = () => {
           >
             <VStack spacing={2} textAlign="center">
               <Heading as="h2" fontSize="xl" color="var(--color-text-primary)">
-                Manual vs Automated Cleanup
+                Agentforce Readiness vs Manual Audit
               </Heading>
             </VStack>
           </motion.div>

@@ -10,11 +10,11 @@ import {
 } from "./workflow-steps";
 
 const STEP_LABELS = [
-  "Detect obsolete components of your org",
-  "Analyze the impact of deleting these components",
-  "Scan beyond Salesforce org for external code dependencies",
-  "Add components to deletion queue",
-  "AI guide you through safe step-by-step deletion plan",
+  "Get your Agentic Readiness Score",
+  "Investigate with your AI-powered org assistant",
+  "Map every external dependency & integration",
+  "Organize your cleanup into AI-suggested packs",
+  "Execute with AI — stay in control at every step",
 ];
 
 interface HeroAnimationCarouselProps {

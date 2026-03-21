@@ -16,11 +16,11 @@ import {
 } from '../workflow-steps'
 
 const STEP_LABELS = [
-  'Measure your Agentic Readiness Score',
-  'Visualize hidden metadata dependencies',
-  'Map every external system & integration',
-  'Cluster cleanup items into Smart Packs',
-  'Safe execution with surgical rollback'
+  "Get your Agentic Readiness Score",
+  "Investigate with your AI-powered org assistant",
+  "Map every external dependency & integration",
+  "Organize your cleanup into AI-suggested packs",
+  "Execute with AI — stay in control at every step"
 ]
 
 interface MobileHeroProps {

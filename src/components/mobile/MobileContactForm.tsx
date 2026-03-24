@@ -10,7 +10,6 @@ import {
   Text,
   Heading,
   useToast,
-  Badge
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import LayoutContainer from '../LayoutContainer'

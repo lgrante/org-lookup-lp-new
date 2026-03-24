@@ -121,7 +121,7 @@ const WorkflowTimeline = () => {
                 flexDirection="column"
                 justifyContent="flex-start"
                 pb={index === steps.length - 1 ? 20 : 0}
-                pt={index === 0 ? "10vh" : "20vh"} // First step slightly higher to feel immediate
+                pt="20vh" // Synchronized with sticky top
               >
                 <motion.div
                   initial={{ opacity: index === 0 ? 1 : 0.3 }}
@@ -184,7 +184,7 @@ const WorkflowTimeline = () => {
             display="flex"
             alignItems="flex-start" // Alignment fix
             justifyContent="center"
-            pt={0}
+            pt="20vh" // Match the text pt exactly
           >
             <AnimatePresence mode="wait">
               <motion.div

@@ -20,9 +20,7 @@ const Footer = () => {
                 <SocialLink icon={FaGithub} href="#" />
                 <SocialLink icon={FaLinkedin} href="https://www.linkedin.com/company/orglookup" />
               </HStack>
-              <Text fontSize="sm" color="gray.600" pt={4} fontStyle="italic">
-                Backed by <strong>PyratzLabs</strong>
-              </Text>
+
             </VStack>
           </GridCol>
 

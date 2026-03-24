@@ -1,6 +1,6 @@
 import { Box, VStack, HStack, Text, Badge, Progress, Divider, Button, Avatar } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiTrash2, FiTool, FiArchive, FiLink, FiAlertTriangle, FiMail, FiHardDrive, FiCheck, FiX, FiUserPlus, FiClock, FiCalendar, FiPlay, FiFileText } from 'react-icons/fi'
+import { Trash2, Wrench, Archive, Link, AlertTriangle, Mail, HardDrive, Check, X, UserPlus, Clock, Calendar, Play, FileText } from 'lucide-react';
 
 interface ExecutionTask {
   id: string
@@ -58,15 +58,15 @@ const mockTasks: ExecutionTask[] = [
 
 const getTaskIcon = (type: string) => {
   switch (type) {
-    case 'delete': return <FiTrash2 size={20} />
-    case 'refactor': return <FiTool size={20} />
-    case 'archive': return <FiArchive size={20} />
-    case 'update-ref': return <FiLink size={20} />
-    case 'deprecate': return <FiAlertTriangle size={20} />
-    case 'notify': return <FiMail size={20} />
-    case 'backup': return <FiHardDrive size={20} />
-    case 'test': return <FiFileText size={20} />
-    default: return <FiFileText size={20} />
+    case 'delete': return <Trash2 size={20} />
+    case 'refactor': return <Wrench size={20} />
+    case 'archive': return <Archive size={20} />
+    case 'update-ref': return <Link size={20} />
+    case 'deprecate': return <AlertTriangle size={20} />
+    case 'notify': return <Mail size={20} />
+    case 'backup': return <HardDrive size={20} />
+    case 'test': return <FileText size={20} />
+    default: return <FileText size={20} />
   }
 }
 
@@ -229,7 +229,7 @@ const SafeExecution = () => {
                           )}
                           {task.dueDate && (
                             <HStack color="gray.500">
-                              <FiClock size={14} />
+                              <Clock size={14} />
                               <Text>Due: {task.dueDate}</Text>
                             </HStack>
                           )}
@@ -242,7 +242,7 @@ const SafeExecution = () => {
                               size="sm" 
                               variant="outline" 
                               colorScheme="red"
-                              leftIcon={<FiX />}
+                              leftIcon={<X />}
                             >
                               Reject
                             </Button>
@@ -250,14 +250,14 @@ const SafeExecution = () => {
                               size="sm" 
                               variant="outline" 
                               colorScheme="blue"
-                              leftIcon={<FiUserPlus />}
+                              leftIcon={<UserPlus />}
                             >
                               Assign
                             </Button>
                             <Button 
                               size="sm" 
                               colorScheme="green"
-                              leftIcon={<FiCheck />}
+                              leftIcon={<Check />}
                             >
                               Approve
                             </Button>
@@ -373,21 +373,21 @@ const SafeExecution = () => {
               <Button 
                 size="md" 
                 variant="outline"
-                leftIcon={<FiCalendar />}
+                leftIcon={<Calendar />}
               >
                 Schedule Execution
               </Button>
               <Button 
                 size="md" 
                 colorScheme="green"
-                leftIcon={<FiPlay />}
+                leftIcon={<Play />}
               >
                 Execute Now
               </Button>
               <Button 
                 size="md" 
                 variant="ghost"
-                leftIcon={<FiFileText />}
+                leftIcon={<FileText />}
               >
                 Export Plan
               </Button>

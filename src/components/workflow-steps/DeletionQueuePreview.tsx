@@ -1,6 +1,6 @@
 import { Box, VStack, HStack, Text, Icon } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiBarChart2, FiLink, FiGlobe } from 'react-icons/fi'
+import { BarChart2, Link, Globe } from 'lucide-react';
 
 const DeletionQueuePreview = () => {
   const items = [
@@ -14,7 +14,7 @@ const DeletionQueuePreview = () => {
     <Box
       bg="white"
       w="100%"
-      h="380px"
+      h="100%"
       display="flex"
       flexDirection="column"
     >
@@ -28,9 +28,9 @@ const DeletionQueuePreview = () => {
       {/* Summary */}
       <HStack spacing={3} p={4} bg="gray.50" borderBottom="1px solid" borderColor="gray.100">
         {[
-          { label: 'Step 1', count: 12, icon: FiBarChart2 },
-          { label: 'Step 2', count: 5, icon: FiLink },
-          { label: 'Step 3', count: 2, icon: FiGlobe },
+          { label: 'Step 1', count: 12, icon: BarChart2 },
+          { label: 'Step 2', count: 5, icon: Link },
+          { label: 'Step 3', count: 2, icon: Globe },
         ].map((item, index) => (
           <motion.div
             key={item.label}

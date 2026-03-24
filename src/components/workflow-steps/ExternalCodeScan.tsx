@@ -1,6 +1,6 @@
 import { Box, VStack, HStack, Text, Badge, Alert, AlertIcon, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiGithub, FiRefreshCw } from 'react-icons/fi'
+import { GitBranch as Github, RefreshCw } from 'lucide-react';
 
 interface ExternalNode {
   id: string
@@ -89,7 +89,7 @@ const ExternalCodeScan = () => {
             </VStack>
             <HStack spacing={3}>
               <HStack bg="whiteAlpha.200" px={3} py={1} borderRadius="full">
-                <FiGithub color="white" />
+                <Github color="white" />
                 <Text color="white" fontSize="sm">Connected</Text>
                 <Box w={2} h={2} bg="green.400" borderRadius="full" />
               </HStack>
@@ -107,7 +107,7 @@ const ExternalCodeScan = () => {
           <HStack justify="space-between">
             <HStack spacing={4}>
               <HStack spacing={2}>
-                <FiGithub />
+                <Github />
                 <Text fontSize="sm" fontWeight="medium">frontend-leads</Text>
                 <Badge colorScheme="green" size="sm">main</Badge>
               </HStack>
@@ -119,7 +119,7 @@ const ExternalCodeScan = () => {
             </HStack>
             <HStack spacing={2}>
               <Text fontSize="xs" color="gray.500">Last scan: 2 hours ago</Text>
-              <Button size="xs" leftIcon={<FiRefreshCw />} variant="ghost">
+              <Button size="xs" leftIcon={<RefreshCw />} variant="ghost">
                 Refresh
               </Button>
             </HStack>

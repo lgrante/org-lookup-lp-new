@@ -1,422 +1,246 @@
+import { useState } from 'react'
 import {
   Box,
   Heading,
   Text,
   VStack,
-  Grid,
-  GridItem,
   HStack,
-  Divider,
-  Icon
+  Icon,
+  Button
 } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-import { 
-  FiClock, 
-  FiZap, 
-  FiSearch, 
-  FiGitBranch, 
-  FiLink, 
-  FiShield, 
-  FiFileText,
-  FiList,
-  FiEye,
-  FiCheckCircle
-} from 'react-icons/fi'
-import { IconType } from 'react-icons'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Clock, Zap, Search, GitBranch, Link, Shield, FileText, List, Eye, CheckCircle } from 'lucide-react';
+import { LucideIcon } from 'lucide-react'
 import LayoutContainer from './LayoutContainer'
-import { fadeIn, centerScale } from '../utils/animations'
+import { fadeIn } from '../utils/animations'
 
 interface ProcessStep {
-  icon: IconType
+  icon: LucideIcon
   text: string
 }
 
 const DeletionPlan = () => {
+  const [isAgentic, setIsAgentic] = useState(false)
+
   const manualProcess: ProcessStep[] = [
-    { icon: FiSearch, text: "Manually <strong>hunt for unused or ambiguous metadata</strong> that could cause AI agent hallucinations" },
-    { icon: FiLink, text: "<strong>Audit automation paths one by one</strong> to spot CPU bottlenecks before they crash Agentforce" },
-    { icon: FiShield, text: "<strong>Review permission sets manually</strong> to prevent over-privileged AI agents from leaking data" },
-    { icon: FiGitBranch, text: "<strong>Search Git repos and external apps</strong> for legacy references and undocumented integrations" },
-    { icon: FiFileText, text: "<strong>Document everything in spreadsheets</strong> — no rollback if something breaks" }
+    { icon: Search, text: "Manually hunt for unused or ambiguous metadata that could cause AI agent hallucinations" },
+    { icon: Link, text: "Audit automation paths one by one to spot CPU bottlenecks before they crash Agentforce" },
+    { icon: Shield, text: "Review permission sets manually to prevent over-privileged AI agents from leaking data" },
+    { icon: GitBranch, text: "Search Git repos and external apps for legacy references and undocumented integrations" },
+    { icon: FileText, text: "Document everything in spreadsheets — no rollback if something breaks" }
   ]
 
   const orgLookupProcess: ProcessStep[] = [
-    { icon: FiList, text: "<strong>Get your Agentic Readiness Score instantly</strong> — know what's blocking Agentforce deployment" },
-    { icon: FiEye, text: "<strong>Visualize the full dependency graph</strong>: metadata, automation, security & integration debt in one view" },
-    { icon: FiGitBranch, text: "<strong>Auto-detect external references</strong> in GitHub/GitLab/Bitbucket and connected systems" },
-    { icon: FiShield, text: "<strong>AI suggests logical cleanup packs</strong> — no one-by-one selection, grouped by project or risk" },
-    { icon: FiCheckCircle, text: "<strong>Execute with built-in rollback</strong>: snapshot before every step, restore anything instantly" }
+    { icon: List, text: "Get your Agentic Readiness Score instantly — know what's blocking Agentforce deployment" },
+    { icon: Eye, text: "Visualize the full dependency graph: metadata, automation, security & integration debt in one view" },
+    { icon: GitBranch, text: "Auto-detect external references in GitHub/GitLab/Bitbucket and connected systems" },
+    { icon: Shield, text: "AI suggests logical cleanup packs — no one-by-one selection, grouped by project or risk" },
+    { icon: CheckCircle, text: "Execute with built-in rollback: snapshot before every step, restore anything instantly" }
   ]
 
-  // Animation pour la colonne Manual (apparaît en premier)
-  const columnFromLeftDelayed = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-        delay: 0.2
-      }
-    }
-  }
-
-  // Animation pour la colonne OrgLookup (apparaît après Manual)
-  const columnFromRightDelayed = {
-    hidden: { opacity: 0, x: 50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-        delay: 0.6 // Délai plus long pour effet séquentiel
-      }
-    }
-  }
-
-  // Animation stagger pour les items Manual avec strikethrough
-  const staggerContainerManual = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.4
-      }
-    }
-  }
-
-  // Animation stagger pour les items OrgLookup
-  const staggerContainerOrgLookup = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.8 // Apparaît après Manual
-      }
-    }
-  }
-
-  // Item avec strikethrough animé
-  const staggerItemWithStrike = {
-    hidden: { 
-      opacity: 0, 
-      y: 20,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut'
-      }
-    }
-  }
-
-  const staggerItem = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut'
-      }
-    }
-  }
-
   return (
-    <Box as="section" py={20} bg="#f8f9fa">
+    <Box as="section" py={24} bg={isAgentic ? "gray.900" : "#f8f9fa"} transition="background-color 0.5s ease">
       <LayoutContainer>
-        <VStack spacing={20} w="full" mx="auto">
-          {/* Titre */}
+        <VStack spacing={16} w="full" mx="auto" maxW="1000px">
+          {/* Header & Toggle */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, margin: "-100px" }}
+            style={{ width: '100%' }}
           >
-            <VStack spacing={6} textAlign="center">
-              <Heading as="h2" size="3xl" color="var(--color-text-primary)">
-                Manual Governance vs AI-Guided Agentforce Readiness
+            <VStack spacing={10} textAlign="center">
+              <Heading 
+                as="h2" 
+                size="3xl" 
+                color={isAgentic ? "white" : "var(--color-text-primary)"}
+                transition="color 0.5s ease"
+              >
+                Governance for the AI Era
               </Heading>
+              
+              {/* Premium Toggle Switch */}
+              <Box 
+                p={2} 
+                bg={isAgentic ? "whiteAlpha.200" : "gray.200"} 
+                borderRadius="full"
+                position="relative"
+                display="flex"
+                boxShadow={isAgentic ? "0 0 40px rgba(231, 104, 230, 0.2)" : "inner"}
+                transition="all 0.5s ease"
+              >
+                <motion.div
+                  layout
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  style={{
+                    position: "absolute",
+                    top: "8px",
+                    bottom: "8px",
+                    left: isAgentic ? "50%" : "8px",
+                    width: "calc(50% - 8px)",
+                    background: isAgentic ? "linear-gradient(135deg, #e768e6, #ff9b26)" : "white",
+                    borderRadius: "999px",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                    zIndex: 0
+                  }}
+                />
+                
+                <Button
+                  flex={1}
+                  variant="unstyled"
+                  px={8}
+                  py={4}
+                  h="auto"
+                  zIndex={1}
+                  color={isAgentic ? "whiteAlpha.700" : "gray.800"}
+                  fontWeight="bold"
+                  fontSize="lg"
+                  onClick={() => setIsAgentic(false)}
+                  _focus={{ outline: "none" }}
+                >
+                  The Manual Way
+                </Button>
+                
+                <Button
+                  flex={1}
+                  variant="unstyled"
+                  px={8}
+                  py={4}
+                  h="auto"
+                  zIndex={1}
+                  color={isAgentic ? "white" : "gray.500"}
+                  fontWeight="bold"
+                  fontSize="lg"
+                  onClick={() => setIsAgentic(true)}
+                  _focus={{ outline: "none" }}
+                >
+                  The Agentic Way
+                </Button>
+              </Box>
             </VStack>
           </motion.div>
 
-          {/* Grid responsive */}
-          <Grid 
-            templateColumns={{ base: "1fr", lg: "1fr auto 1fr" }} 
-            gap={{ base: 6, lg: 8 }} 
-            w="full" 
-            mx="auto" 
-            alignItems="stretch"
-          >
-            {/* Colonne gauche - Processus manuel */}
-            <GridItem h="full" order={{ base: 1, lg: 1 }}>
-              <motion.div
-                variants={columnFromLeftDelayed}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, margin: "-100px" }}
-                style={{ height: '100%' }}
-              >
-                <Box
-                  bg="var(--color-red-50)"
-                  borderRadius="12px"
-                  border="2px solid"
-                  borderColor="var(--color-red-200)"
-                  p={8}
-                  h="full"
+          {/* Content Area */}
+          <Box w="full" position="relative" minH="500px">
+            <AnimatePresence mode="wait">
+              {!isAgentic ? (
+                <motion.div
+                  key="manual"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
                 >
-                  <VStack spacing={4} align="stretch" h="full">
-                    {/* Header avec icône et titre */}
-                    <VStack spacing={3} align="center">
-                      <HStack justify="center">
-                        <FiClock size={24} color="#DC2626" />
-                      </HStack>
-                      <Heading as="h3" size="lg" color="var(--color-red-600)" textAlign="center">
-                        Manual Process
-                      </Heading>
-                      
-                      {/* Indicateur visuel de temps */}
-                      <Box w="full" mt={2}>
-                        <Box 
-                          h="10px" 
-                          bg="var(--color-red-200)" 
-                          borderRadius="full"
-                          overflow="hidden"
-                        >
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: "100%" }}
-                            transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-                            viewport={{ once: false }}
-                            style={{
-                              height: "100%",
-                              background: "var(--color-red-500)",
-                              borderRadius: "9999px"
-                            }}
-                          />
-                        </Box>
-                        <Text fontSize="sm" mt={2} color="var(--color-red-500)" fontWeight="semibold" textAlign="center">
-                          3-12 months of work
-                        </Text>
-                      </Box>
-                    </VStack>
-
-                    <Divider borderColor="var(--color-red-200)" />
-
-                    {/* Liste des étapes avec strikethrough animé */}
-                    <motion.div
-                      variants={staggerContainerManual}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, margin: "-50px" }}
-                    >
-                      <VStack spacing={3} align="stretch" flex={1}>
-                        {manualProcess.map((item, index) => (
-                          <motion.div 
-                            key={index} 
-                            variants={staggerItemWithStrike}
-                          >
-                            <HStack
-                              spacing={3}
-                              align="flex-start"
-                              p={3}
-                              borderRadius="md"
-                              transition="all 0.2s"
-                              _hover={{ 
-                                bg: "var(--color-red-100)",
-                                transform: "translateX(4px)"
-                              }}
-                              cursor="default"
-                            >
-                              <Icon 
-                                as={item.icon} 
-                                color="var(--color-red-500)" 
-                                boxSize={5} 
-                                mt={1}
-                                flexShrink={0}
-                              />
-                              <motion.div
-                                initial={{ 
-                                  textDecoration: "none",
-                                  opacity: 1 
-                                }}
-                                whileInView={{ 
-                                  textDecoration: "line-through",
-                                  opacity: 0.6
-                                }}
-                                transition={{ 
-                                  duration: 0.5, 
-                                  delay: 1.5 + (index * 0.2) // Strikethrough après apparition
-                                }}
-                                viewport={{ once: false }}
-                                style={{ 
-                                  textDecorationColor: "var(--color-red-400)",
-                                  textDecorationThickness: "2px"
-                                }}
-                              >
-                                <Text 
-                                  fontSize="md" 
-                                  color="var(--color-text-primary)" 
-                                  lineHeight={1.6}
-                                  dangerouslySetInnerHTML={{ __html: item.text }} 
-                                />
-                              </motion.div>
-                            </HStack>
-                          </motion.div>
-                        ))}
-                      </VStack>
-                    </motion.div>
-                  </VStack>
-                </Box>
-              </motion.div>
-            </GridItem>
-
-            {/* Colonne centrale - Badge Savings (caché sur mobile) */}
-            <GridItem 
-              alignSelf="center" 
-              display={{ base: "none", lg: "flex" }}
-              order={{ base: 2, lg: 2 }}
-            >
-              <motion.div
-                variants={centerScale}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, margin: "-100px" }}
-              >
-                <VStack spacing={3}>
-                  <Text
-                    fontSize="4xl"
-                    fontWeight="bold"
-                    color="var(--color-text-secondary)"
-                    textAlign="center"
-                    px={4}
-                  >
-                    VS
-                  </Text>
                   <Box
-                    bg="var(--color-success)"
-                    color="white"
-                    px={4}
-                    py={2}
-                    borderRadius="full"
-                    fontWeight="bold"
-                    fontSize="sm"
-                    textAlign="center"
-                    boxShadow="0 4px 12px rgba(34, 197, 94, 0.3)"
+                    bg="white"
+                    borderRadius="24px"
+                    border="2px solid"
+                    borderColor="red.100"
+                    p={10}
+                    boxShadow="xl"
                   >
-                    Save months
-                  </Box>
-                </VStack>
-              </motion.div>
-            </GridItem>
-
-            {/* Colonne droite - Processus OrgLookup */}
-            <GridItem h="full" order={{ base: 3, lg: 3 }}>
-              <motion.div
-                variants={columnFromRightDelayed}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, margin: "-100px" }}
-                style={{ height: '100%' }}
-              >
-                <Box
-                  bg="var(--color-green-50)"
-                  borderRadius="12px"
-                  border="2px solid"
-                  borderColor="var(--color-green-200)"
-                  p={8}
-                  h="full"
-                >
-                  <VStack spacing={4} align="stretch" h="full">
-                    {/* Header avec icône et titre */}
-                    <VStack spacing={3} align="center">
-                      <HStack justify="center">
-                        <FiZap size={24} color="#059669" />
+                    <VStack spacing={8} align="stretch">
+                      <HStack justify="space-between" align="center" borderBottom="1px solid" borderColor="gray.100" pb={6}>
+                        <HStack spacing={4}>
+                          <Box p={3} bg="red.50" borderRadius="xl">
+                            <Clock size={28} color="#DC2626" />
+                          </Box>
+                          <VStack align="flex-start" spacing={0}>
+                            <Heading size="lg" color="gray.800">Legacy Audit</Heading>
+                            <Text color="red.500" fontWeight="bold">3-12 months of manual work</Text>
+                          </VStack>
+                        </HStack>
                       </HStack>
-                      <Heading as="h3" size="lg" color="var(--color-green-600)" textAlign="center">
-                        OrgLookup Process
-                      </Heading>
-                      
-                      {/* Indicateur visuel de temps */}
-                      <Box w="full" mt={2}>
-                        <Box 
-                          h="10px" 
-                          bg="var(--color-green-200)" 
-                          borderRadius="full"
-                          overflow="hidden"
-                        >
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: "2%" }} // 30 min / 40h ≈ 1.25%
-                            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-                            viewport={{ once: false }}
-                            style={{
-                              height: "100%",
-                              background: "var(--color-green-500)",
-                              borderRadius: "9999px",
-                              minWidth: "10px" // Pour que ce soit visible
-                            }}
-                          />
-                        </Box>
-                        <Text fontSize="sm" mt={2} color="var(--color-green-500)" fontWeight="semibold" textAlign="center">
-                          ~1 week
-                        </Text>
-                      </Box>
-                    </VStack>
 
-                    <Divider borderColor="var(--color-green-200)" />
-
-                    {/* Liste des étapes */}
-                    <motion.div
-                      variants={staggerContainerOrgLookup}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, margin: "-50px" }}
-                    >
-                      <VStack spacing={3} align="stretch" flex={1}>
-                        {orgLookupProcess.map((item, index) => (
-                          <motion.div key={index} variants={staggerItem}>
-                            <HStack
-                              spacing={3}
-                              align="flex-start"
-                              p={3}
-                              borderRadius="md"
-                              transition="all 0.2s"
-                              _hover={{ 
-                                bg: "var(--color-green-100)",
-                                transform: "translateX(4px)"
-                              }}
-                              cursor="default"
-                            >
-                              <Icon 
-                                as={item.icon} 
-                                color="var(--color-green-500)" 
-                                boxSize={5} 
-                                mt={1}
-                                flexShrink={0}
-                              />
-                              <Text 
-                                fontSize="md" 
-                                color="var(--color-text-primary)" 
-                                lineHeight={1.6}
-                                dangerouslySetInnerHTML={{ __html: item.text }} 
-                              />
-                            </HStack>
-                          </motion.div>
+                      <VStack spacing={5} align="stretch" py={4}>
+                        {manualProcess.map((item, index) => (
+                          <HStack
+                            key={index}
+                            spacing={5}
+                            p={4}
+                            borderRadius="lg"
+                            bg="gray.50"
+                            border="1px solid"
+                            borderColor="gray.100"
+                            opacity={0.8}
+                          >
+                            <Icon as={item.icon} color="gray.500" boxSize={6} />
+                            <Text fontSize="lg" color="gray.600" lineHeight={1.6} dangerouslySetInnerHTML={{ __html: item.text }} />
+                          </HStack>
                         ))}
                       </VStack>
-                    </motion.div>
-                  </VStack>
-                </Box>
-              </motion.div>
-            </GridItem>
-          </Grid>
+                    </VStack>
+                  </Box>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="agentic"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <Box
+                    bg="gray.800"
+                    borderRadius="24px"
+                    border="1px solid"
+                    borderColor="whiteAlpha.200"
+                    p={10}
+                    boxShadow="0 20px 50px rgba(0,0,0,0.5)"
+                    position="relative"
+                    overflow="hidden"
+                  >
+                    {/* Glowing effect inside card */}
+                    <Box 
+                      position="absolute"
+                      top="-20%"
+                      right="-10%"
+                      w="300px"
+                      h="300px"
+                      bg="#e768e6"
+                      filter="blur(150px)"
+                      opacity={0.15}
+                      borderRadius="full"
+                    />
+
+                    <VStack spacing={8} align="stretch" position="relative" zIndex={1}>
+                      <HStack justify="space-between" align="center" borderBottom="1px solid" borderColor="whiteAlpha.100" pb={6}>
+                        <HStack spacing={4}>
+                          <Box p={3} bg="whiteAlpha.100" borderRadius="xl" border="1px solid" borderColor="whiteAlpha.200">
+                            <Zap size={28} color="#ff9b26" />
+                          </Box>
+                          <VStack align="flex-start" spacing={0}>
+                            <Heading size="lg" color="white">OrgLookup Platform</Heading>
+                            <Text bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text" fontWeight="bold">Ready in ~1 week</Text>
+                          </VStack>
+                        </HStack>
+                      </HStack>
+
+                      <VStack spacing={5} align="stretch" py={4}>
+                        {orgLookupProcess.map((item, index) => (
+                          <HStack
+                            key={index}
+                            spacing={5}
+                            p={4}
+                            borderRadius="lg"
+                            bg="whiteAlpha.50"
+                            border="1px solid"
+                            borderColor="whiteAlpha.100"
+                            _hover={{ bg: 'whiteAlpha.100', borderColor: 'whiteAlpha.300', transform: 'translateX(5px)' }}
+                            transition="all 0.3s ease"
+                          >
+                            <Icon as={item.icon} color="#e768e6" boxSize={6} />
+                            <Text fontSize="lg" color="gray.300" lineHeight={1.6} dangerouslySetInnerHTML={{ __html: item.text }} />
+                          </HStack>
+                        ))}
+                      </VStack>
+                    </VStack>
+                  </Box>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Box>
         </VStack>
       </LayoutContainer>
     </Box>

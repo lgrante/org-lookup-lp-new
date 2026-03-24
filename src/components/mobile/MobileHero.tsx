@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { WiStars } from 'react-icons/wi'
+import { Sparkles } from 'lucide-react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
-import HeroBackground from '../HeroBackground'
 import { staggerContainer, staggerItem } from '../../utils/animations'
 
 // Import workflow step previews
@@ -69,7 +68,7 @@ const MobileHero = ({ onContactClick }: MobileHeroProps) => {
       px={4}
       overflow="hidden"
     >
-      <HeroBackground />
+
       
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -140,7 +139,7 @@ const MobileHero = ({ onContactClick }: MobileHeroProps) => {
                       display: 'inline',
                     }}
                   >
-                    <WiStars
+                    <Sparkles
                       size={24}
                       style={{
                         display: 'inline-block',

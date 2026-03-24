@@ -1,279 +1,240 @@
+import { useState } from 'react'
 import {
   Box,
   Heading,
   Text,
   VStack,
   HStack,
-  Divider,
-  Icon
+  Icon,
+  Button
 } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-import { 
-  FiClock, 
-  FiZap, 
-  FiSearch, 
-  FiGitBranch, 
-  FiLink, 
-  FiShield, 
-  FiFileText,
-  FiList,
-  FiEye,
-  FiCheckCircle
-} from 'react-icons/fi'
-import { IconType } from 'react-icons'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Clock, Zap, Search, GitBranch, Link, Shield, FileText, List, Eye, CheckCircle } from 'lucide-react';
+import { LucideIcon } from 'lucide-react'
 import LayoutContainer from '../LayoutContainer'
 import { fadeIn } from '../../utils/animations'
 
 interface ProcessStep {
-  icon: IconType
+  icon: LucideIcon
   text: string
 }
 
 const MobileDeletionPlan = () => {
+  const [isAgentic, setIsAgentic] = useState(false)
+
   const manualProcess: ProcessStep[] = [
-    { icon: FiSearch, text: "Manually hunt for AI-hallucination risks" },
-    { icon: FiLink, text: "Check field references one by one" },
-    { icon: FiGitBranch, text: "Search Git repos for dependencies" },
-    { icon: FiShield, text: "Cross-check permissions for AI leak" },
-    { icon: FiFileText, text: "Document findings in spreadsheets" }
+    { icon: Search, text: "Manually hunt for AI-hallucination risks" },
+    { icon: Link, text: "Check field references one by one" },
+    { icon: Shield, text: "Cross-check permissions for AI leak" },
+    { icon: GitBranch, text: "Search Git repos for dependencies" },
+    { icon: FileText, text: "Document findings in spreadsheets" }
   ]
 
   const orgLookupProcess: ProcessStep[] = [
-    { icon: FiList, text: "Get your Agentic Readiness Score" },
-    { icon: FiEye, text: "Visualize the full dependency graph" },
-    { icon: FiGitBranch, text: "Sentinel active monitoring (no Shield)" },
-    { icon: FiShield, text: "Cluster items into Smart Cleanup Packs" },
-    { icon: FiCheckCircle, text: "Generate surgical deletion plans" }
+    { icon: List, text: "Get your Agentic Readiness Score" },
+    { icon: Eye, text: "Visualize the full dependency graph" },
+    { icon: GitBranch, text: "Sentinel active monitoring (no Shield)" },
+    { icon: Shield, text: "Cluster items into Smart Cleanup Packs" },
+    { icon: CheckCircle, text: "Generate surgical deletion plans" }
   ]
 
-  const columnVariant = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut'
-      }
-    }
-  }
-
   return (
-    <Box as="section" py="60px" bg="#f8f9fa">
+    <Box as="section" py={16} bg={isAgentic ? "gray.900" : "#f8f9fa"} transition="background-color 0.5s ease">
       <LayoutContainer>
-        <VStack spacing={6} w="full" px={4}>
-          {/* Title */}
+        <VStack spacing={8} w="full" px={4} mx="auto">
+          {/* Header & Toggle */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, margin: "-50px" }}
-          >
-            <VStack spacing={2} textAlign="center">
-              <Heading as="h2" fontSize="xl" color="var(--color-text-primary)">
-                Agentforce Readiness vs Manual Audit
-              </Heading>
-            </VStack>
-          </motion.div>
-
-          {/* Manual Process Card */}
-          <motion.div
-            variants={columnVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, margin: "-30px" }}
             style={{ width: '100%' }}
           >
-            <Box
-              bg="var(--color-red-50)"
-              borderRadius="12px"
-              border="2px solid"
-              borderColor="var(--color-red-200)"
-              p={5}
-            >
-              <VStack spacing={4} align="stretch">
-                {/* Header */}
-                <VStack spacing={2} align="center">
-                  <HStack justify="center">
-                    <FiClock size={20} color="#DC2626" />
-                  </HStack>
-                  <Heading as="h3" fontSize="lg" color="var(--color-red-600)" textAlign="center">
-                    Manual Process
-                  </Heading>
-                  
-                  {/* Progress bar */}
-                  <Box w="full" mt={2}>
-                    <Box 
-                      h="8px" 
-                      bg="var(--color-red-200)" 
-                      borderRadius="full"
-                      overflow="hidden"
-                    >
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "100%" }}
-                        transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-                        viewport={{ once: false }}
-                        style={{
-                          height: "100%",
-                          background: "var(--color-red-500)",
-                          borderRadius: "9999px"
-                        }}
-                      />
-                    </Box>
-                    <Text fontSize="xs" mt={1} color="var(--color-red-500)" fontWeight="semibold" textAlign="center">
-                      3-12 months of work
-                    </Text>
-                  </Box>
-                </VStack>
-
-                <Divider borderColor="var(--color-red-200)" />
-
-                {/* Steps */}
-                <VStack spacing={2} align="stretch">
-                  {manualProcess.map((item, index) => (
-                    <HStack
-                      key={index}
-                      spacing={3}
-                      align="center"
-                      p={2}
-                      borderRadius="md"
-                    >
-                      <Icon 
-                        as={item.icon} 
-                        color="var(--color-red-500)" 
-                        boxSize={4} 
-                        flexShrink={0}
-                      />
-                      <Text 
-                        fontSize="sm" 
-                        color="var(--color-text-primary)" 
-                        lineHeight={1.4}
-                        textDecoration="line-through"
-                        opacity={0.6}
-                      >
-                        {item.text}
-                      </Text>
-                    </HStack>
-                  ))}
-                </VStack>
-              </VStack>
-            </Box>
-          </motion.div>
-
-          {/* VS Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            viewport={{ once: false }}
-          >
-            <VStack spacing={2}>
-              <Text
-                fontSize="2xl"
-                fontWeight="bold"
-                color="var(--color-text-secondary)"
+            <VStack spacing={6} textAlign="center">
+              <Heading 
+                as="h2" 
+                fontSize="2xl" 
+                color={isAgentic ? "white" : "var(--color-text-primary)"}
+                transition="color 0.5s ease"
               >
-                VS
-              </Text>
-              <Box
-                bg="var(--color-success)"
-                color="white"
-                px={4}
-                py={1.5}
+                Governance for the AI Era
+              </Heading>
+              
+              {/* Premium Toggle Switch - Mobile Optimized */}
+              <Box 
+                p={1.5} 
+                bg={isAgentic ? "whiteAlpha.200" : "gray.200"} 
                 borderRadius="full"
-                fontWeight="bold"
-                fontSize="sm"
-                boxShadow="0 4px 12px rgba(34, 197, 94, 0.3)"
+                position="relative"
+                display="flex"
+                w="full"
+                boxShadow={isAgentic ? "0 0 30px rgba(231, 104, 230, 0.2)" : "inner"}
+                transition="all 0.5s ease"
               >
-                Save months
+                <motion.div
+                  layout
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  style={{
+                    position: "absolute",
+                    top: "6px",
+                    bottom: "6px",
+                    left: isAgentic ? "50%" : "6px",
+                    width: "calc(50% - 6px)",
+                    background: isAgentic ? "linear-gradient(135deg, #e768e6, #ff9b26)" : "white",
+                    borderRadius: "999px",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                    zIndex: 0
+                  }}
+                />
+                
+                <Button
+                  flex={1}
+                  variant="unstyled"
+                  px={2}
+                  py={3}
+                  h="auto"
+                  zIndex={1}
+                  color={isAgentic ? "whiteAlpha.700" : "gray.800"}
+                  fontWeight="bold"
+                  fontSize="sm"
+                  onClick={() => setIsAgentic(false)}
+                  _focus={{ outline: "none" }}
+                >
+                  Manual Way
+                </Button>
+                
+                <Button
+                  flex={1}
+                  variant="unstyled"
+                  px={2}
+                  py={3}
+                  h="auto"
+                  zIndex={1}
+                  color={isAgentic ? "white" : "gray.500"}
+                  fontWeight="bold"
+                  fontSize="sm"
+                  onClick={() => setIsAgentic(true)}
+                  _focus={{ outline: "none" }}
+                >
+                  Agentic Way
+                </Button>
               </Box>
             </VStack>
           </motion.div>
 
-          {/* OrgLookup Process Card */}
-          <motion.div
-            variants={columnVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, margin: "-30px" }}
-            style={{ width: '100%' }}
-          >
-            <Box
-              bg="var(--color-green-50)"
-              borderRadius="12px"
-              border="2px solid"
-              borderColor="var(--color-green-200)"
-              p={5}
-            >
-              <VStack spacing={4} align="stretch">
-                {/* Header */}
-                <VStack spacing={2} align="center">
-                  <HStack justify="center">
-                    <FiZap size={20} color="#059669" />
-                  </HStack>
-                  <Heading as="h3" fontSize="lg" color="var(--color-green-600)" textAlign="center">
-                    OrgLookup Process
-                  </Heading>
-                  
-                  {/* Progress bar */}
-                  <Box w="full" mt={2}>
-                    <Box 
-                      h="8px" 
-                      bg="var(--color-green-200)" 
-                      borderRadius="full"
-                      overflow="hidden"
-                    >
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "2%" }}
-                        transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-                        viewport={{ once: false }}
-                        style={{
-                          height: "100%",
-                          background: "var(--color-green-500)",
-                          borderRadius: "9999px",
-                          minWidth: "8px"
-                        }}
-                      />
-                    </Box>
-                    <Text fontSize="xs" mt={1} color="var(--color-green-500)" fontWeight="semibold" textAlign="center">
-                      ~1 week
-                    </Text>
+          {/* Content Area */}
+          <Box w="full" position="relative" minH="450px">
+            <AnimatePresence mode="wait">
+              {!isAgentic ? (
+                <motion.div
+                  key="manual"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Box
+                    bg="white"
+                    borderRadius="20px"
+                    border="2px solid"
+                    borderColor="red.100"
+                    p={6}
+                    boxShadow="md"
+                  >
+                    <VStack spacing={6} align="stretch">
+                      <VStack align="center" spacing={2} borderBottom="1px solid" borderColor="gray.100" pb={4}>
+                        <Box p={3} bg="red.50" borderRadius="xl">
+                          <Clock size={24} color="#DC2626" />
+                        </Box>
+                        <Heading size="md" color="gray.800">Legacy Audit</Heading>
+                        <Text color="red.500" fontWeight="bold" fontSize="sm">3-12 months of manual work</Text>
+                      </VStack>
+
+                      <VStack spacing={3} align="stretch" py={2}>
+                        {manualProcess.map((item, index) => (
+                          <HStack
+                            key={index}
+                            spacing={4}
+                            p={3}
+                            borderRadius="lg"
+                            bg="gray.50"
+                            border="1px solid"
+                            borderColor="gray.100"
+                          >
+                            <Icon as={item.icon} color="gray.500" boxSize={5} />
+                            <Text fontSize="sm" color="gray.600" lineHeight={1.4}>
+                              {item.text}
+                            </Text>
+                          </HStack>
+                        ))}
+                      </VStack>
+                    </VStack>
                   </Box>
-                </VStack>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="agentic"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Box
+                    bg="gray.800"
+                    borderRadius="20px"
+                    border="1px solid"
+                    borderColor="whiteAlpha.200"
+                    p={6}
+                    boxShadow="0 10px 40px rgba(0,0,0,0.5)"
+                    position="relative"
+                    overflow="hidden"
+                  >
+                    {/* Glowing effect inside card */}
+                    <Box 
+                      position="absolute"
+                      top="-20%"
+                      right="-10%"
+                      w="200px"
+                      h="200px"
+                      bg="#e768e6"
+                      filter="blur(100px)"
+                      opacity={0.15}
+                      borderRadius="full"
+                    />
 
-                <Divider borderColor="var(--color-green-200)" />
+                    <VStack spacing={6} align="stretch" position="relative" zIndex={1}>
+                      <VStack align="center" spacing={2} borderBottom="1px solid" borderColor="whiteAlpha.100" pb={4}>
+                        <Box p={3} bg="whiteAlpha.100" borderRadius="xl" border="1px solid" borderColor="whiteAlpha.200">
+                          <Zap size={24} color="#ff9b26" />
+                        </Box>
+                        <Heading size="md" color="white">OrgLookup Platform</Heading>
+                        <Text bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text" fontWeight="bold" fontSize="sm">Ready in ~1 week</Text>
+                      </VStack>
 
-                {/* Steps */}
-                <VStack spacing={2} align="stretch">
-                  {orgLookupProcess.map((item, index) => (
-                    <HStack
-                      key={index}
-                      spacing={3}
-                      align="center"
-                      p={2}
-                      borderRadius="md"
-                    >
-                      <Icon 
-                        as={item.icon} 
-                        color="var(--color-green-500)" 
-                        boxSize={4} 
-                        flexShrink={0}
-                      />
-                      <Text 
-                        fontSize="sm" 
-                        color="var(--color-text-primary)" 
-                        lineHeight={1.4}
-                      >
-                        {item.text}
-                      </Text>
-                    </HStack>
-                  ))}
-                </VStack>
-              </VStack>
-            </Box>
-          </motion.div>
+                      <VStack spacing={3} align="stretch" py={2}>
+                        {orgLookupProcess.map((item, index) => (
+                          <HStack
+                            key={index}
+                            spacing={4}
+                            p={3}
+                            borderRadius="lg"
+                            bg="whiteAlpha.50"
+                            border="1px solid"
+                            borderColor="whiteAlpha.100"
+                          >
+                            <Icon as={item.icon} color="#e768e6" boxSize={5} />
+                            <Text fontSize="sm" color="gray.300" lineHeight={1.4}>
+                              {item.text}
+                            </Text>
+                          </HStack>
+                        ))}
+                      </VStack>
+                    </VStack>
+                  </Box>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Box>
         </VStack>
       </LayoutContainer>
     </Box>
@@ -281,4 +242,3 @@ const MobileDeletionPlan = () => {
 }
 
 export default MobileDeletionPlan
-

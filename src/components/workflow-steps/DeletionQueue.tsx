@@ -1,6 +1,6 @@
 import { Box, VStack, HStack, Text, Checkbox, Badge, Progress, Input, InputGroup, InputLeftElement, Select, Divider } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiSearch, FiTrash2, FiAlertTriangle, FiCheckCircle } from 'react-icons/fi'
+import { Search, Trash2, AlertTriangle, CheckCircle } from 'lucide-react';
 
 interface QueueItem {
   id: string
@@ -122,7 +122,7 @@ const DeletionQueue = () => {
           <HStack spacing={4}>
             <InputGroup maxW="250px">
               <InputLeftElement pointerEvents="none">
-                <FiSearch color="gray" />
+                <Search color="gray" />
               </InputLeftElement>
               <Input placeholder="Filter by name..." size="sm" />
             </InputGroup>
@@ -184,13 +184,13 @@ const DeletionQueue = () => {
                         </HStack>
                         {item.externalWarning && (
                           <HStack color="orange.500" fontSize="xs">
-                            <FiAlertTriangle />
+                            <AlertTriangle />
                             <Text>{item.externalWarning}</Text>
                           </HStack>
                         )}
                         {item.safeToDelete && !item.externalWarning && (
                           <HStack color="green.500" fontSize="xs">
-                            <FiCheckCircle />
+                            <CheckCircle />
                             <Text>Safe to delete</Text>
                           </HStack>
                         )}
@@ -313,7 +313,7 @@ const DeletionQueue = () => {
                   justifyContent="center"
                   gap={2}
                 >
-                  <FiTrash2 />
+                  <Trash2 />
                   Generate Execution Plan
                 </Box>
               </Box>

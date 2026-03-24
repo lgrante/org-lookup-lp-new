@@ -4,142 +4,153 @@ import {
   Text,
   VStack,
   HStack,
-  Card,
-  CardBody,
-  Icon
+  Icon,
+  SimpleGrid
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import {
-  FiZap,
-  FiEye,
-  FiPackage
-} from 'react-icons/fi'
+import { Zap, Activity, ExternalLink, ShieldCheck } from 'lucide-react';
 import LayoutContainer from '../LayoutContainer'
-import { fadeIn } from '../../utils/animations'
+import { fadeIn, staggerContainer, staggerItem } from '../../utils/animations'
 
 const MobileWhatYouGet = () => {
   const benefits = [
     {
-      icon: FiEye,
+      icon: Activity,
       title: "Your Agentic Readiness Score",
-      description: "Know exactly where your org stands — before deploying AI"
+      description: "Know exactly where your org stands — before deploying a single AI agent.",
+      glowColor: "#e768e6"
     },
     {
-      icon: FiZap,
-      title: "Safe Agentforce Deployment",
-      description: "Zero Hallucination risks from ambiguous or redundant metadata"
+      icon: Zap,
+      title: "Agents That Actually Work",
+      description: "No more hallucinations, CPU timeouts, or data leaks from a messy org architecture.",
+      glowColor: "#ff9b26"
     },
     {
-      icon: FiEye,
-      title: "Zero Blind Spot Visibility",
-      description: "Map every external dependency (SAP, PowerBI, HubSpot)"
+      icon: ExternalLink,
+      title: "Full Cross-System Visibility",
+      description: "A single source of truth spanning Salesforce, Git repositories, and middlewares.",
+      glowColor: "#22c55e"
     },
     {
-      icon: FiPackage,
-      title: "Surgical Deletion & Rollback",
-      description: "Cleanup with confidence — restore any item instantly"
+      icon: ShieldCheck,
+      title: "Safe, Reversible Execution",
+      description: "Deploy Agentforce-readiness changes with built-in instant rollback at every step.",
+      glowColor: "#3b82f6"
     }
   ]
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1
-      }
-    }
-  }
-
-  const cardVariant = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: 'easeOut'
-      }
-    }
-  }
-
   return (
-    <Box as="section" py="60px" bg="#f8f9fa">
+    <Box as="section" py="80px" bg="gray.900" position="relative" overflow="hidden">
+      {/* Background Hologram Glows */}
+      <Box 
+        position="absolute"
+        top="-5%"
+        left="-10%"
+        w="250px"
+        h="250px"
+        bg="#e768e6"
+        filter="blur(100px)"
+        opacity={0.15}
+        borderRadius="full"
+      />
+      <Box 
+        position="absolute"
+        bottom="-5%"
+        right="-10%"
+        w="300px"
+        h="300px"
+        bg="#ff9b26"
+        filter="blur(100px)"
+        opacity={0.1}
+        borderRadius="full"
+      />
+
       <LayoutContainer>
-        <VStack spacing={6} px={4}>
+        <VStack spacing={12} px={4} position="relative" zIndex={1}>
           {/* Header */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-50px" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
-            <VStack spacing={2} textAlign="center">
-              <Heading as="h2" fontSize="xl" color="var(--color-text-primary)">
-                The Agentic Governance Platform
+            <VStack spacing={3} textAlign="center">
+              <Heading as="h2" fontSize="2xl" color="white" fontWeight="bold">
+                Platform Capabilities
               </Heading>
+              <Text color="gray.400" fontSize="md" textAlign="center" maxW="300px">
+                Built exclusively for Salesforce teams.
+              </Text>
             </VStack>
           </motion.div>
 
-          {/* Benefits Cards - Stacked */}
+          {/* Benefits Cards - Dynamic Grid/Stack */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-30px" }}
+            viewport={{ once: true, margin: "-30px" }}
             style={{ width: '100%' }}
           >
-            <VStack spacing={3} w="full">
+            <SimpleGrid columns={1} spacing={4} w="full">
               {benefits.map((benefit, index) => (
-                <motion.div key={index} variants={cardVariant} style={{ width: '100%' }}>
-                  <Card
-                    bg="white"
-                    borderRadius="12px"
+                <motion.div key={index} variants={staggerItem} style={{ width: '100%' }}>
+                  <Box
+                    bg="whiteAlpha.50"
+                    backdropFilter="blur(10px)"
+                    borderRadius="20px"
                     border="1px solid"
-                    borderColor="var(--color-gray-200)"
-                    boxShadow="sm"
-                    w="full"
-                    _hover={{
-                      borderColor: 'var(--color-primary)',
-                      boxShadow: 'md',
-                    }}
-                    transition="all 0.2s"
+                    borderColor="whiteAlpha.200"
+                    p={5}
+                    position="relative"
+                    overflow="hidden"
                   >
-                    <CardBody p={4}>
-                      <HStack spacing={4} align="flex-start">
-                        {/* Icon */}
-                        <Box
-                          bg="var(--color-primary)"
-                          borderRadius="full"
-                          boxSize="40px"
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
-                          flexShrink={0}
-                        >
-                          <Icon
-                            as={benefit.icon}
-                            boxSize={5}
-                            color="white"
-                          />
-                        </Box>
+                    {/* Ambient Glow */}
+                    <Box
+                      position="absolute"
+                      top="-20px"
+                      right="-20px"
+                      width="80px"
+                      height="80px"
+                      background={benefit.glowColor}
+                      filter="blur(30px)"
+                      opacity={0.2}
+                      borderRadius="full"
+                    />
 
-                        {/* Content */}
-                        <VStack spacing={1} align="flex-start" flex={1}>
-                          <Heading as="h3" fontSize="sm" color="var(--color-text-primary)" fontWeight="semibold">
-                            {benefit.title}
-                          </Heading>
-                          <Text color="var(--color-text-secondary)" fontSize="xs" lineHeight={1.4}>
-                            {benefit.description}
-                          </Text>
-                        </VStack>
-                      </HStack>
-                    </CardBody>
-                  </Card>
+                    <HStack spacing={5} align="flex-start" position="relative" zIndex={1}>
+                      {/* Icon */}
+                      <Box
+                        p={2.5}
+                        borderRadius="12px"
+                        bg="whiteAlpha.100"
+                        border="1px solid"
+                        borderColor="whiteAlpha.300"
+                        boxShadow={`0 0 15px ${benefit.glowColor}15`}
+                        flexShrink={0}
+                      >
+                        <Icon
+                          as={benefit.icon}
+                          boxSize={6}
+                          color={benefit.glowColor}
+                        />
+                      </Box>
+
+                      {/* Content */}
+                      <VStack spacing={1.5} align="flex-start" flex={1}>
+                        <Heading as="h3" fontSize="md" color="white" fontWeight="bold">
+                          {benefit.title}
+                        </Heading>
+                        <Text color="gray.400" fontSize="sm" lineHeight={1.5}>
+                          {benefit.description}
+                        </Text>
+                      </VStack>
+                    </HStack>
+                  </Box>
                 </motion.div>
               ))}
-            </VStack>
+            </SimpleGrid>
           </motion.div>
         </VStack>
       </LayoutContainer>

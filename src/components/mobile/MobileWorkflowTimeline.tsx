@@ -176,19 +176,19 @@ const MobileWorkflowTimeline = () => {
                               >
                                 STEP {step.step}
                               </Badge>
-                              <Heading as="h3" fontSize="md" fontWeight="bold" color="gray.800" lineHeight={1.3}>
+                              <Heading as="h3" fontSize="lg" fontWeight="bold" color="gray.800" lineHeight={1.3}>
                                 {step.title}
                               </Heading>
-                              <Text fontSize="sm" fontWeight="bold" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
+                              <Text fontSize="md" fontWeight="bold" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
                                 {step.subtitle}
                               </Text>
                             </VStack>
 
-                            <VStack spacing={2} align="flex-start" w="full">
+                            <VStack spacing={3} align="flex-start" w="full">
                               {step.description.map((item, idx) => (
-                                <HStack key={idx} spacing={3} align="flex-start">
-                                  <Box w="5px" h="5px" borderRadius="full" bg="purple.400" mt="6px" flexShrink={0} />
-                                  <Text fontSize="sm" color="gray.600" lineHeight={1.5} dangerouslySetInnerHTML={{ __html: item }} />
+                                <HStack key={idx} spacing={4} align="flex-start">
+                                  <Box w="6px" h="6px" borderRadius="full" bg="purple.400" mt="6px" flexShrink={0} />
+                                  <Text fontSize="md" color="gray.600" lineHeight={1.5} dangerouslySetInnerHTML={{ __html: item }} />
                                 </HStack>
                               ))}
                             </VStack>

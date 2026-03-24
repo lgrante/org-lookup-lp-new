@@ -74,7 +74,8 @@ const WorkflowTimeline = () => {
   return (
     <Box 
       as="section" 
-      py={20} 
+      pt={20} 
+      pb="40vh"
       width="100%"
       bg="white"
       position="relative"
@@ -85,7 +86,7 @@ const WorkflowTimeline = () => {
         px={{ base: 4, md: 8 }}
         width="100%"
       >
-        <VStack spacing={8} width="100%" mb={20}>
+        <VStack spacing={8} width="100%" mb={10}>
           <motion.div
             variants={fadeIn}
             initial="hidden"
@@ -110,21 +111,24 @@ const WorkflowTimeline = () => {
           display={{ base: "none", lg: "flex" }} 
         >
           {/* Left Column: Scrollable Text (Sticky triggers) */}
-          <Box w="45%" pr={12} pb="30vh">
+          <Box w="45%" pr={12}>
             {steps.map((step, index) => (
               <Box 
                 key={index}
-                h="60vh"
+                h={index === steps.length - 1 ? "auto" : "80vh"}
+                minH={index === steps.length - 1 ? "30vh" : "0"}
                 display="flex"
                 flexDirection="column"
-                justifyContent="center"
+                justifyContent="flex-start"
+                pb={index === steps.length - 1 ? 20 : 0}
+                pt="20vh" // Synchronized with sticky top
               >
                 <motion.div
-                  initial={{ opacity: 0.3 }}
+                  initial={{ opacity: index === 0 ? 1 : 0.3 }}
                   whileInView={{ opacity: 1 }}
                   onViewportEnter={() => setActiveStep(index)}
-                  viewport={{ margin: "-45% 0px -45% 0px", once: false }}
-                  transition={{ duration: 0.5 }}
+                  viewport={{ margin: "-10% 0px -45% 0px", once: false }}
+                  transition={{ duration: 0.4 }}
                 >
                   <VStack align="flex-start" spacing={5} maxW="500px">
                     <Badge 
@@ -138,27 +142,27 @@ const WorkflowTimeline = () => {
                     >
                       Step {step.step} / 5
                     </Badge>
-                    <Heading as="h3" size="xl" color="gray.800" lineHeight={1.2}>
+                    <Heading as="h3" size="2xl" color="gray.800" lineHeight={1.2}>
                       {step.title}
                     </Heading>
-                    <Text fontSize="lg" fontWeight="bold" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
+                    <Text fontSize="xl" fontWeight="bold" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
                       {step.subtitle}
                     </Text>
                     
-                    <VStack align="flex-start" spacing={3} mt={2}>
+                    <VStack align="flex-start" spacing={4} mt={2}>
                       {step.description.map((desc, idx) => (
-                        <HStack key={idx} align="flex-start" spacing={3}>
+                        <HStack key={idx} align="flex-start" spacing={4}>
                           <Box 
-                            w="6px" 
-                            h="6px" 
+                            w="8px" 
+                            h="8px" 
                             borderRadius="full" 
                             bg="purple.500" 
-                            mt="10px"
+                            mt="12px"
                             flexShrink={0}
                           />
                           <Text 
                             color="gray.600" 
-                            fontSize="md" 
+                            fontSize="lg" 
                             lineHeight={1.6}
                             dangerouslySetInnerHTML={{ __html: desc }}
                           />
@@ -178,8 +182,9 @@ const WorkflowTimeline = () => {
             top="20vh" 
             h="auto" 
             display="flex"
-            alignItems="center"
+            alignItems="flex-start" // Alignment fix
             justifyContent="center"
+            pt="20vh" // Match the text pt exactly
           >
             <AnimatePresence mode="wait">
               <motion.div

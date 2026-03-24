@@ -9,33 +9,29 @@ import {
   Icon
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import {
-  FiZap,
-  FiEye,
-  FiPackage
-} from 'react-icons/fi'
+import { Zap, Eye, Package } from 'lucide-react';
 import LayoutContainer from '../LayoutContainer'
 import { fadeIn } from '../../utils/animations'
 
 const MobileWhatYouGet = () => {
   const benefits = [
     {
-      icon: FiEye,
+      icon: Eye,
       title: "Your Agentic Readiness Score",
       description: "Know exactly where your org stands — before deploying AI"
     },
     {
-      icon: FiZap,
+      icon: Zap,
       title: "Safe Agentforce Deployment",
       description: "Zero Hallucination risks from ambiguous or redundant metadata"
     },
     {
-      icon: FiEye,
+      icon: Eye,
       title: "Zero Blind Spot Visibility",
       description: "Map every external dependency (SAP, PowerBI, HubSpot)"
     },
     {
-      icon: FiPackage,
+      icon: Package,
       title: "Surgical Deletion & Rollback",
       description: "Cleanup with confidence — restore any item instantly"
     }

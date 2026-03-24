@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiBox, FiZap, FiGitBranch, FiDatabase, FiCode } from 'react-icons/fi'
-import { IconType } from 'react-icons'
+import { Box as BoxIcon, Zap, GitBranch, Database, Code } from 'lucide-react';
+import { LucideIcon } from 'lucide-react'
 
 interface NodeData {
   id: number
@@ -10,16 +10,16 @@ interface NodeData {
   x: number
   y: number
   color: string
-  icon: IconType
+  icon: LucideIcon
 }
 
 const ImpactAnalysisPreview = () => {
   const nodes: NodeData[] = [
-    { id: 1, label: 'AccountCleanupBatch', type: 'Apex', x: 290, y: 130, color: '#ef4444', icon: FiBox },
-    { id: 2, label: 'ContactTrigger', type: 'Trigger', x: 60, y: 70, color: '#f97316', icon: FiZap },
-    { id: 3, label: 'Old_Lead_Flow', type: 'Flow', x: 540, y: 220, color: '#22c55e', icon: FiGitBranch },
-    { id: 4, label: 'Status_Field__c', type: 'Field', x: 140, y: 240, color: '#eab308', icon: FiDatabase },
-    { id: 5, label: 'Account_Helper', type: 'Apex', x: 500, y: 60, color: '#8b5cf6', icon: FiCode },
+    { id: 1, label: 'AccountCleanupBatch', type: 'Apex', x: 290, y: 130, color: '#ef4444', icon: BoxIcon },
+    { id: 2, label: 'ContactTrigger', type: 'Trigger', x: 60, y: 70, color: '#f97316', icon: Zap },
+    { id: 3, label: 'Old_Lead_Flow', type: 'Flow', x: 540, y: 220, color: '#22c55e', icon: GitBranch },
+    { id: 4, label: 'Status_Field__c', type: 'Field', x: 140, y: 240, color: '#eab308', icon: Database },
+    { id: 5, label: 'Account_Helper', type: 'Apex', x: 500, y: 60, color: '#8b5cf6', icon: Code },
   ]
 
   const edges = [
@@ -36,7 +36,7 @@ const ImpactAnalysisPreview = () => {
     <Box
       bg="white"
       w="100%"
-      h="380px"
+      h="100%"
       display="flex"
       flexDirection="column"
     >

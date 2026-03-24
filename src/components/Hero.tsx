@@ -1,6 +1,6 @@
 import { Box, Button, Heading, Text, VStack, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { WiStars } from 'react-icons/wi'
+import { Sparkles } from 'lucide-react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import HeroAnimationCarousel from './HeroAnimationCarousel'
 import { staggerContainer, staggerItem } from '../utils/animations'
@@ -100,7 +100,7 @@ const Hero = ({ onContactClick }: HeroProps) => {
                           display: 'inline-block',
                         }}
                       >
-                        <WiStars
+                        <Sparkles
                           size={36}
                           style={{
                             display: 'inline-block',

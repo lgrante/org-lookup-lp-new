@@ -9,7 +9,8 @@ import {
   VStack,
   Text,
   Heading,
-  useToast
+  useToast,
+  Badge
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import LayoutContainer from '../LayoutContainer'
@@ -61,8 +62,8 @@ const MobileContactForm = ({ isModal = false, onSuccess }: MobileContactFormProp
       }
 
       toast({
-        title: "Success!",
-        description: "We'll be in touch soon about early access.",
+        title: "Access Requested",
+        description: "Your spot has been reserved. We'll be in touch soon.",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -96,48 +97,56 @@ const MobileContactForm = ({ isModal = false, onSuccess }: MobileContactFormProp
       as="form"
       onSubmit={handleSubmit}
       w="full"
-      bg="var(--color-gray-100)"
-      p={5}
-      borderRadius="12px"
+      bg="whiteAlpha.50"
+      backdropFilter="blur(10px)"
+      p={6}
+      borderRadius="20px"
       border="1px solid"
-      borderColor="var(--color-gray-200)"
+      borderColor="whiteAlpha.200"
+      boxShadow="0 20px 40px rgba(0,0,0,0.6)"
+      position="relative"
+      overflow="hidden"
     >
-      <VStack spacing={4}>
+      <Box
+        position="absolute"
+        top="-30%"
+        left="-30%"
+        w="160%"
+        h="160%"
+        bg="radial-gradient(circle, rgba(231,104,230,0.06) 0%, transparent 40%)"
+        pointerEvents="none"
+      />
+
+      <VStack spacing={5} position="relative" zIndex={1}>
         <FormControl isRequired>
-          <FormLabel
-            htmlFor="email"
-            color="var(--color-text-primary)"
-            fontWeight="medium"
-            fontSize="sm"
-          >
-            Email
+          <FormLabel htmlFor="email" color="gray.300" fontWeight="medium" fontSize="sm">
+            Work Email
           </FormLabel>
           <Input
             id="email"
             type="email"
             value={formData.email}
             onChange={handleInputChange('email')}
-            placeholder="your.email@company.com"
-            bg="white"
+            placeholder="admin@enterprise.com"
+            bg="whiteAlpha.50"
             border="1px solid"
-            borderColor="var(--color-gray-300)"
+            borderColor="whiteAlpha.200"
+            color="white"
+            _placeholder={{ color: "gray.600" }}
             _focus={{
-              borderColor: 'var(--color-primary)',
-              boxShadow: '0 0 0 1px var(--color-primary)'
+              borderColor: '#e768e6',
+              boxShadow: '0 0 0 1px #e768e6',
+              bg: "whiteAlpha.100"
             }}
             size="lg"
+            h="52px"
             fontSize="md"
-            h="48px"
+            borderRadius="10px"
           />
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel
-            htmlFor="companyName"
-            color="var(--color-text-primary)"
-            fontWeight="medium"
-            fontSize="sm"
-          >
+          <FormLabel htmlFor="companyName" color="gray.300" fontWeight="medium" fontSize="sm">
             Company Name
           </FormLabel>
           <Input
@@ -145,28 +154,27 @@ const MobileContactForm = ({ isModal = false, onSuccess }: MobileContactFormProp
             type="text"
             value={formData.companyName}
             onChange={handleInputChange('companyName')}
-            placeholder="Your Company"
-            bg="white"
+            placeholder="Acme Corp"
+            bg="whiteAlpha.50"
             border="1px solid"
-            borderColor="var(--color-gray-300)"
+            borderColor="whiteAlpha.200"
+            color="white"
+            _placeholder={{ color: "gray.600" }}
             _focus={{
-              borderColor: 'var(--color-primary)',
-              boxShadow: '0 0 0 1px var(--color-primary)'
+              borderColor: '#e768e6',
+              boxShadow: '0 0 0 1px #e768e6',
+              bg: "whiteAlpha.100"
             }}
             size="lg"
+            h="52px"
             fontSize="md"
-            h="48px"
+            borderRadius="10px"
           />
         </FormControl>
 
         <FormControl>
-          <FormLabel
-            htmlFor="phone"
-            color="var(--color-text-primary)"
-            fontWeight="medium"
-            fontSize="sm"
-          >
-            Phone Number (Optional)
+          <FormLabel htmlFor="phone" color="gray.300" fontWeight="medium" fontSize="sm">
+            Phone Number <Box as="span" color="gray.500">(Optional)</Box>
           </FormLabel>
           <Input
             id="phone"
@@ -174,67 +182,75 @@ const MobileContactForm = ({ isModal = false, onSuccess }: MobileContactFormProp
             value={formData.phone}
             onChange={handleInputChange('phone')}
             placeholder="+1 (555) 000-0000"
-            bg="white"
+            bg="whiteAlpha.50"
             border="1px solid"
-            borderColor="var(--color-gray-300)"
+            borderColor="whiteAlpha.200"
+            color="white"
+            _placeholder={{ color: "gray.600" }}
             _focus={{
-              borderColor: 'var(--color-primary)',
-              boxShadow: '0 0 0 1px var(--color-primary)'
+              borderColor: '#e768e6',
+              boxShadow: '0 0 0 1px #e768e6',
+              bg: "whiteAlpha.100"
             }}
             size="lg"
+            h="52px"
             fontSize="md"
-            h="48px"
+            borderRadius="10px"
           />
         </FormControl>
 
         <FormControl>
-          <FormLabel
-            htmlFor="challenge"
-            color="var(--color-text-primary)"
-            fontWeight="medium"
-            fontSize="sm"
-          >
-            What is your biggest challenge with technical debt in Salesforce?
+          <FormLabel htmlFor="challenge" color="gray.300" fontWeight="medium" fontSize="sm">
+            Biggest challenge with tech debt?
           </FormLabel>
           <Textarea
             id="challenge"
             value={formData.challenge}
             onChange={handleInputChange('challenge')}
-            placeholder="Tell us about your biggest technical debt challenge..."
-            bg="white"
+            placeholder="Tell us about your bottlenecks..."
+            bg="whiteAlpha.50"
             border="1px solid"
-            borderColor="var(--color-gray-300)"
+            borderColor="whiteAlpha.200"
+            color="white"
+            _placeholder={{ color: "gray.600" }}
             _focus={{
-              borderColor: 'var(--color-primary)',
-              boxShadow: '0 0 0 1px var(--color-primary)'
+              borderColor: '#e768e6',
+              boxShadow: '0 0 0 1px #e768e6',
+              bg: "whiteAlpha.100"
             }}
             fontSize="md"
             rows={3}
             resize="vertical"
+            borderRadius="10px"
           />
         </FormControl>
 
-        <Button
-          type="submit"
-          size="lg"
-          variant="solid"
-          bg="var(--color-primary)"
-          _hover={{ bg: 'var(--color-primary-hover)' }}
-          _active={{ transform: 'scale(0.98)' }}
-          color="white"
-          w="full"
-          fontSize="md"
-          fontWeight="bold"
-          h="52px"
-          borderRadius="full"
-          isLoading={isSubmitting}
-          loadingText="Submitting..."
-        >
-          Join Beta
-        </Button>
+        <Box w="full" pt={2}>
+          <Button
+            type="submit"
+            size="lg"
+            variant="solid"
+            bgGradient="linear(to-r, #e768e6, #ff9b26)"
+            _hover={{ 
+              bgGradient: "linear(to-r, #d958d8, #e0871f)",
+              boxShadow: "0 0 20px rgba(231,104,230,0.5)"
+            }}
+            _active={{ transform: 'scale(0.98)' }}
+            color="white"
+            w="full"
+            fontSize="md"
+            fontWeight="bold"
+            h="56px"
+            borderRadius="full"
+            isLoading={isSubmitting}
+            loadingText="Securing spot..."
+          >
+            Request Private Beta
+          </Button>
+        </Box>
 
-        <Text fontSize="xs" color="var(--color-text-secondary)" textAlign="center">
-          We respect your privacy and will never share your information.
+        <Text fontSize="xs" color="gray.500" textAlign="center">
+          Enterprise-grade privacy. Data never shared.
         </Text>
       </VStack>
     </Box>
@@ -245,29 +261,31 @@ const MobileContactForm = ({ isModal = false, onSuccess }: MobileContactFormProp
   }
 
   return (
-    <Box as="section" py="60px" id="contact-form">
+    <Box as="section" py={16} bg="gray.900" id="contact-form">
       <LayoutContainer>
-        <VStack spacing={6} px={4}>
-          {/* Header */}
+        <VStack spacing={8} px={4}>
           <motion.div
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-50px" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
-            <VStack spacing={3} textAlign="center">
-              <Heading as="h2" fontSize="xl" color="var(--color-text-primary)" lineHeight={1.3}>
-                Early Access Beta — Help Shape How Salesforce Teams Tackle Technical Debt
+            <VStack spacing={5} textAlign="center">
+
+              <Heading as="h2" fontSize="2xl" color="white" lineHeight={1.3}>
+                Help Shape How Salesforce Teams Tackle Technical Debt
               </Heading>
+              <Text color="gray.400" fontSize="md">
+                Join the exclusive group of teams preparing for Agentforce.
+              </Text>
             </VStack>
           </motion.div>
 
-          {/* Form */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-30px" }}
+            viewport={{ once: true, margin: "-30px" }}
             style={{ width: '100%' }}
           >
             {FormContent}
@@ -279,4 +297,3 @@ const MobileContactForm = ({ isModal = false, onSuccess }: MobileContactFormProp
 }
 
 export default MobileContactForm
-

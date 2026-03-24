@@ -1,20 +1,20 @@
 import { Box, VStack, HStack, Text, Icon } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiTrash2, FiSettings, FiDatabase, FiMail, FiCheckCircle, FiCheck, FiClock } from 'react-icons/fi'
+import { Trash2, Settings, Database, Mail, CheckCircle, Check, Clock } from 'lucide-react';
 
 const SafeExecutionPreview = () => {
   const tasks = [
-    { icon: FiTrash2, label: 'Delete AccountCleanupBatch', status: 'approved', color: 'green' },
-    { icon: FiSettings, label: 'Refactor LeadService refs', status: 'pending', color: 'gray' },
-    { icon: FiDatabase, label: 'Backup Opportunity_Flow', status: 'completed', color: 'green' },
-    { icon: FiMail, label: 'Notify stakeholders', status: 'pending', color: 'gray' },
+    { icon: Trash2, label: 'Delete AccountCleanupBatch', status: 'approved', color: 'green' },
+    { icon: Settings, label: 'Refactor LeadService refs', status: 'pending', color: 'gray' },
+    { icon: Database, label: 'Backup Opportunity_Flow', status: 'completed', color: 'green' },
+    { icon: Mail, label: 'Notify stakeholders', status: 'pending', color: 'gray' },
   ]
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'approved': return FiCheckCircle
-      case 'completed': return FiCheck
-      case 'pending': return FiClock
+      case 'approved': return CheckCircle
+      case 'completed': return Check
+      case 'pending': return Clock
       default: return null
     }
   }
@@ -23,7 +23,7 @@ const SafeExecutionPreview = () => {
     <Box
       bg="white"
       w="100%"
-      h="380px"
+      h="100%"
       display="flex"
       flexDirection="column"
     >

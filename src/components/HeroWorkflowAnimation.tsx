@@ -4,16 +4,8 @@
 // hero section.
 
 import React, { useEffect, useState } from "react";
-import {
-  FiGitBranch,
-  FiCode,
-  FiBarChart2,
-  FiLayout,
-  FiDatabase,
-  FiTag,
-  FiCloud,
-} from "react-icons/fi";
-import { FaGithub } from "react-icons/fa";
+import { GitBranch, Code, BarChart2, Layout, Database, Tag, Cloud } from 'lucide-react';
+import { GitBranch as Github } from 'lucide-react';
 
 // --- Impact map / graph helper types --------------------------------------
 
@@ -50,43 +42,43 @@ function ImpactNode({
       bg = "rgba(33,150,243,0.16)";
       border = "1px solid rgba(33,150,243,0.6)";
       iconBg = "rgba(33,150,243,1)";
-      icon = <FiGitBranch />;
+      icon = <GitBranch />;
       break;
     case "apex":
       bg = "rgba(156,39,176,0.16)";
       border = "1px solid rgba(156,39,176,0.6)";
       iconBg = "rgba(156,39,176,1)";
-      icon = <FiCode />;
+      icon = <Code />;
       break;
     case "report":
       bg = "rgba(76,175,80,0.16)";
       border = "1px solid rgba(76,175,80,0.6)";
       iconBg = "rgba(76,175,80,1)";
-      icon = <FiBarChart2 />;
+      icon = <BarChart2 />;
       break;
     case "layout":
       bg = "rgba(0,188,212,0.16)";
       border = "1px solid rgba(0,188,212,0.6)";
       iconBg = "rgba(0,188,212,1)";
-      icon = <FiLayout />;
+      icon = <Layout />;
       break;
     case "object":
       bg = "rgba(255,152,0,0.16)";
       border = "1px solid rgba(255,152,0,0.7)";
       iconBg = "rgba(255,152,0,1)";
-      icon = <FiDatabase />;
+      icon = <Database />;
       break;
     case "app":
       bg = "rgba(25,118,210,0.16)";
       border = "1px solid rgba(25,118,210,0.7)";
       iconBg = "rgba(25,118,210,1)";
-      icon = <FaGithub />;
+      icon = <Github />;
       break;
     case "importApp":
       bg = "rgba(121,85,72,0.16)";
       border = "1px solid rgba(121,85,72,0.7)";
       iconBg = "rgba(121,85,72,1)";
-      icon = <FiCloud />;
+      icon = <Cloud />;
       break;
     case "field":
     default:
@@ -94,7 +86,7 @@ function ImpactNode({
       border = "1px solid rgba(255,255,255,0.7)";
       iconBg = "rgba(255,255,255,1)";
       iconColor = "#111";
-      icon = <FiTag />;
+      icon = <Tag />;
       break;
   }
 
@@ -637,7 +629,7 @@ function StepScreen({
                   fontSize: "10px",
                 }}
               >
-                <FaGithub />
+                <Github />
               </span>
               <span>Repo scan</span>
             </span>

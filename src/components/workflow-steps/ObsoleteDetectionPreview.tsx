@@ -15,7 +15,7 @@ const ObsoleteDetectionPreview = () => {
       bg="white"
       overflow="hidden"
       w="100%"
-      h="380px"
+      h="100%"
       display="flex"
       flexDirection="column"
     >

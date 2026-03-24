@@ -1,4 +1,4 @@
-import { Box, Heading, Text, VStack, HStack, Circle } from '@chakra-ui/react'
+import { Box, Heading, Text, VStack, HStack, Circle, Badge } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 import { fadeIn } from '../../utils/animations'
@@ -27,40 +27,40 @@ const MobileWorkflowTimeline = () => {
       title: "Get your Agentic Readiness Score",
       subtitle: "Instant AI-Oriented Health Diagnostic",
       description: [
-        "Know exactly where your org stands before deploying AI",
-        "Surface metadata, automation, security & integration debt",
-        "Prioritize actions by risk, not just usage"
+        "<strong>Agentic Readiness Score</strong>: know exactly where your org stands before deploying AI",
+        "Surface <strong>metadata, automation, security & integration debt</strong>",
+        "<strong>Prioritized action backlog</strong> by AI risk, not just usage"
       ],
       preview: <ObsoleteDetectionPreview />
     },
     {
       step: 2,
-      title: "AI-Powered Investigative Assistant",
-      subtitle: "Natural Language Search across Metadata",
+      title: "Investigate with your AI Assistant",
+      subtitle: "Ask Anything. See the Full Graph.",
       description: [
-        "Ask anything: \"Which Flow can trigger this field?\"",
-        "Interactive dependency map for flows, apex, and rules",
-        "Cross-system visibility into GitHub, ERPs, and more"
+        "<strong>Natural language search</strong> across your entire org",
+        "<strong>Interactive dependency map</strong> for flows, apex, and rules",
+        "<strong>Cross-system visibility</strong>: GitHub, ERPs, and more"
       ],
       preview: <ImpactAnalysisPreview />
     },
     {
       step: 3,
       title: "Map every external dependency",
-      subtitle: "Zero Blind Spot — No Shield License required",
+      subtitle: "Zero Blind Spot — No Shield License",
       description: [
         "Identify connected apps (SAP, HubSpot, PowerBI)",
-        "Predictive Deep Scan captures 100% of read queries",
-        "Sentinel Monitoring maps hidden REST/Bulk write payloads"
+        "<strong>Predictive Deep Scan</strong> captures 100% of read queries",
+        "<strong>Sentinel Monitoring</strong> maps hidden REST/Bulk write payloads"
       ],
       preview: <ExternalCodeScanPreview />
     },
     {
       step: 4,
       title: "Organize into AI Cleanup Packs",
-      subtitle: "Smart Clustering — No One-by-One Selection",
+      subtitle: "Smart Clustering — No One-by-One",
       description: [
-        "AI groups related items by project, team, or domain",
+        "<strong>AI groups related tools</strong> by project, team, or domain",
         "Example: \"12 components tied to legacy Partner Portal\"",
         "Organize cleanup into named Waves (Q1, Wave 2…)"
       ],
@@ -69,11 +69,11 @@ const MobileWorkflowTimeline = () => {
     {
       step: 5,
       title: "Safe Execution & Rollback",
-      subtitle: "AI Plan with Surgical Restores",
+      subtitle: "AI Plan with Surgical Restore",
       description: [
         "AI generates a senior-dev plan: PR → Deactivate → Delete",
-        "Total Control: Accept, Refuse, or Assign each action",
-        "Snapshot before every step — restore anything, instantly"
+        "<strong>Total Control</strong>: Accept, Refuse, or Assign each action",
+        "<strong>Snapshot before every step</strong> — restore anything, instantly"
       ],
       preview: <SafeExecutionPreview />
     }
@@ -81,48 +81,30 @@ const MobileWorkflowTimeline = () => {
 
   const staggerContainer = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } }
   }
 
   const stepVariant = {
     hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.4,
-        ease: 'easeOut'
-      }
-    }
+    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } }
   }
 
   return (
-    <Box 
-      as="section" 
-      py="60px"
-      width="100%"
-      bg="var(--color-bg)"
-    >
+    <Box as="section" py={12} width="100%" bg="white">
       <Box px={4} width="100%">
-        <VStack spacing={8} width="100%">
+        <VStack spacing={10} width="100%">
           {/* Header */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-50px" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
-            <VStack spacing={2} textAlign="center">
-              <Heading as="h2" fontSize="xl" color="var(--color-text-primary)">
+            <VStack spacing={4} textAlign="center">
+              <Heading as="h2" fontSize="2xl" color="gray.900" fontWeight="bold">
                 From Diagnosis to Safe Execution
               </Heading>
-              <Text fontSize="sm" color="var(--color-text-secondary)">
+              <Text fontSize="md" color="gray.500">
                 Your org's AI readiness journey — from the first scan to a clean, agent-ready Salesforce
               </Text>
             </VStack>
@@ -133,37 +115,38 @@ const MobileWorkflowTimeline = () => {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-30px" }}
+            viewport={{ once: true, margin: "-30px" }}
             style={{ width: '100%' }}
           >
-            <Box position="relative" pl={10}>
+            <Box position="relative" pl={8}>
               {/* Vertical Timeline Line */}
               <Box
                 position="absolute"
-                left="16px"
+                left="8px"
                 top="24px"
                 bottom="24px"
                 width="3px"
-                bg="var(--color-primary)"
+                bg="purple.100"
                 borderRadius="full"
-                opacity={0.3}
               />
 
-              <VStack spacing={6} align="stretch">
-                {steps.map((step, index) => (
+              <VStack spacing={10} align="stretch">
+                {steps.map((step) => (
                   <motion.div key={step.step} variants={stepVariant}>
                     <Box position="relative">
                       {/* Step Number Circle */}
                       <Circle
-                        size="32px"
-                        bg="var(--color-primary)"
+                        size="8"
+                        bg="purple.500"
                         color="white"
                         fontSize="sm"
                         fontWeight="bold"
                         position="absolute"
-                        left="-40px"
+                        left="-34px"
                         top="0"
-                        boxShadow="0 2px 8px rgba(0, 98, 137, 0.3)"
+                        boxShadow="0 2px 10px rgba(168, 85, 247, 0.4)"
+                        border="4px solid white"
+                        zIndex={2}
                       >
                         {step.step}
                       </Circle>
@@ -171,56 +154,41 @@ const MobileWorkflowTimeline = () => {
                       {/* Step Content Card */}
                       <Box
                         bg="white"
-                        borderRadius="12px"
-                        border="1px solid var(--color-gray-200)"
+                        borderRadius="20px"
+                        border="1px solid"
+                        borderColor="gray.100"
                         overflow="hidden"
                         boxShadow="sm"
-                        maxW="312px"
                         w="full"
                       >
                         {/* Text Content */}
-                        <Box p={4}>
-                          <VStack spacing={3} align="flex-start">
-                            {/* Title & Subtitle */}
-                            <VStack spacing={1} align="flex-start">
-                              <Heading
-                                as="h3"
-                                fontSize="md"
+                        <Box p={5}>
+                          <VStack spacing={4} align="flex-start">
+                            <VStack spacing={2} align="flex-start">
+                              <Badge 
+                                colorScheme="purple" 
+                                variant="subtle" 
+                                px={2} 
+                                py={0.5} 
+                                borderRadius="full"
+                                fontSize="2xs"
                                 fontWeight="bold"
-                                color="var(--color-text-primary)"
-                                fontFamily="'Vend Sans', sans-serif"
                               >
+                                STEP {step.step}
+                              </Badge>
+                              <Heading as="h3" fontSize="md" fontWeight="bold" color="gray.800" lineHeight={1.3}>
                                 {step.title}
                               </Heading>
-                              <Text
-                                fontSize="xs"
-                                fontWeight="medium"
-                                color="var(--color-primary)"
-                                fontStyle="italic"
-                              >
+                              <Text fontSize="sm" fontWeight="bold" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
                                 {step.subtitle}
                               </Text>
                             </VStack>
 
-                            {/* Description Points */}
                             <VStack spacing={2} align="flex-start" w="full">
                               {step.description.map((item, idx) => (
-                                <HStack key={idx} spacing={2} align="flex-start">
-                                  <Box
-                                    w="6px"
-                                    h="6px"
-                                    borderRadius="full"
-                                    bg="var(--color-tertiary)"
-                                    mt="6px"
-                                    flexShrink={0}
-                                  />
-                                  <Text
-                                    fontSize="sm"
-                                    color="var(--color-text-secondary)"
-                                    lineHeight={1.5}
-                                  >
-                                    {item}
-                                  </Text>
+                                <HStack key={idx} spacing={3} align="flex-start">
+                                  <Box w="5px" h="5px" borderRadius="full" bg="purple.400" mt="6px" flexShrink={0} />
+                                  <Text fontSize="sm" color="gray.600" lineHeight={1.5} dangerouslySetInnerHTML={{ __html: item }} />
                                 </HStack>
                               ))}
                             </VStack>
@@ -229,37 +197,25 @@ const MobileWorkflowTimeline = () => {
 
                         {/* Preview Visual - Scaled to fit */}
                         <Box
-                          borderTop="1px solid var(--color-gray-200)"
-                          bg="var(--color-gray-50)"
+                          borderTop="1px solid"
+                          borderColor="gray.100"
+                          bg="gray.50"
                           overflow="hidden"
                           position="relative"
+                          p={2}
                         >
                           <Box
-                            transform="scale(0.52)"
+                            transform="scale(0.55)"
                             transformOrigin="top left"
                             width="600px"
                             height="380px"
-                            // Compensate for the scaled size
-                            marginBottom="-182px"
-                            marginRight="-288px"
+                            marginBottom="-160px"
+                            marginRight="-260px"
                           >
                             {step.preview}
                           </Box>
                         </Box>
                       </Box>
-
-                      {/* Connecting Line to next step */}
-                      {index < steps.length - 1 && (
-                        <Box
-                          position="absolute"
-                          left="-25px"
-                          top="32px"
-                          bottom="-24px"
-                          width="3px"
-                          bg="var(--color-primary)"
-                          borderRadius="full"
-                        />
-                      )}
                     </Box>
                   </motion.div>
                 ))}

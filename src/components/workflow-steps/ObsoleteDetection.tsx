@@ -1,6 +1,6 @@
 import { Box, VStack, HStack, Text, Checkbox, Badge, Progress, Table, Thead, Tbody, Tr, Th, Td, Input, InputGroup, InputLeftElement, Select } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiSearch } from 'react-icons/fi'
+import { Search } from 'lucide-react';
 
 interface MetadataItem {
   id: string
@@ -96,7 +96,7 @@ const ObsoleteDetection = () => {
           <HStack spacing={4}>
             <InputGroup maxW="300px">
               <InputLeftElement pointerEvents="none">
-                <FiSearch color="gray" />
+                <Search color="gray" />
               </InputLeftElement>
               <Input placeholder="Search metadata..." bg="white" />
             </InputGroup>

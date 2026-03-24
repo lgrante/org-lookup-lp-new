@@ -29,7 +29,7 @@ function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <Box minH="100vh" bg="#faf9f7" display="flex" flexDirection="column" overflowX="hidden">
+    <Box minH="100vh" bg="#faf9f7" display="flex" flexDirection="column">
       {isMobile ? (
         <>
           <MobileHeader onContactClick={onOpen} />

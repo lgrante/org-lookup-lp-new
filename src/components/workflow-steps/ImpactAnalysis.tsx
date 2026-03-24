@@ -1,6 +1,6 @@
 import { Box, VStack, HStack, Text, Badge, IconButton, Tooltip } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiZoomIn, FiZoomOut, FiMaximize2, FiDownload } from 'react-icons/fi'
+import { ZoomIn, ZoomOut, Maximize2, Download } from 'lucide-react';
 
 interface GraphNode {
   id: string
@@ -99,16 +99,16 @@ const ImpactAnalysis = () => {
         <Box px={6} py={3} bg="gray.50" borderBottom="1px solid" borderColor="gray.200">
           <HStack spacing={2}>
             <Tooltip label="Zoom In">
-              <IconButton aria-label="Zoom in" icon={<FiZoomIn />} size="sm" variant="ghost" />
+              <IconButton aria-label="Zoom in" icon={<ZoomIn />} size="sm" variant="ghost" />
             </Tooltip>
             <Tooltip label="Zoom Out">
-              <IconButton aria-label="Zoom out" icon={<FiZoomOut />} size="sm" variant="ghost" />
+              <IconButton aria-label="Zoom out" icon={<ZoomOut />} size="sm" variant="ghost" />
             </Tooltip>
             <Tooltip label="Fullscreen">
-              <IconButton aria-label="Fullscreen" icon={<FiMaximize2 />} size="sm" variant="ghost" />
+              <IconButton aria-label="Fullscreen" icon={<Maximize2 />} size="sm" variant="ghost" />
             </Tooltip>
             <Tooltip label="Export">
-              <IconButton aria-label="Export" icon={<FiDownload />} size="sm" variant="ghost" />
+              <IconButton aria-label="Export" icon={<Download />} size="sm" variant="ghost" />
             </Tooltip>
             <Box flex={1} />
             <Text fontSize="xs" color="gray.500">Drag nodes to reorganize • Scroll to zoom</Text>

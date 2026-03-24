@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiBox, FiZap, FiDatabase } from 'react-icons/fi'
-import { IconType } from 'react-icons'
+import { Box as BoxIcon, Zap, Database } from 'lucide-react';
+import { LucideIcon } from 'lucide-react'
 
 const SAPIcon = ({ size = 18 }: { size?: number }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
@@ -22,7 +22,7 @@ interface NodeData {
   x: number
   y: number
   color: string
-  icon: 'sap' | 'powerbi' | IconType
+  icon: 'sap' | 'powerbi' | LucideIcon
   isExternal?: boolean
 }
 
@@ -30,9 +30,9 @@ const ExternalCodeScanPreview = () => {
   const nodes: NodeData[] = [
     { id: 1, label: 'SAP ERP', type: 'Sentinel', x: 100, y: 90, color: '#0070bc', icon: 'sap', isExternal: true },
     { id: 2, label: 'PowerBI', type: 'Predictive', x: 100, y: 190, color: '#f2c811', icon: 'powerbi', isExternal: true },
-    { id: 3, label: 'LeadAPI', type: 'Apex', x: 320, y: 140, color: '#6366f1', icon: FiBox },
-    { id: 4, label: 'LeadTrigger', type: 'Trigger', x: 500, y: 90, color: '#f97316', icon: FiZap },
-    { id: 5, label: 'Lead__c', type: 'Object', x: 500, y: 190, color: '#22c55e', icon: FiDatabase },
+    { id: 3, label: 'LeadAPI', type: 'Apex', x: 320, y: 140, color: '#6366f1', icon: BoxIcon },
+    { id: 4, label: 'LeadTrigger', type: 'Trigger', x: 500, y: 90, color: '#f97316', icon: Zap },
+    { id: 5, label: 'Lead__c', type: 'Object', x: 500, y: 190, color: '#22c55e', icon: Database },
   ]
 
   const edges = [
@@ -49,7 +49,7 @@ const ExternalCodeScanPreview = () => {
     <Box
       bg="white"
       w="100%"
-      h="380px"
+      h="100%"
       display="flex"
       flexDirection="column"
     >
@@ -164,7 +164,7 @@ const ExternalCodeScanPreview = () => {
 
           {/* Internal Nodes (circles) */}
           {nodes.filter(n => !n.isExternal).map((node, index) => {
-            const IconComponent = node.icon as IconType
+            const IconComponent = node.icon as LucideIcon
             return (
               <motion.g
                 key={node.id}

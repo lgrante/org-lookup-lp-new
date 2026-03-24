@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FaGithub,
-  FaDatabase,
-  FaCode,
-  FaStream,
-  FaChartBar,
-  FaBolt,
-  FaSearch,
-} from "react-icons/fa";
+import { GitBranch as Github, Search, List, Code, BarChart2, Zap, Database } from 'lucide-react';
 
 // --- Palette & helpers ------------------------------------------------------
 
@@ -179,7 +171,7 @@ function Step0InstantDetection({ highlight }: { highlight: string | null }) {
               color: COLORS.primary,
             }}
           >
-            <FaSearch />
+            <Search />
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <div
@@ -535,11 +527,11 @@ function CircleDot({ color }: { color: string }) {
 
 function ImpactNodeCircle({ label, kind, x, y, color, active }: { label: string; kind: string; x: string; y: string; color: string; active: boolean }) {
   const renderIcon = () => {
-    if (kind === "Flow") return <FaStream style={{ fontSize: 16 }} />;
-    if (kind === "Apex") return <FaCode style={{ fontSize: 16 }} />;
-    if (kind === "Report") return <FaChartBar style={{ fontSize: 16 }} />;
-    if (kind === "App") return <FaBolt style={{ fontSize: 16 }} />;
-    if (kind === "Field") return <FaDatabase style={{ fontSize: 16 }} />;
+    if (kind === "Flow") return <List style={{ fontSize: 16 }} />;
+    if (kind === "Apex") return <Code style={{ fontSize: 16 }} />;
+    if (kind === "Report") return <BarChart2 style={{ fontSize: 16 }} />;
+    if (kind === "App") return <Zap style={{ fontSize: 16 }} />;
+    if (kind === "Field") return <Database style={{ fontSize: 16 }} />;
     return null;
   };
 
@@ -633,7 +625,7 @@ function Step2ExternalScan({ highlight }: { highlight: string | null }) {
               fontSize: 16,
             }}
           >
-            <FaGithub />
+            <Github />
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <div
@@ -792,7 +784,7 @@ function GitCircle({ label, x, y, active }: { label: string; x: string; y: strin
           transition: "box-shadow 160ms ease-out",
         }}
       >
-        <FaGithub />
+        <Github />
       </div>
       <div
         style={{
@@ -840,7 +832,7 @@ function SfObjectNode({ label, x, y, active }: { label: string; x: string; y: st
           transition: "box-shadow 160ms ease-out",
         }}
       >
-        <FaDatabase style={{ fontSize: 16 }} />
+        <Database style={{ fontSize: 16 }} />
       </div>
       <div
         style={{
@@ -886,7 +878,7 @@ function ApexNode({ label, x, y }: { label: string; x: string; y: string }) {
           fontWeight: 600,
         }}
       >
-        <FaCode style={{ fontSize: 16 }} />
+        <Code style={{ fontSize: 16 }} />
       </div>
       <div
         style={{

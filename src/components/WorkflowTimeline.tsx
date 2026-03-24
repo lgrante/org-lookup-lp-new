@@ -86,7 +86,7 @@ const WorkflowTimeline = () => {
         px={{ base: 4, md: 8 }}
         width="100%"
       >
-        <VStack spacing={8} width="100%" mb={20}>
+        <VStack spacing={8} width="100%" mb={10}>
           <motion.div
             variants={fadeIn}
             initial="hidden"
@@ -124,11 +124,11 @@ const WorkflowTimeline = () => {
                 pt={index === 0 ? "10vh" : "20vh"} // First step slightly higher to feel immediate
               >
                 <motion.div
-                  initial={{ opacity: 0.3 }}
+                  initial={{ opacity: index === 0 ? 1 : 0.3 }}
                   whileInView={{ opacity: 1 }}
                   onViewportEnter={() => setActiveStep(index)}
-                  viewport={{ margin: "-20% 0px -60% 0px", once: false }}
-                  transition={{ duration: 0.5 }}
+                  viewport={{ margin: "-10% 0px -45% 0px", once: false }}
+                  transition={{ duration: 0.4 }}
                 >
                   <VStack align="flex-start" spacing={5} maxW="500px">
                     <Badge 

@@ -20,7 +20,7 @@ const PainPoints = () => {
   const painPoints: PainPoint[] = [
     {
       title: "Metadata debt",
-      description: "347+ custom fields on a single object, 23 with ambiguous names — your AI Agent can't classify intent correctly and selects wrong action parameters",
+      description: "Even with Data Cloud, ambiguous metadata causes Agentforce to fail. 347+ custom fields on a single object means your AI Agent can't classify intent correctly.",
       icon: Database,
       bgColor: "gray.900",
       iconColor: "#e768e6",

@@ -20,7 +20,7 @@ const MobilePainPoints = () => {
   const painPoints: PainPoint[] = [
     {
       title: "Metadata debt",
-      description: "Ambiguous field names cause AI agent hallucinations",
+      description: "Data Cloud isn't enough. Ambiguous field names cause AI hallucinations.",
       icon: Database,
       bgColor: "gray.900",
       iconColor: "#e768e6",

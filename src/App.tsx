@@ -11,6 +11,7 @@ import WhatYouGet from './components/WhatYouGet'
 import ContactForm from './components/ContactForm'
 import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
+import DataCloudContext from './components/DataCloudContext'
 
 // Mobile components
 import {
@@ -21,7 +22,8 @@ import {
   MobileDeletionPlan,
   MobileWhatYouGet,
   MobileContactForm,
-  MobileFooter
+  MobileFooter,
+  MobileDataCloudContext
 } from './components/mobile'
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
         <>
           <MobileHeader onContactClick={onOpen} />
           <MobileHero onContactClick={onOpen} />
+          <MobileDataCloudContext />
           <MobilePainPoints />
           <MobileWorkflowTimeline />
           <MobileDeletionPlan />
@@ -45,6 +48,7 @@ function App() {
         <>
           <Header onContactClick={onOpen} />
           <Hero onContactClick={onOpen} />
+          <DataCloudContext />
           <PainPoints />
           <WorkflowTimeline />
           <DeletionPlan />

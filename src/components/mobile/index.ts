@@ -6,4 +6,4 @@ export { default as MobileDeletionPlan } from './MobileDeletionPlan'
 export { default as MobileWhatYouGet } from './MobileWhatYouGet'
 export { default as MobileContactForm } from './MobileContactForm'
 export { default as MobileFooter } from './MobileFooter'
-
+export { default as MobileDataCloudContext } from './MobileDataCloudContext'

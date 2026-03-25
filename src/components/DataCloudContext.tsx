@@ -43,7 +43,7 @@ const DataCloudContext = () => {
                   <Heading as="h3" size="lg" color="gray.800">
                     Pillar 1: Data Readiness
                   </Heading>
-                  <Text fontSize="3xl" fontWeight="900" color="blue.500">
+                  <Text fontSize="xl" fontWeight="900" color="blue.500">
                     Data Cloud (The Fuel)
                   </Text>
                 </VStack>
@@ -86,7 +86,7 @@ const DataCloudContext = () => {
                   <Heading as="h3" size="lg" color="white">
                     Pillar 2: Metadata Readiness
                   </Heading>
-                  <Text fontSize="3xl" fontWeight="900" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
+                  <Text fontSize="xl" fontWeight="900" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
                     OrgLookup (The Engine)
                   </Text>
                 </VStack>

@@ -37,7 +37,7 @@ const MobileDataCloudContext = () => {
                     <Heading as="h3" fontSize="sm" color="gray.800">
                       1. Data Readiness
                     </Heading>
-                    <Text fontSize="lg" fontWeight="900" color="blue.500">
+                    <Text fontSize="md" fontWeight="900" color="blue.500">
                       Data Cloud (The Fuel)
                     </Text>
                   </VStack>
@@ -80,7 +80,7 @@ const MobileDataCloudContext = () => {
                     <Heading as="h3" fontSize="sm" color="white">
                       2. Metadata Readiness
                     </Heading>
-                    <Text fontSize="lg" fontWeight="900" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
+                    <Text fontSize="md" fontWeight="900" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
                       OrgLookup (The Engine)
                     </Text>
                   </VStack>

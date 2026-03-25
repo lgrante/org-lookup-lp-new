@@ -36,8 +36,8 @@ function App() {
         <>
           <MobileHeader onContactClick={onOpen} />
           <MobileHero onContactClick={onOpen} />
-          <MobileDataCloudContext />
           <MobilePainPoints />
+          <MobileDataCloudContext />
           <MobileWorkflowTimeline />
           <MobileDeletionPlan />
           <MobileWhatYouGet />
@@ -48,8 +48,8 @@ function App() {
         <>
           <Header onContactClick={onOpen} />
           <Hero onContactClick={onOpen} />
-          <DataCloudContext />
           <PainPoints />
+          <DataCloudContext />
           <WorkflowTimeline />
           <DeletionPlan />
           <WhatYouGet />

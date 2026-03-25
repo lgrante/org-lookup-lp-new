@@ -34,10 +34,10 @@ const MobileDataCloudContext = () => {
                     <Icon as={Database} w={5} h={5} color="blue.500" />
                   </Box>
                   <VStack align="flex-start" spacing={0}>
-                    <Heading as="h3" fontSize="md" color="gray.800">
+                    <Heading as="h3" fontSize="sm" color="gray.800">
                       1. Data Readiness
                     </Heading>
-                    <Text fontSize="sm" fontWeight="bold" color="blue.500">
+                    <Text fontSize="lg" fontWeight="900" color="blue.500">
                       Data Cloud (The Fuel)
                     </Text>
                   </VStack>
@@ -77,10 +77,10 @@ const MobileDataCloudContext = () => {
                     <Icon as={Layers} w={5} h={5} color="#e768e6" />
                   </Box>
                   <VStack align="flex-start" spacing={0}>
-                    <Heading as="h3" fontSize="md" color="white">
+                    <Heading as="h3" fontSize="sm" color="white">
                       2. Metadata Readiness
                     </Heading>
-                    <Text fontSize="sm" fontWeight="bold" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
+                    <Text fontSize="lg" fontWeight="900" bgGradient="linear(to-r, #e768e6, #ff9b26)" bgClip="text">
                       OrgLookup (The Engine)
                     </Text>
                   </VStack>
